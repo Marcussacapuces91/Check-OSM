@@ -112,3 +112,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.idea/
+*.pbf
+names.csv
+*.log
+*.old
