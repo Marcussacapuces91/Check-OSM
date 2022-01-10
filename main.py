@@ -78,17 +78,21 @@ class Application:
 
     def name_commence_par_un_chiffre(self, entry):
         """Name commence avec un chiffre sauf shops sauf ..."""
+        mois = (
+            'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+            'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+        )
         try:
+            # si commence par un chiffre mais...
+            # est un shop
+            # est un amenity
+            # est un numérique suivi d'un mois de l'année (date historique)
+            # est 1er, 2ème etc.
             if re.match(r'^\d', entry.tags['name']) and \
                     'shop' not in entry.tags and \
-                    entry.tags['amenity'] not in (
-                        'restaurant', 'bar', 'cafe', 'fast_food', 'car_sharing', 'studio'
-                    ) and \
-                    not re.match(r'^\d+ Mai', entry.tags['name']) and \
-                    not re.match(r'^\d+ Juillet', entry.tags['name']) and \
-                    not re.match(r'^\d+ Août', entry.tags['name']) and \
-                    not re.match(r'^\d+ Novembre', entry.tags['name']) and \
-                    not re.match(r'^\d+e\s', entry.tags['name']):
+                    'amenity' not in entry.tags and \
+                    not re.match(f'^\d+ ({"|".join(mois)})', entry.tags['name']) and \
+                    not re.match(r'^(1er|1ère|\d+e|\d+è)\s', entry.tags['name']):
                 self.errors += 1
                 log.warning(
                     f"'name' commence par un chiffre ({entry.tags['name']})",
@@ -142,20 +146,21 @@ class Application:
             'Descente', 'Domaine',
             'Échangeur', 'Espace', 'Esplanade',
             'Faubourg',
-            'Grande Route', "Grand'Rue", 'Grande Rue', 'Giratoire',
+            'Grand Place', 'Grande Route', "Grand'Rue", 'Grande Rue', 'Giratoire',
             'Hameau',
             'Impasse',
             'Jardins?',
             'Les Quatre Routes', 'Lotissement',
-            'Mail', 'Montée'
-            'Place', 'Parc', 'Parvis', 'Passage', 'Passerelle', 'Périphérique', 'Pont', 'Port', 'Porte', 'Promenade',
+            'Mail', 'Montée',
+            'Place', 'Parc', 'Parvis', 'Passage', 'Passerelle', 'Périphérique', 'Petite Rue', 'Pont', 'Port', 'Porte', 'Promenade',
             'Quai',
             'Résidence', 'Rocade', 'Rond-Point', 'Route', 'Rue',
             'Sente', 'Sentier', 'Square', 'Sortie',
             'Terrasse', 'Traverse', 'Tunnel',
             'Viaduc', 'Villa', 'Voie',
 
-            "L'Aquitaine", 'La Francilienne', 'L’Océane', "L'Européenne", 'La Comtoise', 'La Provençale'
+            "L'Aquitaine", 'La Francilienne', 'L’Océane', "L'Européenne", 'La Comtoise', 'La Provençale',
+            'La Languedocienne', 'La Méridienne', "L'Arverne", 'La Transeuropéenne', "L'Occitane",
         )
         """Liste des 1ers nom de voie usuels"""
         highway_type_ignore_list = (
@@ -275,9 +280,12 @@ class Application:
         self.errors = 0
 
         self.names = {}
+        start = datetime.datetime.now()
         for i, block in enumerate(blocks):
             nodes, ways, relations = self.parse_block(block, nodes, ways, relations)
-            print(f'{datetime.datetime.now().strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) :',
+            now = datetime.datetime.now()
+            end = start + (now - start) / ((i + 1) / size)
+            print(f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
                   f'Names : {len(self.names)}, Errors : {self.errors}',
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
 
