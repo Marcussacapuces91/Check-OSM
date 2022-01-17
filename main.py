@@ -19,8 +19,8 @@ def _nwr(entry) -> str:
 class Application:
 
     def __init__(self):
-        self.names: dict
-        self.errors: int
+        self.errors: int = 0
+        self.names: dict = {}
 
         logging.debug("Loading deprecated keys.")
         self._keys = list()
@@ -42,19 +42,31 @@ class Application:
         with open('exclusions.csv', newline='') as f:
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            nodes = { int(row[0].split(' ')[1]) for row in reader if len(row[0].split(' ')) and row[0].split(' ')[0] == 'node' }
+            nodes = {
+                int(row[0].split(' ')[1])
+                for row in reader
+                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'node'
+            }
 
             f.seek(0)
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            ways = { int(row[0].split(' ')[1]) for row in reader if len(row[0].split(' ')) and row[0].split(' ')[0] == 'way' }
+            ways = {
+                int(row[0].split(' ')[1])
+                for row in reader
+                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'way'
+            }
 
             f.seek(0)
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            relations = { int(row[0].split(' ')[1]) for row in reader if len(row[0].split(' ')) and row[0].split(' ')[0] == 'relation' }
+            relations = {
+                int(row[0].split(' ')[1])
+                for row in reader
+                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'relation'
+            }
 
-        self._exclude = { 'node': nodes, 'way': ways, 'relation': relations }
+        self._exclude = {'node': nodes, 'way': ways, 'relation': relations}
 
     def add_names(self, entry):
         """Compte les libellés de 'name' dans une liste les regroupant tous."""
@@ -123,18 +135,20 @@ class Application:
             # est un numérique suivi d'un mois de l'année (date historique)
             # est 1er, 2ème etc.
             if re.match(r'^\d', entry.tags['name']):
-                if \
-                   re.match(f'^\d+ ({"|".join(mois)})', entry.tags['name']) or \
-                   re.match(r'^(1er|1ère|\d+e|\d+è|\d+ème)\s', entry.tags['name']) or \
-                   'amenity' in entry.tags or \
-                   ('highway' in entry.tags and entry.tags['highway'] in ('bus_stop', )) or \
-                   ('historic' in entry.tags and entry.tags['historic'] in ('memorial', )) or \
-                   'office' in entry.tags or \
-                   ('public_transport' in entry.tags and entry.tags['public_transport'] in ('stop_position', 'plateform')) or \
-                   'razed:shop' in entry.tags or \
-                   'shop' in entry.tags or \
-                   ('tourism' in entry.tags and entry.tags['tourism'] in ('artwork', 'chalet', 'hotel')):
-                    return # Exceptions à la règle
+                if (
+                   re.match(f'^\\d+ ({"|".join(mois)})', entry.tags['name']) or
+                   re.match(r'^(1er|1ère|\d+e|\d+è|\d+ème)\s', entry.tags['name']) or
+                   'amenity' in entry.tags or
+                   ('highway' in entry.tags and entry.tags['highway'] in ('bus_stop', )) or
+                   ('historic' in entry.tags and entry.tags['historic'] in ('memorial', )) or
+                   'office' in entry.tags or
+                   ('public_transport' in entry.tags and
+                        entry.tags['public_transport'] in ('stop_position', 'plateform')) or
+                   'razed:shop' in entry.tags or
+                   'shop' in entry.tags or
+                   ('tourism' in entry.tags and entry.tags['tourism'] in ('artwork', 'chalet', 'hotel'))
+                   ):
+                    return  # Exceptions à la règle
                 self.errors += 1
                 logging.warning(
                     f"'name' commence par un chiffre ({entry.tags['name']})",
@@ -143,27 +157,26 @@ class Application:
                 n = _nwr(entry) + str(entry.id)
                 requests.get('http://localhost:8111/load_object', params={'objects': n})
 
-
         except KeyError:
             pass
 
     def tag_deprecie(self, entry):
         """Tags (key/value) dépréciés"""
-        for k in entry.tags:
-            if (k, entry.tags[k]) in self._tags:
+        for tag in entry.tags:
+            if (tag, entry.tags[tag]) in self._tags:
                 self.errors += 1
                 logging.info(
-                    f"Tag \'{k}\'=\'{entry.tags[k]}\' déprécié ({entry.tags['name']})",
+                    f"Tag \'{tag}\'=\'{entry.tags[tag]}\' déprécié ({entry.tags['name']})",
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
 
     def key_deprecie(self, entry):
         """Key dépréciés"""
-        for k in entry.tags:
-            if k in self._keys:
+        for tag in entry.tags:
+            if tag in self._keys:
                 self.errors += 1
                 logging.info(
-                    f"Key \'{k}\' dépréciée ({entry.tags['name']})",
+                    f"Key \'{tag}\' dépréciée ({entry.tags['name']})",
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
 
@@ -209,34 +222,35 @@ class Application:
         """Liste des noms de voies formellement erronées."""
 
         highway_type_valid_list = (
-            '^(Grande )?Allée', '^Autoroute', '^Avenue\s',
-            '^Belvédère', '^Boucle', '^Boulevard\s', '^Bretelle',
-            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Petit |Vieux )?Chemin', '^Cité',
-            '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^(Vieille )?Côte', '^Contournement',
+            '^(Grande )?Allée', '^Autoroute', r'^Avenue\s',
+            '^Belvédère', '^Boucle', r'^Boulevard\s', '^Bretelle',
+            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Petit |Vieux )?Chemin',
+            '^Cité', '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^(Vieille )?Côte', '^Contournement',
             '^Descente', '^Déviation', '^Diffuseur', '^Domaine',
             '^Échangeur', '^Espace', '^Esplanade', '^Eurovélo',
-            '^Faubourg\s', '^Fossé',
+            r'^Faubourg\s', '^Fossé',
             '^Giratoire', '^Gué',
             '^Hameau',
             '^Impasse', '^Itinéraire',
             '^Jardins?',
             '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
             '^Mail', '^Montée',
-            '^Parc', '^Parvis', '^Passage','^Passe', '^Passerelle', "^(Ancienne |Grande |Grand'?|Petite )?Place",
+            '^Parc', '^Parvis', '^Passage', '^Passe', '^Passerelle', "^(Ancienne |Grande |Grand'?|Petite )?Place",
             '^Pénétrante', '^Périphérique', '^Pont', '^Port', '^Porte', '^Promenade',
             '^Quartier', '^Quai',
             '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
-            "^(Basse |Petite |Grand'? ?|Grande |Vieille )?Rue",
+            "^(Basse |Grand[' ]|Grande |Haute |Petite |Vieille )?Rue",
             '^Sente', '^Sentier', '^Square', '^Sortie',
             '^Terrasse', '^Traverse', '^Tunnel',
             '^Vallée', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne )?Voie',
             '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
 
-# Alsace
-            r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer |Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
+            # Alsace
+            r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer ' + \
+            r'|Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
             '^Engpfaede$',
 
-# Autoroutes nationales
+            # Autoroutes nationales
             "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
             '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
             '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$"
@@ -264,18 +278,19 @@ class Application:
                         n = _nwr(entry) + str(entry.id)
                         requests.get('http://localhost:8111/load_object', params={'objects': n})
                         return
-                # Pas de black -> test white-list
-                for valid in highway_type_valid_list:
-                    if re.match(valid, entry.tags['name']): # OK
-                        return
-                # Pas trouvé en white-list -> erreur
-                self.errors += 1
-                logging.info(
-                    f"Type de voie inconnue ({entry.tags['name']})",
-                    extra={'type': _nwr(entry), 'id': entry.id}
-                )
-                n = _nwr(entry) + str(entry.id)
-                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                if False:    # Utilisation de la white-list ?
+                    # Pas de black -> test white-list
+                    for valid in highway_type_valid_list:
+                        if re.match(valid, entry.tags['name']): # OK
+                            return
+                    # Pas trouvé en white-list -> erreur
+                    self.errors += 1
+                    logging.info(
+                        f"Type de voie inconnue ({entry.tags['name']})",
+                        extra={'type': _nwr(entry), 'id': entry.id}
+                    )
+                    n = _nwr(entry) + str(entry.id)
+                    requests.get('http://localhost:8111/load_object', params={'objects': n})
         except KeyError:
             pass
 
@@ -290,10 +305,10 @@ class Application:
                     try:
                         self.add_names(entry)
                         self.check_name(entry)
-                        #self.name_egale_addr_housenumber(entry)
-                        #self.name_egale_ref(entry)
-                        #self.name_commence_ou_termine_par_espace(entry)
-                        #self.name_commence_par_un_chiffre(entry)
+                        # self.name_egale_addr_housenumber(entry)
+                        # self.name_egale_ref(entry)
+                        # self.name_commence_ou_termine_par_espace(entry)
+                        # self.name_commence_par_un_chiffre(entry)
                     except KeyError:  # Pas de name
                         pass
 
@@ -308,10 +323,10 @@ class Application:
                     try:
                         self.add_names(entry)
                         self.check_name(entry)
-                        #self.name_egale_addr_housenumber(entry)
-                        #self.name_egale_ref(entry)
-                        #self.name_commence_ou_termine_par_espace(entry)
-                        #self.name_commence_par_un_chiffre(entry)
+                        # self.name_egale_addr_housenumber(entry)
+                        # self.name_egale_ref(entry)
+                        # self.name_commence_ou_termine_par_espace(entry)
+                        # self.name_commence_par_un_chiffre(entry)
                     except KeyError:  # Pas de name
                         pass
 
@@ -326,8 +341,8 @@ class Application:
                     try:
                         self.add_names(entry)
                         self.check_name(entry)
-                        #self.name_egale_ref(entry)
-                        #self.name_commence_ou_termine_par_espace(entry)
+                        # self.name_egale_ref(entry)
+                        # self.name_commence_ou_termine_par_espace(entry)
                     except KeyError:  # Pas de name
                         pass
 
@@ -336,7 +351,8 @@ class Application:
 
         return nodes_, ways_, relations_
 
-    def parse(self, file: esy.osm.pbf.File):
+    def parse(self, file: esy.osm.pbf.File) -> None:
+        """Analyse tout le fichier transmis en 2 passes (1 Collecte des blocs (et taille), 2 analyse des blocs"""
         logging.debug('Parsing fichier à vide.')
         blocks = list(file.blocks)
         size = len(blocks)
@@ -354,6 +370,16 @@ class Application:
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
 
+    def save_names(self, filename: str):
+        """Sauvegarde la liste de tous les noms (tag name) collectés"""
+        with open(filename, 'w', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+            for k in sorted(self.names):
+                ligne = [k]
+                for i in self.names[k]:
+                    ligne.append(i)
+                writer.writerow(ligne)
+
 
 if __name__ == '__main__':
     FORMAT = '%(asctime)s [%(lineno)5d] %(levelname)8s - %(funcName)s - %(message)s ' \
@@ -364,13 +390,8 @@ if __name__ == '__main__':
 
     app = Application()
 
-    with esy.osm.pbf.File('france.osm.pbf') as osm:
-        app.parse(osm)
+    with esy.osm.pbf.File('france.osm.pbf') as osm_pbf:
+        app.parse(osm_pbf)
 
-    with open('names.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-        for k in sorted(app.names):
-            l = [k]
-            for i in app.names[k]:
-                l.append(i)
-            writer.writerow(l)
+    app.save_names('names.csv')
+
