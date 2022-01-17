@@ -190,74 +190,70 @@ class Application:
         """Liste des noms de voies formellement erronées."""
 
         highway_type_valid_list = (
-            'Allée', 'Autoroute', 'Avenue',
-            'Basse Corniche', 'Belvédère', 'Boucle', 'Boulevard', 'Bretelle',
-            'Carreau', 'Carrefour', 'Chasse', 'Chaussée', 'Chemin', '(Le|Nouveau|Ancien|Vieux) Chemin', 'Cité', 'Clos', 'Corniche', 'Cour', 'Cours', 'Côte', 'Contournement',
-            'Descente', 'Déviation', 'Domaine',
-            'Échangeur', 'Espace', 'Esplanade',
-            'Faubourg',
-            'Giratoire',
-            'Hameau',
-            'Impasse',
-            'Jardins?',
-            'Les Quatre Routes', 'Lotissement',
-            'Mail', 'Montée',
-            '(|Grande |Grand)Place', 'Parc', 'Parvis', 'Passage', 'Passerelle', 'Pénétrante', 'Périphérique', 'Pont', 'Port', 'Porte', 'Promenade',
-            'Quai',
-            'Résidence', 'Rocade', 'Rond-Point', '(|Grande |Vieille )Route', "(|Petite |Grand'|Grande )Rue",
-            'Sente', 'Sentier', 'Square', 'Sortie',
-            'Terrasse', 'Traverse', 'Tunnel',
-            'Vallée', 'Viaduc', 'Villa', 'Voie',
+            '^Allée', '^Autoroute', '^Avenue',
+            '^Belvédère', '^Boucle', '^Boulevard', '^Bretelle',
+            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Vieux )?Chemin', '^Cité',
+            '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^Côte', '^Contournement',
+            '^Descente', '^Déviation', '^Domaine',
+            '^Échangeur', '^Espace', '^Esplanade', '^Eurovélo',
+            '^Faubourg', '^Fossé',
+            '^Giratoire',
+            '^Hameau',
+            '^Impasse',
+            '^Jardins?',
+            '^Les Quatre Routes', '^Lotissement',
+            '^Mail', '^Montée',
+            '^(Grande |Grand)?Place', '^Parc', '^Parvis', '^Passage', '^Passerelle', '^Pénétrante', '^Périphérique',
+            '^Pont', '^Port', '^Porte', '^Promenade',
+            '^Quai',
+            '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Vieille )?Route',
+            "^(Petite |Grand'? ?|Grande |Vieille )?Rue",
+            '^Sente', '^Sentier', '^Square', '^Sortie',
+            '^Terrasse', '^Traverse', '^Tunnel',
+            '^Vallée', '^Viaduc', '^Villa', '^Voie',
+            '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
 
 # Alsace
-            r'^[A-Z][a-z]* Pfad$',
+            r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer |Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
+            '^Engpfaede$',
 
-            r'^[A-Z]\w*(gasse?| Weg|-Weg|weg| Pfad|pfad|strasse)$',
-            r'^Alter [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Einen [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Grosser [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Klein(er)? [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Mittlerer [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Oberer [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Ober-[A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Unter[- ][A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Unterer [A-Z]\w*( Weg|weg| Pfad)$',
-            r'^Vordere(r)? [A-Z]\w*( Weg|weg| Pfad)$',
-
-            "L'Aquitaine", 'La Francilienne', 'L’Océane', "L'Européenne", 'La Comtoise', 'La Provençale',
-            'La Languedocienne', 'La Méridienne', "L'Arverne", 'La Transeuropéenne', "L'Occitane", 'La Catalane',
+# Autoroutes nationales
+            "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
+            '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
+            '^La Catalane$',
         )
-        """Liste des 1ers nom de voie usuels"""
+        """Liste des noms de voies acceptés"""
 
         highway_value_list = (
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
             'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link',
-            'living_street', 'pedestrian', 'track', 'bus_guideway', 'road', 'busway',
-            # 'service'
+            'living_street', 'pedestrian', 'bus_guideway', 'road', 'busway',
+            # 'service', 'track'
         )
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
         try:
             if entry.tags['highway'] in highway_value_list:
-                l = "|".join(highway_type_valid_list)
-                if re.match(f'^({l})', entry.tags['name']):
-                    for regle in highway_black_list:
-                        if re.match(regle, entry.tags['name']):
-                            self.errors += 1
-                            logging.error(
-                                f"Erreur/Typo sur nom de voie '{regle}' ({entry.tags['name']})",
-                                extra={'type': _nwr(entry), 'id': entry.id}
-                            )
-                            n = _nwr(entry) + str(entry.id)
-                            requests.get('http://localhost:8111/load_object', params={'objects': n})
-                else:
-                    self.errors += 1
-                    logging.info(
-                        f"Type de voie inconnue ({entry.tags['name']})",
-                        extra={'type': _nwr(entry), 'id': entry.id}
-                    )
-                    n = _nwr(entry) + str(entry.id)
-                    requests.get('http://localhost:8111/load_object', params={'objects': n})
+                for valid in highway_type_valid_list:
+                    if re.match(valid, entry.tags['name']):     # à priori ok (white-list)
+                        for regle in highway_black_list:
+                            if re.match(regle, entry.tags['name']):
+                                self.errors += 1
+                                logging.error(
+                                    f"Erreur/Typo sur nom de voie '{regle}' ({entry.tags['name']})",
+                                    extra={'type': _nwr(entry), 'id': entry.id}
+                                )
+                                n = _nwr(entry) + str(entry.id)
+                                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                        return
+                # Pas trouvé en white-list -> erreur
+                self.errors += 1
+                logging.info(
+                    f"Type de voie inconnue ({entry.tags['name']})",
+                    extra={'type': _nwr(entry), 'id': entry.id}
+                )
+                n = _nwr(entry) + str(entry.id)
+                requests.get('http://localhost:8111/load_object', params={'objects': n})
         except KeyError:
             pass
 
@@ -346,7 +342,7 @@ if __name__ == '__main__':
 
     app = Application()
 
-    with esy.osm.pbf.File('alsace.osm.pbf') as osm:
+    with esy.osm.pbf.File('france.osm.pbf') as osm:
         app.parse(osm)
 
     with open('names.csv', 'w', encoding='UTF8', newline='') as f:
