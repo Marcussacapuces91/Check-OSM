@@ -4,9 +4,9 @@ import logging
 import re
 import esy.osm.pbf
 import requests
-import json
+# import json
 
-from sympy import Point, Polygon, intersection
+# from sympy import Point, Polygon, intersection
 
 
 def _nwr(entry) -> str:
@@ -14,6 +14,7 @@ def _nwr(entry) -> str:
         entry) == esy.osm.pbf.file.Way else 'relation'
 
 # @see https://josm.openstreetmap.de/wiki/Help/RemoteControlCommands
+
 
 class Application:
 
@@ -23,16 +24,16 @@ class Application:
 
         logging.debug("Loading deprecated keys.")
         self._keys = list()
-        with open('deprecated_keys.csv', newline='') as f:
-            reader = csv.reader(f)
+        with open('deprecated_keys.csv', newline='') as f_deprec:
+            reader = csv.reader(f_deprec)
             next(reader)  # Saute la 1ère ligne
             for row in reader:
                 self._keys.append(row[0])
 
         logging.debug("Loading deprecated tags.")
         self._tags = list()
-        with open('deprecated_tags.csv', newline='') as f:
-            reader = csv.reader(f)
+        with open('deprecated_tags.csv', newline='') as f_deprec:
+            reader = csv.reader(f_deprec)
             next(reader)
             for row in reader:
                 self._tags.append((row[0], row[1]))
@@ -169,15 +170,33 @@ class Application:
     def check_name(self, entry):
         """Vérifie le contenu du champ name et sa validité"""
         highway_black_list = (
-            r'^Chemin Ancien Chemin ',
-            r'^Chemin Chemin ',
-            r'^Chemin [Rr]ural (No|Numéro|n°|N°|№)',
-            r'^Chemin Vicinal ',
-            r'^Chemin d\'Exploitation ',
-            r'Voie [Cc]ommunale (No|Numéro|n°|N°|№)',
-            r'Voie Dite',
-            f'Z\.? ?A\.?',
-            f'Z\.? ?I\.?',
+            r'^\d+',
+            r'^\w+\.',
+            r'^all[eé]e',
+            r'^avenue',
+            r'^[Cc]h\.?',
+            r'^[Cc]hemin [Aa]ncien [Cc]hemin',
+            r'^[Cc]hemin [Cc]hemin',
+            r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)?',
+            r'^[Cc]hemin [Vv]icinal',
+            r'^[Cc]hemin d\'[Ee]xploitation',
+            r'^chemin',
+            r'^(C|CE|CR|D|G[Rr]|N) ?\d*',
+            r'^Lotossement', r'^Lotiseement',
+            r'passage',
+            r'^Qrt',
+            r'Résdence',
+            r'^RUE', r'^rue',
+            r'^ROUTE', r'^route',
+            r'^[Rr]oute [Dd]épartementale',
+            r'[Ss]t[e] Anne',
+            r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)?',
+            r'^VC',
+            r'^[Vv]oie [Dd]ite',
+            r'^voie',
+            r'^[Zz]\.? ?[Aa][CcEe]?.?',
+            r'^[Zz]\.? ?[Cc].?',
+            r'^[Zz]\.? ?[Ii].?',
             r'^\w+ [A-Z]+\.',   # Abréviation
             r'^\w+ Georges Sand',
             r'^\w+ Pierre Ronsard',
@@ -190,27 +209,27 @@ class Application:
         """Liste des noms de voies formellement erronées."""
 
         highway_type_valid_list = (
-            '^Allée', '^Autoroute', '^Avenue',
-            '^Belvédère', '^Boucle', '^Boulevard', '^Bretelle',
-            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Vieux )?Chemin', '^Cité',
-            '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^Côte', '^Contournement',
-            '^Descente', '^Déviation', '^Domaine',
+            '^(Grande )?Allée', '^Autoroute', '^Avenue\s',
+            '^Belvédère', '^Boucle', '^Boulevard\s', '^Bretelle',
+            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Petit |Vieux )?Chemin', '^Cité',
+            '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^(Vieille )?Côte', '^Contournement',
+            '^Descente', '^Déviation', '^Diffuseur', '^Domaine',
             '^Échangeur', '^Espace', '^Esplanade', '^Eurovélo',
-            '^Faubourg', '^Fossé',
-            '^Giratoire',
+            '^Faubourg\s', '^Fossé',
+            '^Giratoire', '^Gué',
             '^Hameau',
-            '^Impasse',
+            '^Impasse', '^Itinéraire',
             '^Jardins?',
-            '^Les Quatre Routes', '^Lotissement',
+            '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
             '^Mail', '^Montée',
-            '^(Grande |Grand)?Place', '^Parc', '^Parvis', '^Passage', '^Passerelle', '^Pénétrante', '^Périphérique',
-            '^Pont', '^Port', '^Porte', '^Promenade',
-            '^Quai',
-            '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Vieille )?Route',
-            "^(Petite |Grand'? ?|Grande |Vieille )?Rue",
+            '^Parc', '^Parvis', '^Passage','^Passe', '^Passerelle', "^(Ancienne |Grande |Grand'?|Petite )?Place",
+            '^Pénétrante', '^Périphérique', '^Pont', '^Port', '^Porte', '^Promenade',
+            '^Quartier', '^Quai',
+            '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
+            "^(Basse |Petite |Grand'? ?|Grande |Vieille )?Rue",
             '^Sente', '^Sentier', '^Square', '^Sortie',
             '^Terrasse', '^Traverse', '^Tunnel',
-            '^Vallée', '^Viaduc', '^Villa', '^Voie',
+            '^Vallée', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne )?Voie',
             '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
 
 # Alsace
@@ -220,7 +239,7 @@ class Application:
 # Autoroutes nationales
             "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
             '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
-            '^La Catalane$',
+            '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$"
         )
         """Liste des noms de voies acceptés"""
 
@@ -234,17 +253,20 @@ class Application:
 
         try:
             if entry.tags['highway'] in highway_value_list:
+                # Test black-list
+                for black in highway_black_list:
+                    if re.match(black, entry.tags['name']):
+                        self.errors += 1
+                        logging.error(
+                            f"Erreur/Typo sur nom de voie '{black}' ({entry.tags['name']})",
+                            extra={'type': _nwr(entry), 'id': entry.id}
+                        )
+                        n = _nwr(entry) + str(entry.id)
+                        requests.get('http://localhost:8111/load_object', params={'objects': n})
+                        return
+                # Pas de black -> test white-list
                 for valid in highway_type_valid_list:
-                    if re.match(valid, entry.tags['name']):     # à priori ok (white-list)
-                        for regle in highway_black_list:
-                            if re.match(regle, entry.tags['name']):
-                                self.errors += 1
-                                logging.error(
-                                    f"Erreur/Typo sur nom de voie '{regle}' ({entry.tags['name']})",
-                                    extra={'type': _nwr(entry), 'id': entry.id}
-                                )
-                                n = _nwr(entry) + str(entry.id)
-                                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                    if re.match(valid, entry.tags['name']): # OK
                         return
                 # Pas trouvé en white-list -> erreur
                 self.errors += 1
