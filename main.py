@@ -182,34 +182,36 @@ class Application:
 
     def check_name(self, entry):
         """Vérifie le contenu du champ name et sa validité"""
-        highway_black_list = (
+        highway_black_list = {
             r'^\d+',
             r'^\w+\.',
-            r'^all[eé]e',
+            r'^all([eé]e|eé)',
             r'^avenue',
-            r'^[Cc]h\.?',
+            r'^[Cc]h\.?\s',
             r'^[Cc]hemin [Aa]ncien [Cc]hemin',
             r'^[Cc]hemin [Cc]hemin',
-            r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)?',
+            r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)',
             r'^[Cc]hemin [Vv]icinal',
             r'^[Cc]hemin d\'[Ee]xploitation',
             r'^chemin',
-            r'^(C|CE|CR|D|G[Rr]|N) ?\d*',
+            r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
+            r"l'[Ee]rable",
             r'^Lotossement', r'^Lotiseement',
+            r'maître \w+',
             r'passage',
             r'^Qrt',
             r'Résdence',
             r'^RUE', r'^rue',
             r'^ROUTE', r'^route',
-            r'^[Rr]oute [Dd]épartementale',
+            r'^[Rr]oute [Dd]épartementale (No|Numéro|n°|N°|№)',
             r'[Ss]t[e] Anne',
-            r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)?',
+            r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
             r'^VC',
             r'^[Vv]oie [Dd]ite',
             r'^voie',
-            r'^[Zz]\.? ?[Aa][CcEe]?.?',
-            r'^[Zz]\.? ?[Cc].?',
-            r'^[Zz]\.? ?[Ii].?',
+            r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
+            r'^[Zz]\.? ?[Cc].?\s',
+            r'^[Zz]\.? ?[Ii].?\s',
             r'^\w+ [A-Z]+\.',   # Abréviation
             r'^\w+ Georges Sand',
             r'^\w+ Pierre Ronsard',
@@ -217,11 +219,11 @@ class Application:
             r'^\w+ Marroniers*',
             r'^\w+ D\'\w+',
             r'^\w+ De \w+',
-            r'^\w+ Des \w+'
-        )
-        """Liste des noms de voies formellement erronées."""
+            r'^\w+ Des \w+',
+        }
+        """Set des noms de voies formellement erronées."""
 
-        highway_type_valid_list = (
+        highway_type_valid_list = {
             '^(Grande )?Allée', '^Autoroute', r'^Avenue\s',
             '^Belvédère', '^Boucle', r'^Boulevard\s', '^Bretelle',
             '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Petit |Vieux )?Chemin',
@@ -241,9 +243,12 @@ class Application:
             '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
             "^(Basse |Grand[' ]|Grande |Haute |Petite |Vieille )?Rue",
             '^Sente', '^Sentier', '^Square', '^Sortie',
-            '^Terrasse', '^Traverse', '^Tunnel',
+            '^Terrasse', '^Traverse', '^Tranchée', '^Tunnel',
             '^Vallée', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne )?Voie',
             '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
+
+            # Nord
+            '^Ratzengaesschen', '.* Straete$', '.*stra[ae]t$', '.*dreve$',
 
             # Alsace
             r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer ' + \
@@ -254,8 +259,8 @@ class Application:
             "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
             '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
             '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$"
-        )
-        """Liste des noms de voies acceptés"""
+        }
+        """Set des noms de voies acceptés"""
 
         highway_value_list = (
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
@@ -269,6 +274,7 @@ class Application:
             if entry.tags['highway'] in highway_value_list:
                 # Test black-list
                 for black in highway_black_list:
+                    # print(black)
                     if re.match(black, entry.tags['name']):
                         self.errors += 1
                         logging.error(
@@ -278,7 +284,7 @@ class Application:
                         n = _nwr(entry) + str(entry.id)
                         requests.get('http://localhost:8111/load_object', params={'objects': n})
                         return
-                if False:    # Utilisation de la white-list ?
+                if True:    # Utilisation de la white-list ?
                     # Pas de black -> test white-list
                     for valid in highway_type_valid_list:
                         if re.match(valid, entry.tags['name']): # OK
@@ -390,8 +396,9 @@ if __name__ == '__main__':
 
     app = Application()
 
-    with esy.osm.pbf.File('france.osm.pbf') as osm_pbf:
-        app.parse(osm_pbf)
+    for n in { 'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin' }:
+        with esy.osm.pbf.File(f'{n}.osm.pbf') as osm_pbf:
+            app.parse(osm_pbf)
 
     app.save_names('names.csv')
 
