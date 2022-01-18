@@ -396,7 +396,12 @@ if __name__ == '__main__':
 
     app = Application()
 
-    for n in { 'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin' }:
+    for n in { # 'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
+               # 'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var'
+               #'pyrenees_orientales', 'ariege',
+               'haute_garonne',
+               # 'hautes_pyrenees', 'pyrenees_atlantiques'
+            }:
         with esy.osm.pbf.File(f'{n}.osm.pbf') as osm_pbf:
             app.parse(osm_pbf)
 
