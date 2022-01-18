@@ -258,7 +258,7 @@ class Application:
             # Autoroutes nationales
             "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
             '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
-            '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$"
+            '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$", "^L'Ariégeoise$",
         }
         """Set des noms de voies acceptés"""
 
@@ -396,14 +396,14 @@ if __name__ == '__main__':
 
     app = Application()
 
-    for n in { # 'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
-               # 'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var'
-               #'pyrenees_orientales', 'ariege',
-               'haute_garonne',
-               # 'hautes_pyrenees', 'pyrenees_atlantiques'
-            }:
+    liste = {
+        'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
+        'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
+        'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
+    }
+    liste = { 'essonne' }
+    for n in liste:
         with esy.osm.pbf.File(f'{n}.osm.pbf') as osm_pbf:
+            app.names = {}
             app.parse(osm_pbf)
-
-    app.save_names('names.csv')
-
+            app.save_names(f'names_{n}.csv')
