@@ -70,11 +70,11 @@ class Application:
 
     def add_names(self, entry):
         """Compte les libellés de 'name' dans une liste les regroupant tous."""
-        n = entry.tags['name']
+        name = entry.tags['name']
         try:
-            self.names[n].add(f'{_nwr(entry)}/{entry.id}')
+            self.names[name].add(f'{_nwr(entry)}/{entry.id}')
         except KeyError:
-            self.names[n] = {f'{_nwr(entry)}/{entry.id}'}
+            self.names[name] = {f'{_nwr(entry)}/{entry.id}'}
 
     def name_egale_addr_housenumber(self, entry):
         """Recherche name = addr:housenumber"""
@@ -88,8 +88,10 @@ class Application:
                     f"name = addr:housenumber ({entry.tags['name']})",
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
-                n = _nwr(entry) + str(entry.id)
-                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                requests.get(
+                    'http://localhost:8111/load_object',
+                    params={'objects': _nwr(entry) + str(entry.id)}
+                )
         except KeyError:
             pass
 
@@ -102,8 +104,10 @@ class Application:
                     f"name = ref ({entry.tags['name']})",
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
-                n = _nwr(entry) + str(entry.id)
-                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                requests.get(
+                    'http://localhost:8111/load_object',
+                    params={'objects': _nwr(entry) + str(entry.id)}
+                )
         except KeyError:
             pass
 
@@ -154,8 +158,10 @@ class Application:
                     f"'name' commence par un chiffre ({entry.tags['name']})",
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
-                n = _nwr(entry) + str(entry.id)
-                requests.get('http://localhost:8111/load_object', params={'objects': n})
+                requests.get(
+                    'http://localhost:8111/load_object',
+                    params={'objects': _nwr(entry) + str(entry.id)}
+                )
 
         except KeyError:
             pass
@@ -180,71 +186,89 @@ class Application:
                     extra={'type': _nwr(entry), 'id': entry.id}
                 )
 
-    def check_name(self, entry):
-        """Vérifie le contenu du champ name et sa validité"""
-        highway_black_list = {
-            r'^\d+',
-            r'^\w+\.',
-            r'^all([eé]e|eé)',
-            r'^avenue',
-            r'^[Cc]h\.?\s',
-            r'^[Cc]hemin [Aa]ncien [Cc]hemin',
-            r'^[Cc]hemin [Cc]hemin',
-            r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)',
-            r'^[Cc]hemin [Vv]icinal',
-            r'^[Cc]hemin d\'[Ee]xploitation',
-            r'^chemin',
-            r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
-            r"l'[Ee]rable",
-            r'^Lotossement', r'^Lotiseement',
-            r'maître \w+',
-            r'passage',
-            r'^Qrt',
-            r'Résdence',
-            r'^RUE', r'^rue',
-            r'^ROUTE', r'^route',
-            r'^[Rr]oute [Dd]épartementale (No|Numéro|n°|N°|№)',
-            r'[Ss]t[e] Anne',
-            r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
-            r'^VC',
-            r'^[Vv]oie [Dd]ite',
-            r'^voie',
-            r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
-            r'^[Zz]\.? ?[Cc].?\s',
-            r'^[Zz]\.? ?[Ii].?\s',
-            r'^\w+ [A-Z]+\.',   # Abréviation
-            r'^\w+ Georges Sand',
-            r'^\w+ Pierre Ronsard',
-            r'^\w+ Roger-Martin du Gard',   # sans tiret "Roger Martin du Gard"
-            r'^\w+ Marroniers*',
-            r'^\w+ D\'\w+',
-            r'^\w+ De \w+',
-            r'^\w+ Des \w+',
+    def check_highway_name(self, entry):
+        """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
+        erreurs_connues = {
+            (r'^(.*)\bA\. Malraux$', r'\1André Malraux'),
+            (r'^(all[eé][eé]?|Al\.)\b(.*)$', r'Allée\2'),
+            (r'^avenue\b(.*)$', r'Avenue\1'),
+            # r'^[Cc]h\.?\s',
+            # r'^[Cc]hemin [Aa]ncien [Cc]hemin',
+            # r'^[Cc]hemin [Cc]hemin',
+            # r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)', r'CR\s'
+            # r'^[Cc]hemin [Vv]icinal',
+            # r'^[Cc]hemin d\'[Ee]xploitation',
+            (r'^chemin\b(.*)$', r'Chemin\1'),
+            # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
+            # r'(.*)\bd(u|es) bois$',
+            # r'[Ee]cole',    # École
+            (r'[Ee]cureuil(s?)$', r'Écureuil\1'),
+            # r"l'[Ee]rable$",
+            (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
+            # r'[Eeé]crins',      # Écrins
+            # r'^Grand-Rue',
+            (r'^Impase\b(.*)$', r'Impasse\1'),
+            # r'(.*)\bJ.C. Cave$',
+            (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
+            (r'Lantèrne', r'Lanterne'),
+            # r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
+            # r'maître\s\w+',
+            (r'\bN\.-D\.\b', r'Notre-Dame'),
+            (r'^(passage)\b(.*)$', r'Passage\2'),
+            (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
+            # r'^Raquette',
+            # r'^Qrt',
+            (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
+            (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
+            (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
+            # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
+            # r'[Ss]t[e] Anne',
+            # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
+            # r'^VC',
+            # r'^[Vv]oie [Dd]ite',
+            # r'^voie',
+            # r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
+            # r'^[Zz]\.? ?[Cc].?\s',
+            # r'^[Zz]\.? ?[Ii].?\s',
+
+            # r'^\w+ [A-Z]+\.',               # Abréviation
+            # r'^\w+\.',                      # Abréviation sur 1er mot
+            (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
+            # r'^.* Pierre Ronsard',          # Pierre de Ronsard
+            # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
+            # r'^\w Marroniers?',
+            # r"^\w D'\w+",
+            # r'^\w De \w+',
+            # r'^\w Des \w+',
         }
         """Set des noms de voies formellement erronées."""
 
         highway_type_valid_list = {
-            '^(Grande )?Allée', '^Autoroute', r'^Avenue\s',
-            '^Belvédère', '^Boucle', r'^Boulevard\s', '^Bretelle',
-            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^(Ancien |Grand |Le |Nouveau |Petit |Vieux )?Chemin',
-            '^Cité', '^Circuit', '^Clos', '^(Basse )?Corniche', '^Cour', '^Cours', '^(Vieille )?Côte', '^Contournement',
-            '^Descente', '^Déviation', '^Diffuseur', '^Domaine',
-            '^Échangeur', '^Espace', '^Esplanade', '^Eurovélo',
+            '^Abbaye', '^(Grande )?Allée', '^Autoroute', r'^(Petite )?Avenue\s',
+            '^Belvédère', '^Boucle', r'^Boulevard\s', '^(Le )?Bois', '^Bretelle',
+            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^Château',
+            '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
+            '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
+            '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
+            '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine', '^Duplex',
+            '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
             r'^Faubourg\s', '^Fossé',
-            '^Giratoire', '^Gué',
+            '^(Grand )?Giratoire', '^Gué',
             '^Hameau',
-            '^Impasse', '^Itinéraire',
+            '^(Petite )?Impass?e', '^Itinéraire',
             '^Jardins?',
-            '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
-            '^Mail', '^Montée',
-            '^Parc', '^Parvis', '^Passage', '^Passe', '^Passerelle', "^(Ancienne |Grande |Grand'?|Petite )?Place",
-            '^Pénétrante', '^Périphérique', '^Pont', '^Port', '^Porte', '^Promenade',
+            '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
+            '^Mail', '^Montée', '^Montoir',
+            '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
+            "^(Ancienne |Grande |Grand'?|Petite )?Place",
+            '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
             '^Quartier', '^Quai',
-            '^Résidence', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
-            "^(Basse |Grand[' ]|Grande |Haute |Petite |Vieille )?Rue",
-            '^Sente', '^Sentier', '^Square', '^Sortie',
-            '^Terrasse', '^Traverse', '^Tranchée', '^Tunnel',
-            '^Vallée', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne )?Voie',
+            '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
+            "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
+            '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
+            '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
+            '^Vallée', '^Vallon', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne |Petite |Nouvelle )?Voie',
+            '^Voirie',
             '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
 
             # Nord
@@ -273,21 +297,43 @@ class Application:
         try:
             if entry.tags['highway'] in highway_value_list:
                 # Test black-list
-                for black in highway_black_list:
-                    # print(black)
-                    if re.match(black, entry.tags['name']):
-                        self.errors += 1
-                        logging.error(
-                            f"Erreur/Typo sur nom de voie '{black}' ({entry.tags['name']})",
-                            extra={'type': _nwr(entry), 'id': entry.id}
-                        )
-                        n = _nwr(entry) + str(entry.id)
-                        requests.get('http://localhost:8111/load_object', params={'objects': n})
-                        return
-                if True:    # Utilisation de la white-list ?
+                for black in erreurs_connues:
+                    if (type(black) == str) :   # Erreur
+                        match = black
+                        if re.match(match, entry.tags['name']):
+                            self.errors += 1
+                            logging.error(
+                                f"Erreur/Typo sur nom de voie '{match}' ({entry.tags['name']})",
+                                extra={'type': _nwr(entry), 'id': entry.id}
+                            )
+                            requests.get(
+                                'http://localhost:8111/load_object',
+                                params={'objects': _nwr(entry) + str(entry.id)}
+                            )
+                            return
+                    else:                       # Correction
+                        match, replace = list(black)
+                        new, nb = re.subn(match, replace, entry.tags['name'])
+                        if nb :
+                            # print(match, replace, entry.tags['name'], '->', new)
+
+                            self.errors += 1
+                            logging.error(
+                                f"Correction/Typo sur nom de voie '{match}' ({entry.tags['name']})->{new}",
+                                extra={'type': _nwr(entry), 'id': entry.id}
+                            )
+                            requests.get(
+                                'http://localhost:8111/load_object',
+                                params={
+                                    'objects': _nwr(entry) + str(entry.id),
+                                    'addtags': f'name={new}'
+                                }
+                            )
+                            return
+                if False:    # Utilisation de la white-list ?
                     # Pas de black -> test white-list
                     for valid in highway_type_valid_list:
-                        if re.match(valid, entry.tags['name']): # OK
+                        if re.match(valid, entry.tags['name']):     # OK
                             return
                     # Pas trouvé en white-list -> erreur
                     self.errors += 1
@@ -295,8 +341,8 @@ class Application:
                         f"Type de voie inconnue ({entry.tags['name']})",
                         extra={'type': _nwr(entry), 'id': entry.id}
                     )
-                    n = _nwr(entry) + str(entry.id)
-                    requests.get('http://localhost:8111/load_object', params={'objects': n})
+                    # n = _nwr(entry) + str(entry.id)
+                    # requests.get('http://localhost:8111/load_object', params={'objects': n})
         except KeyError:
             pass
 
@@ -310,7 +356,7 @@ class Application:
                     nodes_ += 1
                     try:
                         self.add_names(entry)
-                        self.check_name(entry)
+                        self.check_highway_name(entry)
                         # self.name_egale_addr_housenumber(entry)
                         # self.name_egale_ref(entry)
                         # self.name_commence_ou_termine_par_espace(entry)
@@ -328,7 +374,7 @@ class Application:
                     ways_ += 1
                     try:
                         self.add_names(entry)
-                        self.check_name(entry)
+                        self.check_highway_name(entry)
                         # self.name_egale_addr_housenumber(entry)
                         # self.name_egale_ref(entry)
                         # self.name_commence_ou_termine_par_espace(entry)
@@ -346,7 +392,7 @@ class Application:
                     relations_ += 1
                     try:
                         self.add_names(entry)
-                        self.check_name(entry)
+                        self.check_highway_name(entry)
                         # self.name_egale_ref(entry)
                         # self.name_commence_ou_termine_par_espace(entry)
                     except KeyError:  # Pas de name
@@ -376,9 +422,9 @@ class Application:
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
 
-    def save_names(self, filename: str):
+    def save_names(self, filename_: str):
         """Sauvegarde la liste de tous les noms (tag name) collectés"""
-        with open(filename, 'w', encoding='UTF8', newline='') as f:
+        with open(filename_, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
             for k in sorted(self.names):
                 ligne = [k]
@@ -396,14 +442,15 @@ if __name__ == '__main__':
 
     app = Application()
 
-    liste = {
-        'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
-        'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
-        'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
-    }
-    liste = { 'essonne' }
-    for n in liste:
-        with esy.osm.pbf.File(f'{n}.osm.pbf') as osm_pbf:
+    # liste = {
+    #     'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
+    #     'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
+    #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
+    # }
+    # liste = {'essonne', 'france'}
+    liste = {'france'}
+    for filename in liste:
+        with esy.osm.pbf.File(f'{filename}.osm.pbf') as osm_pbf:
             app.names = {}
             app.parse(osm_pbf)
-            app.save_names(f'names_{n}.csv')
+            app.save_names(f'names_{filename}.csv')
