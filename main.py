@@ -189,38 +189,47 @@ class Application:
     def check_highway_name(self, entry):
         """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
         erreurs_connues = {
-            (r'^(.*)\bA\. Malraux$', r'\1André Malraux'),
-            (r'^(all[eé][eé]?|Al\.)\b(.*)$', r'Allée\2'),
-            (r'^avenue\b(.*)$', r'Avenue\1'),
+            r'^Aerodrome',
+            (r"(.*)\s[Dd]es\salouettes$", r"\1 des Alouettes"),
+            (r"(.*)\sde\sl'ancien\s(\w)$", r"\1 de l\'Ancien \2"),
+            (r"^(.*)\s[Aa]\.?\sMalraux$", r"\1 André Malraux"),
+            # (r'^(all[eé][eé]?|Al\.)\b(.*)$', r'Allée\2'),
+            # (r'^avenue\b(.*)$', r'Avenue\1'),
+            # r'de la brasserie',
             # r'^[Cc]h\.?\s',
             # r'^[Cc]hemin [Aa]ncien [Cc]hemin',
             # r'^[Cc]hemin [Cc]hemin',
             # r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)', r'CR\s'
             # r'^[Cc]hemin [Vv]icinal',
             # r'^[Cc]hemin d\'[Ee]xploitation',
-            (r'^chemin\b(.*)$', r'Chemin\1'),
+            # (r'^chemin\b(.*)$', r'Chemin\1'),
             # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
+            # r'des clos',
+            # r'du clos du colombier',
             # r'(.*)\bd(u|es) bois$',
+            # r'du petit Bois$',
             # r'[Ee]cole',    # École
-            (r'[Ee]cureuil(s?)$', r'Écureuil\1'),
+            # (r'[Ee]cureuil(s?)$', r'Écureuil\1'),
             # r"l'[Ee]rable$",
-            (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
+            # (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
             # r'[Eeé]crins',      # Écrins
             # r'^Grand-Rue',
-            (r'^Impase\b(.*)$', r'Impasse\1'),
+            # (r'^Impase\b(.*)$', r'Impasse\1'),
             # r'(.*)\bJ.C. Cave$',
-            (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
-            (r'Lantèrne', r'Lanterne'),
+            # (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
+            # (r'Lantèrne', r'Lanterne'),
             # r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
             # r'maître\s\w+',
-            (r'\bN\.-D\.\b', r'Notre-Dame'),
-            (r'^(passage)\b(.*)$', r'Passage\2'),
-            (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
+            # r'de la mairie$',
+            # (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
+            # (r'^(passage)\b(.*)$', r'Passage\2'),
+            # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
             # r'^Raquette',
             # r'^Qrt',
-            (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-            (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
-            (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
+            # (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
+            # (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
+            # r'rue haute',
+            # (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
             # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
             # r'[Ss]t[e] Anne',
             # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
@@ -233,7 +242,7 @@ class Application:
 
             # r'^\w+ [A-Z]+\.',               # Abréviation
             # r'^\w+\.',                      # Abréviation sur 1er mot
-            (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
+            # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
             # r'^.* Pierre Ronsard',          # Pierre de Ronsard
             # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
             # r'^\w Marroniers?',
@@ -260,7 +269,7 @@ class Application:
             '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
             '^Mail', '^Montée', '^Montoir',
             '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
-            "^(Ancienne |Grande |Grand'?|Petite )?Place",
+            "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
             '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
             '^Quartier', '^Quai',
             '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
@@ -298,7 +307,7 @@ class Application:
             if entry.tags['highway'] in highway_value_list:
                 # Test black-list
                 for black in erreurs_connues:
-                    if (type(black) == str) :   # Erreur
+                    if type(black) == str:   # Erreur
                         match = black
                         if re.match(match, entry.tags['name']):
                             self.errors += 1
@@ -314,7 +323,7 @@ class Application:
                     else:                       # Correction
                         match, replace = list(black)
                         new, nb = re.subn(match, replace, entry.tags['name'])
-                        if nb :
+                        if nb:
                             # print(match, replace, entry.tags['name'], '->', new)
 
                             self.errors += 1
@@ -356,7 +365,7 @@ class Application:
                     nodes_ += 1
                     try:
                         self.add_names(entry)
-                        self.check_highway_name(entry)
+                        # self.check_highway_name(entry)
                         # self.name_egale_addr_housenumber(entry)
                         # self.name_egale_ref(entry)
                         # self.name_commence_ou_termine_par_espace(entry)
