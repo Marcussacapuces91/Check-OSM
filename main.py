@@ -189,22 +189,25 @@ class Application:
     def check_highway_name(self, entry):
         """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
         erreurs_connues = {
+            # A
             r'^Aerodrome',
             (r"(.*)\s[Dd]es\salouettes$", r"\1 des Alouettes"),
             (r"(.*)\sde\sl'ancien\s(\w)$", r"\1 de l\'Ancien \2"),
             (r"^(.*)\s[Aa]\.?\sMalraux$", r"\1 André Malraux"),
-            # (r'^(all[eé][eé]?|Al\.)\b(.*)$', r'Allée\2'),
-            # (r'^avenue\b(.*)$', r'Avenue\1'),
-            # r'de la brasserie',
-            # r'^[Cc]h\.?\s',
-            # r'^[Cc]hemin [Aa]ncien [Cc]hemin',
-            # r'^[Cc]hemin [Cc]hemin',
+            (r'^(all[eé][eé]?|Al\.)\s(.*)$', r'Allée \2'),
+            (r'^avenue\s(.*)$', r'Avenue \1'),
+            # B
+            (r'(.*)\sde\sla\sbrasserie$', r'\1 de la Brasserie'),
+            # C
+            (r"^[Cc](h|hem|hemii?)\.?\s(.*)$", r"Chemin \2"),
+            (r"^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\s(.*)$", r"Ancien Chemin \1"),
+            r'^[Cc]hemin [Cc]hemin',
             # r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)', r'CR\s'
             # r'^[Cc]hemin [Vv]icinal',
             # r'^[Cc]hemin d\'[Ee]xploitation',
             # (r'^chemin\b(.*)$', r'Chemin\1'),
             # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
-            # r'des clos',
+            (r"^(.*)\sdes\sclos$", r"\1 des Clos"),
             # r'du clos du colombier',
             # r'(.*)\bd(u|es) bois$',
             # r'du petit Bois$',
@@ -213,11 +216,12 @@ class Application:
             # r"l'[Ee]rable$",
             # (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
             # r'[Eeé]crins',      # Écrins
+            (r"^(.*)[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
             # r'^Grand-Rue',
             # (r'^Impase\b(.*)$', r'Impasse\1'),
             # r'(.*)\bJ.C. Cave$',
             # (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
-            # (r'Lantèrne', r'Lanterne'),
+            (r'^(.*)\sLantèrne$', r'\1 Lanterne'),
             # r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
             # r'maître\s\w+',
             # r'de la mairie$',
@@ -422,11 +426,11 @@ class Application:
         self.names = {}
         start = datetime.datetime.now()
         logging.debug('Parsing des blocs.')
-        for i, block in enumerate(blocks):
+        for i, block in enumerate(blocks[56600:]):
             nodes, ways, relations = self.parse_block(block, nodes, ways, relations)
             now = datetime.datetime.now()
             end = start + (now - start) / ((i + 1) / size)
-            print(f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
+            print(i, f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
                   f'Names : {len(self.names)}, Errors : {self.errors}',
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
