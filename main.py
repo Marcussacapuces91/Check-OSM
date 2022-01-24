@@ -23,23 +23,21 @@ class Application:
         self.names: dict = {}
 
         logging.debug("Loading deprecated keys.")
-        self._keys = list()
-        with open('deprecated_keys.csv', newline='') as f_deprec:
+        self._deprecated_keys = list()
+        with open('deprecated_keys.csv', newline='', encoding="utf8") as f_deprec:
             reader = csv.reader(f_deprec)
             next(reader)  # Saute la 1ère ligne
-            for row in reader:
-                self._keys.append(row[0])
+            self._deprecated_keys = (row[0] for row in reader)
 
         logging.debug("Loading deprecated tags.")
-        self._tags = list()
-        with open('deprecated_tags.csv', newline='') as f_deprec:
+        self._deprecated_tags = list()
+        with open('deprecated_tags.csv', newline='', encoding="utf8") as f_deprec:
             reader = csv.reader(f_deprec)
             next(reader)
-            for row in reader:
-                self._tags.append((row[0], row[1]))
+            self._deprecated = ( (row[0], row[1]) for row in reader )
 
         logging.debug("Loading exclusions.")
-        with open('exclusions.csv', newline='') as f:
+        with open('exclusions.csv', newline='', encoding="utf8") as f:
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
             nodes = {
@@ -67,6 +65,26 @@ class Application:
             }
 
         self._exclude = {'node': nodes, 'way': ways, 'relation': relations}
+
+        logging.debug("Loading invalid ways name.")
+        with open('invalid_ways_name.csv', newline='', encoding="utf8") as f:
+            reader = csv.reader(f)
+            next(reader)  # Saute la 1ère ligne
+
+            l = []
+            for row in reader:
+                if len(row) and row[0][0] != '#':
+                    r0 = re.compile(row[0])
+                    if len(row) == 1:
+                        l.append(r0)
+                    else:
+                        l.append((r0, row[1]))
+            self._invalid_ways_name = set(l)
+#            for r in self._invalid_ways_name:
+#                print(r)
+#            exit(0)
+
+
 
     def add_names(self, entry):
         """Compte les libellés de 'name' dans une liste les regroupant tous."""
@@ -150,7 +168,8 @@ class Application:
                         entry.tags['public_transport'] in ('stop_position', 'plateform')) or
                    'razed:shop' in entry.tags or
                    'shop' in entry.tags or
-                   ('tourism' in entry.tags and entry.tags['tourism'] in ('artwork', 'chalet', 'hotel'))
+                   ('tourism' in entry.tags and
+                        entry.tags['tourism'] in ('artwork', 'chalet', 'hotel'))
                    ):
                     return  # Exceptions à la règle
                 self.errors += 1
@@ -169,7 +188,7 @@ class Application:
     def tag_deprecie(self, entry):
         """Tags (key/value) dépréciés"""
         for tag in entry.tags:
-            if (tag, entry.tags[tag]) in self._tags:
+            if (tag, entry.tags[tag]) in self._deprecated_tags:
                 self.errors += 1
                 logging.info(
                     f"Tag \'{tag}\'=\'{entry.tags[tag]}\' déprécié ({entry.tags['name']})",
@@ -179,7 +198,7 @@ class Application:
     def key_deprecie(self, entry):
         """Key dépréciés"""
         for tag in entry.tags:
-            if tag in self._keys:
+            if tag in self._deprecated_keys:
                 self.errors += 1
                 logging.info(
                     f"Key \'{tag}\' dépréciée ({entry.tags['name']})",
@@ -188,73 +207,6 @@ class Application:
 
     def check_highway_name(self, entry):
         """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
-        erreurs_connues = {
-            # A
-            r'^Aerodrome',
-            (r"(.*)\s[Dd]es\salouettes$", r"\1 des Alouettes"),
-            (r"(.*)\sde\sl'ancien\s(\w)$", r"\1 de l\'Ancien \2"),
-            (r"^(.*)\s[Aa]\.?\sMalraux$", r"\1 André Malraux"),
-            (r'^(all[eé][eé]?|Al\.)\s(.*)$', r'Allée \2'),
-            (r'^avenue\s(.*)$', r'Avenue \1'),
-            # B
-            (r'(.*)\sde\sla\sbrasserie$', r'\1 de la Brasserie'),
-            # C
-            (r"^[Cc](h|hem|hemii?)\.?\s(.*)$", r"Chemin \2"),
-            (r"^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\s(.*)$", r"Ancien Chemin \1"),
-            r'^[Cc]hemin [Cc]hemin',
-            # r'^[Cc]hemin [Rr]ural (No|Numéro|n°|N°|№)', r'CR\s'
-            # r'^[Cc]hemin [Vv]icinal',
-            # r'^[Cc]hemin d\'[Ee]xploitation',
-            # (r'^chemin\b(.*)$', r'Chemin\1'),
-            # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
-            (r"^(.*)\sdes\sclos$", r"\1 des Clos"),
-            # r'du clos du colombier',
-            # r'(.*)\bd(u|es) bois$',
-            # r'du petit Bois$',
-            # r'[Ee]cole',    # École
-            # (r'[Ee]cureuil(s?)$', r'Écureuil\1'),
-            # r"l'[Ee]rable$",
-            # (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
-            # r'[Eeé]crins',      # Écrins
-            (r"^(.*)[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
-            # r'^Grand-Rue',
-            # (r'^Impase\b(.*)$', r'Impasse\1'),
-            # r'(.*)\bJ.C. Cave$',
-            # (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
-            (r'^(.*)\sLantèrne$', r'\1 Lanterne'),
-            # r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
-            # r'maître\s\w+',
-            # r'de la mairie$',
-            # (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
-            # (r'^(passage)\b(.*)$', r'Passage\2'),
-            # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
-            # r'^Raquette',
-            # r'^Qrt',
-            # (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-            # (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
-            # r'rue haute',
-            # (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
-            # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-            # r'[Ss]t[e] Anne',
-            # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
-            # r'^VC',
-            # r'^[Vv]oie [Dd]ite',
-            # r'^voie',
-            # r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
-            # r'^[Zz]\.? ?[Cc].?\s',
-            # r'^[Zz]\.? ?[Ii].?\s',
-
-            # r'^\w+ [A-Z]+\.',               # Abréviation
-            # r'^\w+\.',                      # Abréviation sur 1er mot
-            # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
-            # r'^.* Pierre Ronsard',          # Pierre de Ronsard
-            # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
-            # r'^\w Marroniers?',
-            # r"^\w D'\w+",
-            # r'^\w De \w+',
-            # r'^\w Des \w+',
-        }
-        """Set des noms de voies formellement erronées."""
 
         highway_type_valid_list = {
             '^Abbaye', '^(Grande )?Allée', '^Autoroute', r'^(Petite )?Avenue\s',
@@ -307,55 +259,94 @@ class Application:
         )
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
-        try:
-            if entry.tags['highway'] in highway_value_list:
-                # Test black-list
-                for black in erreurs_connues:
-                    if type(black) == str:   # Erreur
-                        match = black
-                        if re.match(match, entry.tags['name']):
-                            self.errors += 1
-                            logging.error(
-                                f"Erreur/Typo sur nom de voie '{match}' ({entry.tags['name']})",
-                                extra={'type': _nwr(entry), 'id': entry.id}
-                            )
-                            requests.get(
-                                'http://localhost:8111/load_object',
-                                params={'objects': _nwr(entry) + str(entry.id)}
-                            )
-                            return
-                    else:                       # Correction
-                        match, replace = list(black)
-                        new, nb = re.subn(match, replace, entry.tags['name'])
-                        if nb:
-                            # print(match, replace, entry.tags['name'], '->', new)
+        if type(entry) == esy.osm.pbf.file.Node and 'addr:street' in entry.tags:
+            value = entry.tags['addr:street']
+            # Test black-list
+            for black in self._invalid_ways_name:
+                match = black
+                if type(match) == re.Pattern:   # Erreur
+                    if match.match(value):
+                        self.errors += 1
+                        logging.warning(
+                            f"Erreur/Typo sur addr:street '{match}' ({entry.tags['addr:street']})",
+                            extra={'type': _nwr(entry), 'id': entry.id}
+                        )
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={'objects': _nwr(entry) + str(entry.id)}
+                        )
+                else:                       # Correction
+                    match, replace = list(black)
+                    m = match.match(value)
+                    if m:
+                        self.errors += 1
+                        value = m.expand(replace)
+                        logging.error(
+                            f"Correction/Typo sur addr:street '{match}' ({entry.tags['addr:street']}) -> {value}",
+                            extra={'type': _nwr(entry), 'id': entry.id}
+                        )
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={
+                                'objects': _nwr(entry) + str(entry.id),
+                                'addtags': f'addr:street={value}'
+                            }
+                        )
+            if value != entry.tags['addr:street']:      # Au moins une modif.
+                return
 
-                            self.errors += 1
-                            logging.error(
-                                f"Correction/Typo sur nom de voie '{match}' ({entry.tags['name']})->{new}",
-                                extra={'type': _nwr(entry), 'id': entry.id}
-                            )
-                            requests.get(
-                                'http://localhost:8111/load_object',
-                                params={
-                                    'objects': _nwr(entry) + str(entry.id),
-                                    'addtags': f'name={new}'
-                                }
-                            )
-                            return
-                if False:    # Utilisation de la white-list ?
-                    # Pas de black -> test white-list
-                    for valid in highway_type_valid_list:
-                        if re.match(valid, entry.tags['name']):     # OK
-                            return
-                    # Pas trouvé en white-list -> erreur
-                    self.errors += 1
-                    logging.info(
-                        f"Type de voie inconnue ({entry.tags['name']})",
-                        extra={'type': _nwr(entry), 'id': entry.id}
-                    )
-                    # n = _nwr(entry) + str(entry.id)
-                    # requests.get('http://localhost:8111/load_object', params={'objects': n})
+        elif (type(entry) == esy.osm.pbf.file.Way and
+              entry.tags['highway'] in highway_value_list and
+              'name' in entry.tags):
+            value = entry.tags['name']
+            for black in self._invalid_ways_name:
+                if type(black) == str:   # Erreur
+                    nb = re.match(black, value)
+                    if nb:
+                        self.errors += 1
+                        logging.warning(
+                            f"Erreur/Typo sur nom de voie '{black}' ({value})",
+                            extra={'type': _nwr(entry), 'id': entry.id}
+                        )
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={'objects': _nwr(entry) + str(entry.id)}
+                        )
+                else:                       # Correction
+                    match, replace = list(black)
+                    new, nb = re.subn(match, replace, value)
+                    if nb:
+                        self.errors += 1
+                        value = new
+                        logging.error(
+                            f"Correction/Typo sur nom de voie '{match}' ({entry.tags['name']}) -> {value}",
+                            extra={'type': _nwr(entry), 'id': entry.id}
+                        )
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={
+                                'objects': _nwr(entry) + str(entry.id),
+                                'addtags': f'name={value}'
+                            }
+                        )
+
+            if (value != entry.tags['name']):
+                return
+
+        try:
+            if False:    # Utilisation de la white-list ?
+                # Pas de black -> test white-list
+                for valid in highway_type_valid_list:
+                    if re.match(valid, entry.tags['name']):     # OK
+                        return
+                # Pas trouvé en white-list -> erreur
+                self.errors += 1
+                logging.info(
+                    f"Type de voie inconnue ({entry.tags['name']})",
+                    extra={'type': _nwr(entry), 'id': entry.id}
+                )
+                # n = _nwr(entry) + str(entry.id)
+                # requests.get('http://localhost:8111/load_object', params={'objects': n})
         except KeyError:
             pass
 
@@ -369,7 +360,7 @@ class Application:
                     nodes_ += 1
                     try:
                         self.add_names(entry)
-                        # self.check_highway_name(entry)
+                        self.check_highway_name(entry)
                         # self.name_egale_addr_housenumber(entry)
                         # self.name_egale_ref(entry)
                         # self.name_commence_ou_termine_par_espace(entry)
@@ -426,7 +417,8 @@ class Application:
         self.names = {}
         start = datetime.datetime.now()
         logging.debug('Parsing des blocs.')
-        for i, block in enumerate(blocks[56600:]):
+        # for i, block in enumerate(blocks[56600:]):
+        for i, block in enumerate(blocks):
             nodes, ways, relations = self.parse_block(block, nodes, ways, relations)
             now = datetime.datetime.now()
             end = start + (now - start) / ((i + 1) / size)
@@ -451,7 +443,11 @@ if __name__ == '__main__':
              'https://www.openstreetmap.org/%(type)s/%(id)s'
 #    logging.basicConfig(filename='openstreetmap.log', filemode='w', encoding='utf-8', level=logging.DEBUG,
 #                        format=FORMAT)
-    logging.basicConfig(encoding='utf-8', level=logging.DEBUG+1)
+    logging.basicConfig(
+        filename='openstreetmap.log', filemode='w', encoding='utf-8',
+        level=logging.DEBUG+1,
+        format=r'%(asctime)s [%(lineno)5d] %(levelname)8s - %(funcName)s - %(message)s'
+    )
 
     app = Application()
 
