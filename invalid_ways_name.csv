@@ -1,0 +1,127 @@
+Search, Replace
+# A
+# r'^Aerodrome',
+^(.*)\s[Dd]es\salouettes$,\1 des Alouettes
+^(.*)\sde\sl'ancien\s(\w)$,\1 de l\'Ancien \2
+^(.*)\s[Aa]\.?\sMalraux$,\1 André Malraux
+^(all[eé][eé]?|Al\.)\s(.*)$,Allée \2
+^[aA]ncienne\sRD\s?(\d+)$
+^[aA]ncienne\sRN\s?(\d+)$
+^([Aa]v.?|avenue)\Z(.*)$,Avenue\2
+
+# B
+^Borne\sFrontière\s(\d+)$
+^(.*)\b[Dd](u|es)\sbois\Z(.*)$,\1d\2 Bois\3
+^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$',\1du Petit Bois\2
+^(.*)\b[Dd]es\s[Pp]etits\sbois\Z(.*)$
+^(.*)\bde\sla\sbrasserie$,\1de la Brasserie
+
+# C
+^(.+)\b[Dd]u carvéon$,\1du Carvéon
+^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
+^([Cc]h|[Cc]hem|[Cc]hemii?|chemin)\.?\s(.*)$,Chemin \2
+^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\s(.*)$,Ancien Chemin \1
+^[Cc]hemin\s[Cc]hemin\s(.*)$,Chemin \1
+# r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
+# r'^CR\b',
+# r'^[Cc]hemin [Vv]icinal',
+# r'^[Cc]hemin d\'[Ee]xploitation',
+# r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
+^(.*)\sdes\sclos$,\1 des Clos
+# r'du clos du colombier',
+
+# D
+
+# E
+^(.*)\b[Ee]cole(s?)\Z(.*)$,\1École\2\3
+^(.*)\b[Ee]cureuil(s?)\Z(.*)$,\1Écureuil\2\3
+^(.*)\b[Eeé]glise\Z(.*)$,\1Église\2
+^(.*)\b[Eé]rable\Z(.*)$,\1Érable\2
+
+# F
+#(r"^(.*)\s[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
+
+# G
+# r'^(.*)\bGENEVIEVE\sDE\sGAULE\sANTHONIOZ\Z(.*)$',
+
+# H
+# r'^(.*)\bhenri\sdunant\Z(.*)$',
+
+# I
+# (r'^[Ii]mpase\s(.*)$', r'Impasse \1'),
+
+# L
+# (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
+# (r'^(.*)\blotissement\Z(.*)$', r'\1Lotissement\2'),
+
+# M
+# r'^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$',
+# N
+# r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
+# P
+# (r'^(place|PLACE)\s(.*)$', r'Place \2'),
+# (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
+# Q
+
+# R
+# r"^(.*)\b[Rr]te\Z(.*)$",
+# r"^[Rr](ue|oute) [Ss]ans [Nn]om$",
+# (r"^(rue|RUE)\Z(.*)$", r'Rue\2'),
+
+# S
+# (r"^(.*)\bSaint-[Eée]tienne\Z(.*)", r"\1Saint-Étienne\2"),
+# (r"^(.*)\bSaint-[Éée]xup[eé]ry\Z(.*)", r"\1Saint-Exupéry\2"),
+# (r"^(.*)\bSaint-[Ll]eger\Z(.*)", r"\1Saint-Léger\2"),
+# (r"^(.*)\bSaint-[Rr]emy\Z(.*)", r"\1Saint-Rémy\2"),
+^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
+
+# T
+# U
+
+# V
+# (r'^(voie|VOIE)\s(.*)$', r'Voie \2'),
+# (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
+# r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
+
+
+
+
+
+
+# r"l'[Ee]rable$",
+# (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
+# r'[Eeé]crins',      # Écrins
+# r'^Grand-Rue',
+# r'(.*)\bJ.C. Cave$',
+# (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
+# r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
+# r'maître\s\w+',
+# r'de la mairie$',
+# (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
+# (r'^(passage)\b(.*)$', r'Passage\2'),
+# (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
+# r'^Raquette',
+# r'^Qrt',
+# (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
+# (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
+# r'rue haute',
+# (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
+# r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
+# r'[Ss]t[e] Anne',
+# r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
+# r'^VC',
+# r'^[Vv]oie [Dd]ite',
+# r'^voie',
+# r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
+# r'^[Zz]\.? ?[Cc].?\s',
+# r'^[Zz]\.? ?[Ii].?\s',
+
+# r'^\w+ [A-Z]+\.',               # Abréviation
+# r'^\w+\.',                      # Abréviation sur 1er mot
+# (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
+# r'^.* Pierre Ronsard',          # Pierre de Ronsard
+# r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
+# r'^\w Marroniers?',
+# r"^\w D'\w+",
+# r'^\w De \w+',
+# r'^\w Des \w+',
