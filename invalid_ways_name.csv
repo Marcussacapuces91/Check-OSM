@@ -1,6 +1,7 @@
 Search, Replace
+
 # A
-# r'^Aerodrome',
+^(.*)Aerodrome(.*)$
 ^(.*)\b[Dd]es\salouettes$,\1des Alouettes
 ^(.*)\dde\sl'ancien\s(\w)$,\1de l\'Ancien \2
 ^(.*)\b[Aa]\.?\sMalraux$,\1André Malraux
@@ -32,6 +33,9 @@ Search, Replace
 # r'(.*)\bJ.C. Cave$',
 
 # D
+# r"^\w D'\w+",
+# r'^\w De \w+',
+# r'^\w Des \w+',
 
 # E
 ^(.*)\b[Ee]cole(s?)\Z(.*)$,\1École\2\3
@@ -46,6 +50,7 @@ Search, Replace
 
 # G
 # r'^(.*)\bGENEVIEVE\sDE\sGAULE\sANTHONIOZ\Z(.*)$',
+# (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
 
 # H
 # r'^(.*)\bhenri\sdunant\Z(.*)$',
@@ -65,29 +70,39 @@ Search, Replace
 
 # M
 ^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$,\1de la Mairie\2
-# r'maître\s\w+',
+^(.*)\bmaître\Z(.*)$
+^(.*)\bde\smary\stavy\Z(.*)$
+# r'^\w Marroniers?',
 
 # N
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
 # (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
 
 # P
+# (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
 ^Place$
 ^(place|PLACE)\s(.*)$,Place \2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
 # (r'^(passage)\b(.*)$', r'Passage\2'),
+# r'^.* Pierre Ronsard',          # Pierre de Ronsard
 
 # Q
+# r'^Qrt',
 
 # R
+# r'^Raquette',
+# (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
 ^(.*)\b[Rr]te\Z(.*)$
 ^(route|ROUTE)\s(.*)$,Route \2
 ^[Rr](ue|oute) [Ss]ans [Nn]om$
+# r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
 ^(rue|RUE)\s(.*)$,Rue \2
 ^[Gg]rande?-Rue
-
+# r'rue haute',
+# r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
 
 # S
+# r'[Ss]t[e] Anne',
 # (r"^(.*)\bSaint-[Eée]tienne\Z(.*)", r"\1Saint-Étienne\2"),
 # (r"^(.*)\bSaint-[Éée]xup[eé]ry\Z(.*)", r"\1Saint-Exupéry\2"),
 # (r"^(.*)\bSaint-[Ll]eger\Z(.*)", r"\1Saint-Léger\2"),
@@ -102,35 +117,15 @@ Search, Replace
 ^(voie|VOIE)\Z(.*)$,Voie\1
 ^[Vv][Cc]\Z(.*)$,Voie Communale\1
 # (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
+# r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 
-
-
-
-
-
-# (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
-# r'^Raquette',
-# r'^Qrt',
-# (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-# r'rue haute',
-# (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
-# r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-# r'[Ss]t[e] Anne',
-# r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
-# r'^VC',
-# r'^[Vv]oie [Dd]ite',
-# r'^voie',
+# Z
 # r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
 # r'^[Zz]\.? ?[Cc].?\s',
 # r'^[Zz]\.? ?[Ii].?\s',
 
+# Abréviation
 # r'^\w+ [A-Z]+\.',               # Abréviation
 # r'^\w+\.',                      # Abréviation sur 1er mot
-# (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
-# r'^.* Pierre Ronsard',          # Pierre de Ronsard
-# r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
-# r'^\w Marroniers?',
-# r"^\w D'\w+",
-# r'^\w De \w+',
-# r'^\w Des \w+',
+
