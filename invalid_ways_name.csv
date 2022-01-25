@@ -19,7 +19,7 @@ Search, Replace
 # C
 ^(.+)\b[Dd]u carvéon$,\1du Carvéon
 ^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
-^([Cc]h|[Cc]hem|[Cc]hemii?|chemin|CHEMIN)\.?\Z(.*)$,Chemin\2
+^([Cc]h.?|[Cc]hem.?|[Cc]hemii?|chemin|CHEMIN)(\s[Rr]ural)?\Z(.*)$,Chemin\3
 ^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
 ^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
@@ -78,13 +78,14 @@ Search, Replace
 # (r"^(.*)\bSaint-[Ll]eger\Z(.*)", r"\1Saint-Léger\2"),
 # (r"^(.*)\bSaint-[Rr]emy\Z(.*)", r"\1Saint-Rémy\2"),
 ^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
+^(sentier|SENTIER)\s(.*)$,Sentier \2
 
 # T
 # U
 
 # V
-^(voie|VOIE)\Z(.*)$,Voie\2
-^[Vv][Cc]\Z(.*)$,Voie Communale\2
+^(voie|VOIE)\Z(.*)$,Voie\1
+^[Vv][Cc]\Z(.*)$,Voie Communale\1
 # (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 
