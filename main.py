@@ -255,20 +255,22 @@ class Application:
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
             'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link',
             'living_street', 'pedestrian', 'bus_guideway', 'road', 'busway',
+            'path',
             # 'service', 'track'
         )
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
-        if type(entry) == esy.osm.pbf.file.Node and 'addr:street' in entry.tags:
+        if type(entry) == esy.osm.pbf.file.Node and \
+                'addr:street' in entry.tags:
             value = entry.tags['addr:street']
             # Test black-list
             for black in self._invalid_ways_name:
-                match = black
-                if type(match) == re.Pattern:   # Erreur
-                    if match.match(value):
+                search = black
+                if type(search) == re.Pattern:   # Erreur
+                    if search.match(value):
                         self.errors += 1
                         logging.warning(
-                            f"Erreur/Typo sur addr:street '{match}' ({entry.tags['addr:street']})",
+                            f"Erreur/Typo sur addr:street '{search}' ({entry.tags['addr:street']})",
                             extra={'type': _nwr(entry), 'id': entry.id}
                         )
                         requests.get(
@@ -276,13 +278,13 @@ class Application:
                             params={'objects': _nwr(entry) + str(entry.id)}
                         )
                 else:                       # Correction
-                    match, replace = list(black)
-                    m = match.match(value)
+                    search, replace = list(black)
+                    m = search.match(value)
                     if m:
                         self.errors += 1
                         value = m.expand(replace)
                         logging.error(
-                            f"Correction/Typo sur addr:street '{match}' ({entry.tags['addr:street']}) -> {value}",
+                            f"Correction/Typo sur addr:street '{search}' ({entry.tags['addr:street']}) -> {value}",
                             extra={'type': _nwr(entry), 'id': entry.id}
                         )
                         requests.get(
@@ -295,17 +297,17 @@ class Application:
             if value != entry.tags['addr:street']:      # Au moins une modif.
                 return
 
-        elif (type(entry) == esy.osm.pbf.file.Way and
-              entry.tags['highway'] in highway_value_list and
-              'name' in entry.tags):
+        elif type(entry) == esy.osm.pbf.file.Way and \
+                entry.tags['highway'] in highway_value_list and \
+                'name' in entry.tags:
             value = entry.tags['name']
             for black in self._invalid_ways_name:
-                if type(black) == str:   # Erreur
-                    nb = re.match(black, value)
-                    if nb:
+                if type(black) == re.Pattern:   # Erreur
+                    search = black
+                    if search.match(value):
                         self.errors += 1
                         logging.warning(
-                            f"Erreur/Typo sur nom de voie '{black}' ({value})",
+                            f"Erreur/Typo sur nom de voie '{search}' ({entry.tags['name']})",
                             extra={'type': _nwr(entry), 'id': entry.id}
                         )
                         requests.get(
@@ -313,13 +315,13 @@ class Application:
                             params={'objects': _nwr(entry) + str(entry.id)}
                         )
                 else:                       # Correction
-                    match, replace = list(black)
-                    new, nb = re.subn(match, replace, value)
-                    if nb:
+                    search, replace = list(black)
+                    m = search.match(value)
+                    if m:
                         self.errors += 1
-                        value = new
+                        value = m.expand(replace)
                         logging.error(
-                            f"Correction/Typo sur nom de voie '{match}' ({entry.tags['name']}) -> {value}",
+                            f"Correction/Typo sur nom de voie '{search}' ({entry.tags['name']}) -> {value}",
                             extra={'type': _nwr(entry), 'id': entry.id}
                         )
                         requests.get(
@@ -330,8 +332,14 @@ class Application:
                             }
                         )
 
-            if (value != entry.tags['name']):
+            if value != entry.tags['name']:
                 return
+
+        elif type(entry) == esy.osm.pbf.file.Relation and \
+                entry.tags['type'] == 'associatedStreet' and \
+                'name' in entry.tags:
+            print(entry.tags['name'])
+
 
         try:
             if False:    # Utilisation de la white-list ?
