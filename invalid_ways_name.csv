@@ -1,13 +1,13 @@
 Search, Replace
 # A
 # r'^Aerodrome',
-^(.*)\s[Dd]es\salouettes$,\1 des Alouettes
-^(.*)\sde\sl'ancien\s(\w)$,\1 de l\'Ancien \2
-^(.*)\s[Aa]\.?\sMalraux$,\1 André Malraux
-^(all[eé][eé]?|Al\.)\s(.*)$,Allée \2
+^(.*)\b[Dd]es\salouettes$,\1des Alouettes
+^(.*)\dde\sl'ancien\s(\w)$,\1de l\'Ancien \2
+^(.*)\b[Aa]\.?\sMalraux$,\1André Malraux
+^(ALL[EÉ]E|all[eé][eé]?|Al\.)\Z(.*)$,Allée\2
 ^[aA]ncienne\sRD\s?(\d+)$
 ^[aA]ncienne\sRN\s?(\d+)$
-^([Aa]v.?|avenue)\Z(.*)$,Avenue\2
+^([Aa]v.?|avenue|AVENUE)\Z(.*)$,Avenue\2
 
 # B
 ^Borne\sFrontière\s(\d+)$
@@ -19,9 +19,9 @@ Search, Replace
 # C
 ^(.+)\b[Dd]u carvéon$,\1du Carvéon
 ^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
-^([Cc]h|[Cc]hem|[Cc]hemii?|chemin)\.?\s(.*)$,Chemin \2
-^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\s(.*)$,Ancien Chemin \1
-^[Cc]hemin\s[Cc]hemin\s(.*)$,Chemin \1
+^([Cc]h|[Cc]hem|[Cc]hemii?|chemin|CHEMIN)\.?\Z(.*)$,Chemin\2
+^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
+^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
 # r'^CR\b',
 # r'^[Cc]hemin [Vv]icinal',
@@ -48,7 +48,8 @@ Search, Replace
 # r'^(.*)\bhenri\sdunant\Z(.*)$',
 
 # I
-# (r'^[Ii]mpase\s(.*)$', r'Impasse \1'),
+^(impasse|IMPASSE)\Z(.*)$,Impasse\1
+^[Ii]mpase\Z(.*)$,Impasse\1
 
 # L
 # (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
@@ -59,14 +60,17 @@ Search, Replace
 # N
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
 # P
-# (r'^(place|PLACE)\s(.*)$', r'Place \2'),
+^Place$
+^(place|PLACE)\s(.*)$,Place \2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
+
 # Q
 
 # R
-# r"^(.*)\b[Rr]te\Z(.*)$",
-# r"^[Rr](ue|oute) [Ss]ans [Nn]om$",
-# (r"^(rue|RUE)\Z(.*)$", r'Rue\2'),
+^(.*)\b[Rr]te\Z(.*)$
+^(route|ROUTE)\s(.*)$,Route \2
+^[Rr](ue|oute) [Ss]ans [Nn]om$
+^(rue|RUE)\s(.*)$,Rue \2
 
 # S
 # (r"^(.*)\bSaint-[Eée]tienne\Z(.*)", r"\1Saint-Étienne\2"),
@@ -79,7 +83,8 @@ Search, Replace
 # U
 
 # V
-# (r'^(voie|VOIE)\s(.*)$', r'Voie \2'),
+^(voie|VOIE)\Z(.*)$,Voie\2
+^[Vv][Cc]\Z(.*)$,Voie Communale\2
 # (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 
@@ -103,7 +108,6 @@ Search, Replace
 # r'^Raquette',
 # r'^Qrt',
 # (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-# (r'^(RUE|rue)\b(.*)$', r'Rue\2'),
 # r'rue haute',
 # (r'^(ROUTE|route)\b(.*)$', r'Route\2'),
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
