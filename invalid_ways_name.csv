@@ -12,7 +12,7 @@ Search, Replace
 # B
 ^Borne\sFrontière\s(\d+)$
 ^(.*)\b[Dd](u|es)\sbois\Z(.*)$,\1d\2 Bois\3
-^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$',\1du Petit Bois\2
+^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$,\1du Petit Bois\2
 ^(.*)\b[Dd]es\s[Pp]etits\sbois\Z(.*)$
 ^(.*)\bde\sla\sbrasserie$,\1de la Brasserie
 
@@ -29,6 +29,7 @@ Search, Replace
 # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
 ^(.*)\sdes\sclos$,\1 des Clos
 # r'du clos du colombier',
+# r'(.*)\bJ.C. Cave$',
 
 # D
 
@@ -37,6 +38,8 @@ Search, Replace
 ^(.*)\b[Ee]cureuil(s?)\Z(.*)$,\1Écureuil\2\3
 ^(.*)\b[Eeé]glise\Z(.*)$,\1Église\2
 ^(.*)\b[Eé]rable\Z(.*)$,\1Érable\2
+^[Eeé]changeur\Z(.*)$
+^(.*)\b[Eeé]crins\Z(.*)$
 
 # F
 #(r"^(.*)\s[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
@@ -51,18 +54,28 @@ Search, Replace
 ^(impasse|IMPASSE)\Z(.*)$,Impasse\1
 ^[Ii]mpase\Z(.*)$,Impasse\1
 
+# J
+# (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
+
 # L
 # (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
 # (r'^(.*)\blotissement\Z(.*)$', r'\1Lotissement\2'),
+# r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
+
 
 # M
-# r'^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$',
+^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$,\1de la Mairie\2
+# r'maître\s\w+',
+
 # N
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
+# (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
+
 # P
 ^Place$
 ^(place|PLACE)\s(.*)$,Place \2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
+# (r'^(passage)\b(.*)$', r'Passage\2'),
 
 # Q
 
@@ -71,6 +84,8 @@ Search, Replace
 ^(route|ROUTE)\s(.*)$,Route \2
 ^[Rr](ue|oute) [Ss]ans [Nn]om$
 ^(rue|RUE)\s(.*)$,Rue \2
+^[Gg]rande?-Rue
+
 
 # S
 # (r"^(.*)\bSaint-[Eée]tienne\Z(.*)", r"\1Saint-Étienne\2"),
@@ -94,17 +109,6 @@ Search, Replace
 
 
 
-# r"l'[Ee]rable$",
-# (r'^[Eeé]changeur\b(.*)$', r'Échangeur\1'),
-# r'[Eeé]crins',      # Écrins
-# r'^Grand-Rue',
-# r'(.*)\bJ.C. Cave$',
-# (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
-# r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
-# r'maître\s\w+',
-# r'de la mairie$',
-# (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
-# (r'^(passage)\b(.*)$', r'Passage\2'),
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
 # r'^Raquette',
 # r'^Qrt',
