@@ -24,7 +24,7 @@ Search, Replace
 ^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
 ^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
-# r'^CR\b',
+^CR\Z(.*),Chemin Rural\1
 # r'^[Cc]hemin [Vv]icinal',
 # r'^[Cc]hemin d\'[Ee]xploitation',
 # r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
@@ -73,6 +73,7 @@ Search, Replace
 ^(.*)\bmaître\Z(.*)$
 ^(.*)\bde\smary\stavy\Z(.*)$
 # r'^\w Marroniers?',
+^(mont[ée]e|MONT[EÉ]E|Montee)\Z(.*),Montée\2
 
 # N
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
@@ -81,7 +82,7 @@ Search, Replace
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
 ^Place$
-^(place|PLACE)\s(.*)$,Place \2
+^(place|PLACE|[Pp][Ll]\.?)\s(.*)$,Place \2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
 # (r'^(passage)\b(.*)$', r'Passage\2'),
 # r'^.* Pierre Ronsard',          # Pierre de Ronsard
