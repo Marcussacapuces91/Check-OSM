@@ -24,15 +24,16 @@ Search, Replace
 ^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
 ^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
-^CR\Z(.*),Chemin Rural\1
-# r'^[Cc]hemin [Vv]icinal',
-# r'^[Cc]hemin d\'[Ee]xploitation',
-# r'^(C|CE|CR|D|G[Rr]|N) ?\d+',
+^CR\Z(.*)$,Chemin Rural\1
+^[Cc]hemin [Vv]icinal\Z(.*)$
+^[Cc]hemin d\'[Ee]xploitation\Z(.*)$
+^(C|CE|CR) ?\d+$
 ^(.*)\sdes\sclos$,\1 des Clos
 # r'du clos du colombier',
 # r'(.*)\bJ.C. Cave$',
 
 # D
+^D\s?\d+$
 # r"^\w D'\w+",
 # r'^\w De \w+',
 # r'^\w Des \w+',
@@ -49,6 +50,7 @@ Search, Replace
 #(r"^(.*)\s[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
 
 # G
+^G[Rr]\s?\d+$
 # r'^(.*)\bGENEVIEVE\sDE\sGAULE\sANTHONIOZ\Z(.*)$',
 # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
 
@@ -65,7 +67,7 @@ Search, Replace
 # L
 # (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
 # (r'^(.*)\blotissement\Z(.*)$', r'\1Lotissement\2'),
-# r'^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$',
+^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$
 
 
 # M
@@ -76,6 +78,7 @@ Search, Replace
 ^(mont[ée]e|MONT[EÉ]E|Montee)\Z(.*),Montée\2
 
 # N
+^N\s?\d+$
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
 # (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
 
@@ -99,6 +102,8 @@ Search, Replace
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
 ^(rue|RUE)\s(.*)$,Rue \2
 ^[Gg]rande?-Rue
+^Rond-?\s?[Pp]oint\Z(.*)$
+^rond-point\Z(.*)$
 # r'rue haute',
 # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
 
