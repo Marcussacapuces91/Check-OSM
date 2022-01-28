@@ -45,7 +45,7 @@ class Application:
             nodes = {
                 int(row[0].split(' ')[1])
                 for row in reader
-                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'node'
+                if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'node'
             }
 
             f.seek(0)
@@ -54,7 +54,7 @@ class Application:
             ways = {
                 int(row[0].split(' ')[1])
                 for row in reader
-                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'way'
+                if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'way'
             }
 
             f.seek(0)
@@ -63,7 +63,7 @@ class Application:
             relations = {
                 int(row[0].split(' ')[1])
                 for row in reader
-                if len(row[0].split(' ')) and row[0].split(' ')[0] == 'relation'
+                if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'relation'
             }
 
         self._exclude = {'node': nodes, 'way': ways, 'relation': relations}
@@ -88,8 +88,6 @@ class Application:
 #            for r in self._invalid_ways_name:
 #                print(r)
 #            exit(0)
-
-
 
     def add_names(self, entry):
         """Compte les libellés de 'name' dans une liste les regroupant tous."""
@@ -213,48 +211,50 @@ class Application:
     def check_highway_name(self, entry):
         """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
 
-        highway_type_valid_list = {
-            '^Abbaye', '^(Grande )?Allée', '^Autoroute', r'^(Petite )?Avenue\s',
-            '^Belvédère', '^Boucle', r'^Boulevard\s', '^(Le )?Bois', '^Bretelle',
-            '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^Château',
-            '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
-            '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
-            '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
-            '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine', '^Duplex',
-            '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
-            r'^Faubourg\s', '^Fossé',
-            '^(Grand )?Giratoire', '^Gué',
-            '^Hameau',
-            '^(Petite )?Impass?e', '^Itinéraire',
-            '^Jardins?',
-            '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
-            '^Mail', '^Montée', '^Montoir',
-            '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
-            "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
-            '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
-            '^Quartier', '^Quai',
-            '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
-            "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
-            '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
-            '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
-            '^Vallée', '^Vallon', '^Venelle', '^Véloroute', '^Viaduc', '^Villa', '^(Ancienne |Petite |Nouvelle )?Voie',
-            '^Voirie',
-            '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
-
-            # Nord
-            '^Ratzengaesschen', '.* Straete$', '.*stra[ae]t$', '.*dreve$',
-
-            # Alsace
-            r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer ' + \
-            r'|Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
-            '^Engpfaede$',
-
-            # Autoroutes nationales
-            "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
-            '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
-            '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$", "^L'Ariégeoise$",
-        }
-        """Set des noms de voies acceptés"""
+        # highway_type_valid_list = {
+        #     '^Abbaye', '^(Grande )?Allée', '^Autoroute', r'^(Petite )?Avenue\s',
+        #     '^Belvédère', '^Boucle', r'^Boulevard\s', '^(Le )?Bois', '^Bretelle',
+        #     '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^Château',
+        #     '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
+        #     '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
+        #     '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
+        #     '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine',
+        #     '^Duplex',
+        #     '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
+        #     r'^Faubourg\s', '^Fossé',
+        #     '^(Grand )?Giratoire', '^Gué',
+        #     '^Hameau',
+        #     '^(Petite )?Impass?e', '^Itinéraire',
+        #     '^Jardins?',
+        #     '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
+        #     '^Mail', '^Montée', '^Montoir',
+        #     '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
+        #     "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
+        #     '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
+        #     '^Quartier', '^Quai',
+        #     '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
+        #     "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
+        #     '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
+        #     '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
+        #     '^Vallée', '^Vallon', '^Venelle', '^Véloroute', '^Viaduc', '^Villa',
+        #     '^(Ancienne |Petite |Nouvelle )?Voie',
+        #     '^Voirie',
+        #     '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
+        #
+        #     # Nord
+        #     '^Ratzengaesschen', '.* Straete$', '.*stra[ae]t$', '.*dreve$',
+        #
+        #     # Alsace
+        #     r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer ' + \
+        #     r'|Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
+        #     '^Engpfaede$',
+        #
+        #     # Autoroutes nationales
+        #     "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
+        #     '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
+        #     '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$", "^L'Ariégeoise$",
+        # }
+        # """Set des noms de voies acceptés"""
 
         highway_value_list = (
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
@@ -267,7 +267,7 @@ class Application:
 
         def check_name(key: str, value: str, entry_) -> str:
             for row in self._invalid_ways_name:
-                match = row[0].match(value)
+                match = row[0].search(value)
                 if match and len(row) == 1:     # search
                     self.errors += 1
                     logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
@@ -276,17 +276,18 @@ class Application:
                         params={'objects': _nwr(entry_) + str(entry_.id)}
                     )
                 elif match and len(row) == 2:   # search & replace
-                    self.errors += 1
                     replace = match.expand(row[1])
-                    logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
-                    requests.get(
-                        'http://localhost:8111/load_object',
-                        params={
-                            'objects': _nwr(entry_) + str(entry_.id),
-                            'addtags': f'{key}={replace}'
-                        }
-                    )
-                    value = replace
+                    if replace != value:
+                        self.errors += 1
+                        logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={
+                                'objects': _nwr(entry_) + str(entry_.id),
+                                'addtags': f'{key}={replace}'
+                            }
+                        )
+                        value = replace
             return value
 
         try:
@@ -302,22 +303,22 @@ class Application:
         except KeyError:
             pass
 
-        if False:    # Utilisation de la white-list ?
-            try:
-                # Pas de black -> test white-list
-                for valid in highway_type_valid_list:
-                    if re.match(valid, entry.tags['name']):     # OK
-                        return
-                # Pas trouvé en white-list -> erreur
-                self.errors += 1
-                logging.info(
-                    f"Type de voie inconnue ({entry.tags['name']})",
-                    extra={'type': _nwr(entry), 'id': entry.id}
-                )
-                # n = _nwr(entry) + str(entry.id)
-                # requests.get('http://localhost:8111/load_object', params={'objects': n})
-            except KeyError:
-                pass
+        # if False:    # Utilisation de la white-list ?
+        #     try:
+        #         # Pas de black -> test white-list
+        #         for valid in highway_type_valid_list:
+        #             if re.match(valid, entry.tags['name']):     # OK
+        #                 return
+        #         # Pas trouvé en white-list -> erreur
+        #         self.errors += 1
+        #         logging.info(
+        #             f"Type de voie inconnue ({entry.tags['name']})",
+        #             extra={'type': _nwr(entry), 'id': entry.id}
+        #         )
+        #         # n = _nwr(entry) + str(entry.id)
+        #         # requests.get('http://localhost:8111/load_object', params={'objects': n})
+        #     except KeyError:
+        #         pass
 
     def parse_block(self, block_, nodes_: int, ways_: int, relations_: int) -> (int, int, int):
         for entry in block_:
