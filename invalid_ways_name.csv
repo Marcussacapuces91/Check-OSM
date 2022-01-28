@@ -1,109 +1,116 @@
 Search, Replace
 
 # A
-^(.*)Aerodrome(.*)$
-^(.*)\b[Dd]es\salouettes$,\1des Alouettes
-^(.*)\dde\sl'ancien\s(\w)$,\1de l\'Ancien \2
-^(.*)\b[Aa]\.?\sMalraux$,\1André Malraux
-^(ALL[EÉ]E|all[eé][eé]?|Al\.)\Z(.*)$,Allée\2
-^[aA]ncienne\sRD\s?(\d+)$
-^[aA]ncienne\sRN\s?(\d+)$
-^([Aa]v.?|avenue|AVENUE)\Z(.*)$,Avenue\2
+(?i)^(.*)\bAerodrome\b(.*)$,\1Aérodrome\2
+(?i)^(.*)\b[Dd]es\sAlouettes$,\1des Alouettes
+# (?i)^(.*)\bde\sl'Ancien\b(\w)$,\1de l'Ancien\2
+# (?i)^(.*)\b[Aa]\.?\sMalraux$,\1André Malraux
+# (?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
+# ^[aA]ncienne\sRD\s?(\d+)$
+# ^[aA]ncienne\sRN\s?(\d+)$
+# ^Anc\.?\b
+#(?i)^(Av\.?|Avenue)\b(.*)$,Avenue\2
 
 # B
-^Borne\sFrontière\s(\d+)$
-^(.*)\b[Dd](u|es)\sbois\Z(.*)$,\1d\2 Bois\3
-^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$,\1du Petit Bois\2
-^(.*)\b[Dd]es\s[Pp]etits\sbois\Z(.*)$
-^(.*)\bde\sla\sbrasserie$,\1de la Brasserie
+# ^Borne\sFrontière\s(\d+)$
+# ^(.*)\b[Dd](u|es)\sbois\Z(.*)$,\1d\2 Bois\3
+# ^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$,\1du Petit Bois\2
+# ^(.*)\b[Dd]es\s[Pp]etits\sbois\Z(.*)$
+# ^(.*)\bde\sla\sbrasserie$,\1de la Brasserie
 
 # C
-^(.+)\b[Dd]u carvéon$,\1du Carvéon
-^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
-^([Cc]h.?|[Cc]hem.?|[Cc]hemii?|chemin|CHEMIN)(\s[Rr]ural)?\Z(.*)$,Chemin\3
-^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
-^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
+# ^(.+)\b[Dd]u carvéon$,\1du Carvéon
+# ^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
+# ^([Cc]h.?|[Cc]hem.?|[Cc]hemii?|chemin|CHEMIN)(\s[Rr]ural)?\Z(.*)$,Chemin\3
+# ^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
+# ^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
-^CR\Z(.*)$,Chemin Rural\1
-^[Cc]hemin [Vv]icinal\Z(.*)$
-^[Cc]hemin d\'[Ee]xploitation\Z(.*)$
-^(C|CE|CR) ?\d+$
-^(.*)\sdes\sclos$,\1 des Clos
+# ^CR\Z(.*)$,Chemin Rural\1
+# ^[Cc]hemin [Vv]icinal\Z(.*)$
+# ^[Cc]hemin d\'[Ee]xploitation\Z(.*)$
+# ^(C|CE|CR) ?\d+$
+# ^(.*)\sdes\sclos$,\1 des Clos
 # r'du clos du colombier',
 # r'(.*)\bJ.C. Cave$',
+# (?i)^(.*)\bGeorges Cl[ée]menceau\b(.*),\1Georges Clemenceau\2
 
 # D
-^D\s?\d+$
-# r"^\w D'\w+",
-# r'^\w De \w+',
-# r'^\w Des \w+',
+# ^D\s?\d+$
+# ^(.*)\bD'\Z(.*)
+# ^(.*)\bD[Ee]\Z(.*)
+# ^(.*)\bD[Ee][Ss]'\Z(.*)
 
 # E
-^(.*)\b[Ee]cole(s?)\Z(.*)$,\1École\2\3
-^(.*)\b[Ee]cureuil(s?)\Z(.*)$,\1Écureuil\2\3
-^(.*)\b[Eeé]glise\Z(.*)$,\1Église\2
-^(.*)\b[Eé]rable\Z(.*)$,\1Érable\2
-^[Eeé]changeur\Z(.*)$
-^(.*)\b[Eeé]crins\Z(.*)$
+# ^(.*)\b[Ee]cole(s?)\Z(.*)$,\1École\2\3
+# ^(.*)\b[Ee]cureuil(s?)\Z(.*)$,\1Écureuil\2\3
+# ^(.*)\b[Eeé]glise\Z(.*)$,\1Église\2
+# ^(.*)\b[Eé]rable\Z(.*)$,\1Érable\2
+# ^[Eeé]changeur\Z(.*)$
+# ^(.*)\b[Eeé]crins\Z(.*)$
+# ^(.*)\b[Eeé]tienne\sBilli[eè]res\b(.*)$
+# \b[ÉEée]tienne\set\s[Mm]athilde\s[Pp]inault\b
 
 # F
-#(r"^(.*)\s[Ff]\.?\sMauriac$", r"\1 François Mauriac"),
+# ^(.*)\b[Ff]\.?\sMauriac\b(.*)$,\1François Mauriac\2
 
 # G
-^G[Rr]\s?\d+$
+# ^G[Rr]\s?\d+$
+# ^[Gg]rande?-Rue
 # r'^(.*)\bGENEVIEVE\sDE\sGAULE\sANTHONIOZ\Z(.*)$',
 # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
+# (?i)^(.*)\bdu\s[Gg][eé]n[eé]ral\s[Dd]e\s[Gg]aulle\b(.*)$
+# (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$
 
 # H
 # r'^(.*)\bhenri\sdunant\Z(.*)$',
 
 # I
-^(impasse|IMPASSE)\Z(.*)$,Impasse\1
-^[Ii]mpase\Z(.*)$,Impasse\1
+# ^(impasse|IMPASSE)\Z(.*)$,Impasse\1
+# ^[Ii]mpase\Z(.*)$,Impasse\1
 
 # J
 # (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
+#^(.*)\bdu\s[Mm]ar[eé]chal\s[Jj]offre\b(.*)
 
 # L
 # (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
 # (r'^(.*)\blotissement\Z(.*)$', r'\1Lotissement\2'),
-^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$
-
+# ^(Lotos[se]ement|Lotiseement|LOtissement|Lot\.)\b(.*)$
 
 # M
-^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$,\1de la Mairie\2
-^(.*)\bmaître\Z(.*)$
-^(.*)\bde\smary\stavy\Z(.*)$
+# ^(.*)\b[Dd]e\s[Ll]a\smairie\Z(.*)$,\1de la Mairie\2
+# ^(.*)\bmaître\Z(.*)$
+# ^(.*)\bde\smary\stavy\Z(.*)$
 # r'^\w Marroniers?',
-^(mont[ée]e|MONT[EÉ]E|Montee)\Z(.*),Montée\2
+# ^(mont[ée]e|MONT[EÉ]E|Montee)\Z(.*),Montée\2
 
 # N
-^N\s?\d+$
+# ^N\s?\d+$
 # r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
 # (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
-^Place$
-^(place|PLACE|[Pp][Ll]\.?)\s(.*)$,Place \2
+# ^Place$
+# ^(place|PLACE|[Pp][Ll]\.?)\s(.*)$,Place \2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
 # (r'^(passage)\b(.*)$', r'Passage\2'),
 # r'^.* Pierre Ronsard',          # Pierre de Ronsard
+# (?i)^(.*)\bG[ée]n([eé]ral)?\sPatton\b(.*)$
 
 # Q
-# r'^Qrt',
+# (?i)^Qrt\b(.*)
 
 # R
 # r'^Raquette',
 # (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-^(.*)\b[Rr]te\Z(.*)$
-^(route|ROUTE)\s(.*)$,Route \2
-^[Rr](ue|oute) [Ss]ans [Nn]om$
+# ^(.*)\b[Rr]te\Z(.*)$
+# ^(route|ROUTE)\s(.*)$,Route \2
+# ^[Rr](ue|oute) [Ss]ans [Nn]om$
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-^(rue|RUE)\s(.*)$,Rue \2
-^[Gg]rande?-Rue
-^Rond-?\s?[Pp]oint\Z(.*)$
-^rond-point\Z(.*)$
+# ^(rue|RUE)\s(.*)$,Rue \2
+# ^Rond-?\s?[Pp]oint\b(.*)$,Rond-point\1
+# ^rond-point\b(.*)$,Rond-point\1
 # r'rue haute',
 # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
 
@@ -113,15 +120,15 @@ Search, Replace
 # (r"^(.*)\bSaint-[Éée]xup[eé]ry\Z(.*)", r"\1Saint-Exupéry\2"),
 # (r"^(.*)\bSaint-[Ll]eger\Z(.*)", r"\1Saint-Léger\2"),
 # (r"^(.*)\bSaint-[Rr]emy\Z(.*)", r"\1Saint-Rémy\2"),
-^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
-^(sentier|SENTIER)\s(.*)$,Sentier \2
+# ^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
+# ^(sentier|SENTIER)\s(.*)$,Sentier \2
 
 # T
 # U
 
 # V
-^(voie|VOIE)\Z(.*)$,Voie\1
-^[Vv][Cc]\Z(.*)$,Voie Communale\1
+# ^(voie|VOIE)\Z(.*)$,Voie\1
+# ^[Vv][Cc]\Z(.*)$,Voie Communale\1
 # (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
@@ -135,3 +142,4 @@ Search, Replace
 # r'^\w+ [A-Z]+\.',               # Abréviation
 # r'^\w+\.',                      # Abréviation sur 1er mot
 
+^(.*[^«]) ([^»].*)$,\1 \2
