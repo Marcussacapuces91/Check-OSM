@@ -4,27 +4,30 @@ Search, Replace
 (?i)^(.*)\bAerodrome\b(.*)$,\1Aérodrome\2
 (?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
 (?i)^(.*)\b[Dd]es\sAlouettes$,\1des Alouettes
-(?i)^(Anc\.?|Ancien)\b(.*)$,Ancien\2
+(?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^(.*)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
 (?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
+(?i)^(.*)\bl\sArchevêque\b(.*)$,\1l'Archevêque\2
+(?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
 
 # ^[aA]ncienne\sRD\s?(\d+)$
 # ^[aA]ncienne\sRN\s?(\d+)$
-(?i)^(Av\.?|Avenue)\b(.*)$,Avenue\2
+(?i)^(Ave?\.?|Avenue)\b(.*)$,Avenue\2
 
 # B
 # ^Borne\sFrontière\s(\d+)$
-# ^(.*)\b[Dd](u|es)\sbois\Z(.*)$,\1d\2 Bois\3
-# ^(.*)\b[Dd]u\s[Pp]etit\sbois\Z(.*)$,\1du Petit Bois\2
-# ^(.*)\b[Dd]es\s[Pp]etits\sbois\Z(.*)$
-# ^(.*)\bde\sla\sbrasserie$,\1de la Brasserie
+(?i)^(.*)\bdu\sBois\b(.*)$,\1du Bois\2
+(?i)^(.*)\bdes\sBois\b(.*)$,\1des Bois\2
+(?i)^(.*)\bdu\sPetit\sBois\b(.*)$,\1du Petit Bois\2
+(?i)^(.*)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
+(?i)^(.*)\bde\sla\sbrasserie\b(.*)$,\1de la Brasserie\2
 
 # C
 # ^(.+)\b[Dd]u carvéon$,\1du Carvéon
 # ^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
-# ^([Cc]h.?|[Cc]hem.?|[Cc]hemii?|chemin|CHEMIN)(\s[Rr]ural)?\Z(.*)$,Chemin\3
-# ^[Cc]hemin\s[Aa]ncien\s[Cc]hemin\Z(.*)$,Ancien Chemin\1
-# ^[Cc]hemin\s[Cc]hemin\Z(.*)$,Chemin\1
+(?i)^(Che?m?.?|Chemii?|Chemin)(\s[Rr]ural)?\b(.*)$,Chemin\3
+# ^Chemin\sAncien\sChemin\d(.*)$,Ancien Chemin\1
+(?i)^Chemin\sChemin\d(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
 # ^CR\Z(.*)$,Chemin Rural\1
 # ^[Cc]hemin [Vv]icinal\Z(.*)$
@@ -34,6 +37,7 @@ Search, Replace
 # r'du clos du colombier',
 # r'(.*)\bJ.C. Cave$',
 # (?i)^(.*)\bGeorges Cl[ée]menceau\b(.*),\1Georges Clemenceau\2
+# CALMETTE ET GUERIN
 
 # D
 # ^D\s?\d+$
@@ -52,7 +56,8 @@ Search, Replace
 # \b[ÉEée]tienne\set\s[Mm]athilde\s[Pp]inault\b
 
 # F
-# ^(.*)\b[Ff]\.?\sMauriac\b(.*)$,\1François Mauriac\2
+# FELIX FRANCOIS
+# René FOUQUE - CARRO
 
 # G
 # ^G[Rr]\s?\d+$
@@ -61,6 +66,7 @@ Search, Replace
 # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
 # (?i)^(.*)\bdu\s[Gg][eé]n[eé]ral\s[Dd]e\s[Gg]aulle\b(.*)$
 # (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$
+# (?i)^(.*)\bdu\sGénéral\sde\sGaulle\b(.*)$
 
 # H
 # r'^(.*)\bhenri\sdunant\Z(.*)$',
@@ -73,6 +79,9 @@ Search, Replace
 # (r'(.*)\bjean-baptiste de la quintinie$', r'Jean-Baptiste de la Quintinie'),
 #^(.*)\bdu\s[Mm]ar[eé]chal\s[Jj]offre\b(.*)
 
+# K
+# DE KUSEL
+
 # L
 # (r'^(.*)\bLantèrne(s?)\Z(.*)$', r'\1Lanterne\2\3'),
 # (r'^(.*)\blotissement\Z(.*)$', r'\1Lotissement\2'),
@@ -84,6 +93,7 @@ Search, Replace
 # ^(.*)\bde\smary\stavy\Z(.*)$
 # r'^\w Marroniers?',
 # ^(mont[ée]e|MONT[EÉ]E|Montee)\Z(.*),Montée\2
+# ^(.*)\b[Ff]\.?\sMauriac\b(.*)$,\1François Mauriac\2
 
 # N
 # ^N\s?\d+$
@@ -98,6 +108,7 @@ Search, Replace
 # (r'^(passage)\b(.*)$', r'Passage\2'),
 # r'^.* Pierre Ronsard',          # Pierre de Ronsard
 # (?i)^(.*)\bG[ée]n([eé]ral)?\sPatton\b(.*)$
+# DU PARC
 
 # Q
 # (?i)^Qrt\b(.*)
@@ -114,6 +125,8 @@ Search, Replace
 # ^rond-point\b(.*)$,Rond-point\1
 # r'rue haute',
 # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
+# (?i)^(.*)\bRaymond\sPointcar[eé]\b(.*)$
+# (?i)^(.*)\bde\sla\sR[ée]publique\b(.*)$
 
 # S
 # r'[Ss]t[e] Anne',
