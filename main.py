@@ -267,17 +267,20 @@ class Application:
 
         def check_name(key: str, value: str, entry_) -> str:
             for row in self._invalid_ways_name:
-                match = row[0].search(value)
-                if match and len(row) == 1:     # search
-                    self.errors += 1
-                    logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
-                    requests.get(
-                        'http://localhost:8111/load_object',
-                        params={'objects': _nwr(entry_) + str(entry_.id)}
-                    )
-                elif match and len(row) == 2:   # search & replace
-                    replace = match.expand(row[1])
-                    if replace != value:
+                while True:     # Repeat search until no more
+                    match = row[0].search(value)
+                    if match and len(row) == 1:     # search
+                        self.errors += 1
+                        logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={'objects': _nwr(entry_) + str(entry_.id)}
+                        )
+                        break
+                    elif match and len(row) == 2:   # search & replace
+                        replace = match.expand(row[1])
+                        if replace == value:
+                            break
                         self.errors += 1
                         logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
                         requests.get(
@@ -288,6 +291,8 @@ class Application:
                             }
                         )
                         value = replace
+                    else:
+                        break
             return value
 
         try:
