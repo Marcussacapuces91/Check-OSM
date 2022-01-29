@@ -25,7 +25,7 @@ Search, Replace
 # C
 # ^(.+)\b[Dd]u carvéon$,\1du Carvéon
 # ^[Cc]hemin(|\s[Cc]ommunal|\s[Rr]ural)\s[Dd]it\s[Dd]e\s(.*)$,Chemin de \2
-(?i)^(Che?m?.?|Chemii?|Chemin)(\s[Rr]ural)?\b(.*)$,Chemin\3
+(?i)^(Che?m?.?|Chemii?|Chemin)\b(.*)$,Chemin\2
 # ^Chemin\sAncien\sChemin\d(.*)$,Ancien Chemin\1
 (?i)^Chemin\sChemin\d(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
