@@ -2,14 +2,15 @@ Search, Replace
 
 # A
 (?i)^(.*)\bAerodrome\b(.*)$,\1Aérodrome\2
+(?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
 (?i)^(.*)\b[Dd]es\sAlouettes$,\1des Alouettes
-# (?i)^(.*)\bde\sl'Ancien\b(\w)$,\1de l'Ancien\2
-# (?i)^(.*)\b[Aa]\.?\sMalraux$,\1André Malraux
-# (?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
+(?i)^(Anc\.?|Ancien)\b(.*)$,Ancien\2
+(?i)^(.*)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
+(?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
+
 # ^[aA]ncienne\sRD\s?(\d+)$
 # ^[aA]ncienne\sRN\s?(\d+)$
-# ^Anc\.?\b
-#(?i)^(Av\.?|Avenue)\b(.*)$,Avenue\2
+(?i)^(Av\.?|Avenue)\b(.*)$,Avenue\2
 
 # B
 # ^Borne\sFrontière\s(\d+)$
