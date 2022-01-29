@@ -278,7 +278,11 @@ class Application:
                         )
                         break
                     elif match and len(row) == 2:   # search & replace
-                        replace = match.expand(row[1])
+                        try:
+                            replace = match.expand(row[1])
+                        except re.error as e:
+                            print(f'{e} : {row[1]}')
+                            raise(e)
                         if replace == value:
                             break
                         self.errors += 1
