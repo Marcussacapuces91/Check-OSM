@@ -7,7 +7,7 @@ Search, Replace
 (?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^(.*)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
 (?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
-(?i)^(.*)\bl\sArchevêque\b(.*)$,\1l'Archevêque\2
+(?i)^(.*)\bl['\s]Archev[eê]que\b(.*)$,\1l'Archevêque\2
 (?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
 
 # ^[aA]ncienne\sRD\s?(\d+)$
