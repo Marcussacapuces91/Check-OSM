@@ -42,29 +42,29 @@ class Application:
         with open('exclusions.csv', newline='', encoding="utf8") as f:
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            nodes = {
+            nodes = frozenset(
                 int(row[0].split(' ')[1])
                 for row in reader
                 if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'node'
-            }
+            )
 
             f.seek(0)
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            ways = {
+            ways = frozenset(
                 int(row[0].split(' ')[1])
                 for row in reader
                 if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'way'
-            }
+            )
 
             f.seek(0)
             reader = csv.reader(f)
             next(reader)  # Saute la 1ère ligne
-            relations = {
+            relations = frozenset(
                 int(row[0].split(' ')[1])
                 for row in reader
                 if len(row) and len(row[0].split(' ')) and row[0].split(' ')[0] == 'relation'
-            }
+            )
 
         self._exclude = {'node': nodes, 'way': ways, 'relation': relations}
 
@@ -84,7 +84,7 @@ class Application:
                         l_.append((r0,))
                     else:
                         l_.append((r0, row[1]))
-            self._invalid_ways_name = set(l_)
+            self._invalid_ways_name = frozenset(l_)
 #            for r in self._invalid_ways_name:
 #                print(r)
 #            exit(0)
@@ -266,38 +266,39 @@ class Application:
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
         def check_name(key: str, value: str, entry_) -> str:
-            for row in self._invalid_ways_name:
-                while True:     # Repeat search until no more
+            while True:  # Repeat search until no more
+                start = value
+                for row in self._invalid_ways_name:
                     match = row[0].search(value)
-                    if match and len(row) == 1:     # search
-                        self.errors += 1
-                        logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
-                        requests.get(
-                            'http://localhost:8111/load_object',
-                            params={'objects': _nwr(entry_) + str(entry_.id)}
-                        )
-                        break
-                    elif match and len(row) == 2:   # search & replace
-                        try:
-                            replace = match.expand(row[1])
-                        except re.error as e:
-                            print(f'{e} : {row[1]}')
-                            raise(e)
-                        if replace == value:
-                            break
-                        self.errors += 1
-                        logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
-                        requests.get(
-                            'http://localhost:8111/load_object',
-                            params={
-                                'objects': _nwr(entry_) + str(entry_.id),
-                                'addtags': f'{key}={replace}'
-                            }
-                        )
-                        value = replace
-                    else:
-                        break
-            return value
+                    if match:
+                        if len(row) == 1:     # search
+                            self.errors += 1
+                            logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
+                            requests.get(
+                                'http://localhost:8111/load_object',
+                                params={'objects': _nwr(entry_) + str(entry_.id)}
+                            )
+                            return value
+                        elif len(row) == 2:   # search & replace
+                            try:
+                                replace = match.expand(row[1])
+                            except re.error as e:
+                                print(f'{e} : {row[1]}')
+                                raise(e)
+                            if replace != value:
+                                self.errors += 1
+                                logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
+                                requests.get(
+                                    'http://localhost:8111/load_object',
+                                    params={
+                                        'objects': _nwr(entry_) + str(entry_.id),
+                                        'addtags': f'{key}={replace}'
+                                    }
+                                )
+                                value = replace
+                                break
+                if start == value:
+                    return value
 
         try:
             match entry:
