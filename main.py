@@ -284,10 +284,12 @@ class Application:
                                 replace = match.expand(row[1])
                             except re.error as e:
                                 print(f'{e} : {row[1]}')
-                                raise(e)
+                                raise e
                             if replace != value:
                                 self.errors += 1
-                                logging.error(f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"')
+                                logging.error(
+                                    f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
+                                )
                                 requests.get(
                                     'http://localhost:8111/load_object',
                                     params={
