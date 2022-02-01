@@ -59,20 +59,26 @@ Search, Replace
 (?i)^(.+)\bde\b(.+)$,\1de\2
 (?i)^(.+)\bdu\b(.+)$,\1du\2
 (?i)^(.+)\bdes\b(.+)$,\1des\2
-# des dalys
-# de la duys
+(?i)^(.+)\bdes\sDalys\b(.*)$,\1des Dalys\2
+(?i)^(.+)\bde\sla\sDuys\b(.*)$,\1de la Duys\2
 
 # E
-# ^(.*)\b[Ee]cole(s?)\Z(.*)$,\1École\2\3
-# ^(.*)\b[Ee]cureuil(s?)\Z(.*)$,\1Écureuil\2\3
-# ^(.*)\b[Eeé]glise\Z(.*)$,\1Église\2
-# ^(.*)\b[Eé]rable\Z(.*)$,\1Érable\2
-# ^[Eeé]changeur\Z(.*)$
-# ^(.*)\b[Eeé]crins\Z(.*)$
-# ^(.*)\b[Eeé]tienne\sBilli[eè]res\b(.*)$
-# \b[ÉEée]tienne\set\s[Mm]athilde\s[Pp]inault\b
-# de l'étrat
-# du petit étang
+(?i)^(.*)\b[ÉEé]cole\b(.*)$,\1École\2
+(?i)^(.+)\bde\sl'[ÉEé]cole\b(.*)$,\1de l'École\2
+(?i)^(.*)\b[ÉEé]coles\b(.*)$,\1Écoles\2
+(?i)^(.+)\b[ÉEé]cureuil\b(.*)$,\1Écureuil\2
+(?i)^(.+)\b[ÉEé]cureuils\b(.*)$,\1Écureuils\2
+(?i)^(.*)\b[ÉEé]glise\b(.*)$,\1Église\2
+(?i)^(.+)\bde\sl'[ÉEé]glise\b(.*)$,\1de l'Église\2
+(?i)^(.*)\b[ÉEé]glises\b(.*)$,\1Églises\2
+(?i)^(.*)\b[ÉEé]rable\b(.*)$,\1Érable\2
+(?i)^(.*)\b[ÉEé]rabless\b(.*)$,\1Érables\2
+(?i)^[Eé]changeur\b(.*)$,Échangeur\1
+(?i)^(.*)\b[ÉEé]crins\b(.*)$,\1Écrins\2
+(?i)^(.*)\b[ÉEé]tienne\sBilli[eè]res\b(.*)$,\1Étienne Billières\2
+(?i)^(.*)\b[ÉEé]tienne\set\sMathilde\sPinault\b(.*)$,\1Étienne et Mathilde Pinault\2
+(?i)^(.+)\bde\sl'[ÉEé]trat\b(.*)$,\1de l'Étrat\2
+(?i)^(.*)\b[ÉEé]tang\b(.*)$,\1Étang\2
 
 # F
 # FELIX FRANCOIS
@@ -140,6 +146,7 @@ Search, Replace
 # de la plaine
 # du plan
 # du pont
+# du petit
 
 # Q
 # (?i)^Qrt\b(.*),Quartier\1
@@ -152,7 +159,7 @@ Search, Replace
 # ^(route|ROUTE)\s(.*)$,Route \2
 # ^[Rr](ue|oute) [Ss]ans [Nn]om$
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-# ^(rue|RUE)\s(.*)$,Rue \2
+# ^(rues?|RUE)\s(.*)$,Rue \2
 # ^Rond-?\s?[Pp]oint\b(.*)$,Rond-point\1
 # ^rond-point\b(.*)$,Rond-point\1
 # r'rue haute',
@@ -171,6 +178,8 @@ Search, Replace
 # ^(sentier|SENTIER)\s(.*)$,Sentier \2
 # de saint-sauveur
 # du seux
+# Saint-Louis
+# Saint-Martin
 
 # T
 # de la tour
