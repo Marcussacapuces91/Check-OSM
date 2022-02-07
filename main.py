@@ -432,7 +432,7 @@ if __name__ == '__main__':
     )
 
     app = Application()
-
+    requests.get('http://localhost:8111/load_object', params={'objects': { 'r/1403916' }, 'addtags': { 'name': 'France métropolitaine'}})
     # liste = {
     #     'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
     #     'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
