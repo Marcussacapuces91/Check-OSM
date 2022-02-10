@@ -78,10 +78,10 @@ Search, Replace
 
 # D
 # (?i)^D\s?\d+$
-# (?i)^(.+)\bd'\b(.+)$,\1d'\2
-# (?i)^(.+)\bde\b(.+)$,\1de\2
-# (?i)^(.+)\bdu\b(.+)$,\1du\2
-# (?i)^(.+)\bdes\b(.+)$,\1des\2
+(?i)^(.+)\bd'\b(.+)$,\1d'\2
+(?i)^(.+)\bde\b(.+)$,\1de\2
+(?i)^(.+)\bdu\b(.+)$,\1du\2
+(?i)^(.+)\bdes\b(.+)$,\1des\2
 
 (?i)^(.+)\bdes\sDalys\b(.*)$,\1des Dalys\2
 (?i)^(.+)\bde\sla\sDuys\b(.*)$,\1de la Duys\2
