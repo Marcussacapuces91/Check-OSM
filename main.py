@@ -266,34 +266,38 @@ class Application:
 
         def check_name(key: str, value: str, entry_) -> str:
             # 1er tour pour chercher 1 match
-            match = False
+            change = False
             for row in self._invalid_ways_name:
-                if row[0].search(value):
-                    match = True
-                    root = xml.etree.ElementTree.fromstring(
-                        requests.get(f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}').content
-                    )
-                    match root[0].tag:
-                        case 'node':
-                            entry_ = esy.osm.pbf.Node(
-                                id=root[0].attrib['id'],
-                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
-                                lonlat=(float(root[0].attrib['lon']), float(root[0].attrib['lat']))
+                if len(row) == 2:
+                    match = row[0].search(value)
+                    if match:
+                        replace = match.expand(row[1])
+                        if replace != value:
+                            change = True
+                            root = xml.etree.ElementTree.fromstring(
+                                requests.get(f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}').content
                             )
-                        case 'way':
-                            entry_ = esy.osm.pbf.Way(
-                                id=root[0].attrib['id'],
-                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
-                                refs=None
-                            )
-                        case 'relation':
-                            entry_ = esy.osm.pbf.Relation(
-                                id=root[0].attrib['id'],
-                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
-                                members=None
-                            )
-                    break
-            if not match:
+                            match root[0].tag:
+                                case 'node':
+                                    entry_ = esy.osm.pbf.Node(
+                                        id=root[0].attrib['id'],
+                                        tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                        lonlat=(float(root[0].attrib['lon']), float(root[0].attrib['lat']))
+                                    )
+                                case 'way':
+                                    entry_ = esy.osm.pbf.Way(
+                                        id=root[0].attrib['id'],
+                                        tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                        refs=None
+                                    )
+                                case 'relation':
+                                    entry_ = esy.osm.pbf.Relation(
+                                        id=root[0].attrib['id'],
+                                        tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                        members=None
+                                    )
+                            break
+            if not change:
                 return value
 
             while True:  # Repeat search until no more
