@@ -2,11 +2,10 @@ import csv
 import datetime
 import logging
 import re
+import xml.etree.ElementTree
+
 import esy.osm.pbf
 import requests
-# import json
-
-# from sympy import Point, Polygon, intersection
 
 
 def _nwr(entry) -> str:
@@ -266,6 +265,37 @@ class Application:
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
         def check_name(key: str, value: str, entry_) -> str:
+            # 1er tour pour chercher 1 match
+            match = False
+            for row in self._invalid_ways_name:
+                if row[0].search(value):
+                    match = True
+                    root = xml.etree.ElementTree.fromstring(
+                        requests.get(f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}').content
+                    )
+                    match root[0].tag:
+                        case 'node':
+                            entry_ = esy.osm.pbf.Node(
+                                id=root[0].attrib['id'],
+                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                lonlat=(float(root[0].attrib['lon']), float(root[0].attrib['lat']))
+                            )
+                        case 'way':
+                            entry_ = esy.osm.pbf.Way(
+                                id=root[0].attrib['id'],
+                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                refs=None
+                            )
+                        case 'relation':
+                            entry_ = esy.osm.pbf.Relation(
+                                id=root[0].attrib['id'],
+                                tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
+                                members=None
+                            )
+                    break
+            if not match:
+                return value
+
             while True:  # Repeat search until no more
                 start = value
                 for row in self._invalid_ways_name:
