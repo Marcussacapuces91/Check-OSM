@@ -15,13 +15,14 @@ Search, Replace
 (?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
 (?i)^(.+)\bdes\sAmin[ée]es\b(.*)$,\1des Aminées\2
 (?i)^(.+)\bdes\sAlli[ée]s\b(.*)$,\1des Alliés\2
-# (?i)^(.+)\bles\sAcacias\b(.*)$,\1les Acacias\2
+(?i)^(.+)\bles\sAcacias\b(.*)$,\1les Acacias\2
 
 # ^[aA]ncienne\sRD\s?(\d+)$
 # ^[aA]ncienne\sRN\s?(\d+)$
 
 # B
 # ^Borne\sFrontière\s(\d+)$
+(?i)^Bas\b(.+)$,Bas\1
 (?i)^(BD|Boulevard)\b(.+)$,Boulevard\2
 (?i)^(.+)\bdu\sBois\b(.*)$,\1du Bois\2
 (?i)^(.+)\bdes\sBois\b(.*)$,\1des Bois\2
@@ -69,7 +70,9 @@ Search, Replace
 (?i)^(.+)\bdu\sCourt\b(.*)$,\1du Court\2
 (?i)^(.+)\bdes\sCr[èe]s\b(.*)$,\1des Crès\2
 (?i)^(.+)\ble\sCoteau\b(.*)$,\1le Coteau\2
-(?i)^(.+)\blee\sCoteaux\b(.*)$,\1les Coteaux\2
+(?i)^(.+)\bles\sCoteaux\b(.*)$,\1les Coteaux\2
+(?i)^(.+)\bdu\sCol\b(.*)$,\1du Col\2
+(?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
 
 # r'(.*)\bJ.C. Cave$',
 
@@ -81,6 +84,7 @@ Search, Replace
 (?i)^(.+)\bdes\b(.+)$,\1des\2
 (?i)^(.+)\bdes\sDalys\b(.*)$,\1des Dalys\2
 (?i)^(.+)\bde\sla\sDuys\b(.*)$,\1de la Duys\2
+(?i)^Digue\b(.+)$,Digue\1
 # (?i)^(.+)\bdite?\b(.+)$
 
 # E
@@ -101,6 +105,7 @@ Search, Replace
 (?i)^(.+)\bde\sl'[ÉEé]trat\b(.*)$,\1de l'Étrat\2
 (?i)^(.*)\b[ÉEé]tang\b(.*)$,\1Étang\2
 (?i)^(.+)\bd'\s?Eau\b(.*)$,\1d'Eau\2
+(?i)^(.*)\b[ÉEé]lise\b(.*)$,\1Élise\2
 
 # F
 (?i)^(.*)\bF[eé]lix\sFran[cç]ois\b(.*)$,\1Félix François\2
@@ -123,7 +128,8 @@ Search, Replace
 (?i)^(.+)\bdes\sHospitaliers\b(.*)$,\1des Hospitaliers\2
 
 # I
-(?i)^(Imp\.?|Impass?e)\b(.*)$,Impasse\2
+(?i)^Impasse\b(.*)$,Impasse\1
+(?i)^(Imp\.|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 
 # J
@@ -142,15 +148,16 @@ Search, Replace
 
 # M
 (?i)^(.+)\bde\sla\sMairie\b(.*)$,\1de la Mairie\2
-(?i)^(.+)\bma[Îîi]tre\b(.*)$,\1Maître\2
+# (?i)^(.+)\bma[Îî]tre\b(.*)$,\1Maître\2
 (?i)^(.+)\bde\sMary\sTavy\b(.*)$,\1de Mary Tavy\2
 (?i)^\bdes\sMarr?onn?iers\b(.*)$,\1des Marronniers\2
 (?i)^\bdu\sMarr?onn?ier\b(.*)$,\1du Marronnier\2
-(?i)^Mont[Éée]e\b(.*)$,Montée\2
+(?i)^Mont[Éée]e\b(.*)$,Montée\1
 (?i)^(.*)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
 (?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
+# des Murs
 
 # N
 # ^N\s?\d+$
@@ -174,7 +181,7 @@ Search, Replace
 # du pont
 # du petit
 # du parc
-
+# Rue Pierre Maitre
 # Q
 # (?i)^Qrt\b(.*),Quartier\1
 # Quai
@@ -212,6 +219,8 @@ Search, Replace
 # (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
 # Allée du sol,way/617262166
 # Allée du sous bois,way/796497695
+# Impasse de la Sablière
+# à Scie
 
 # T
 # de la tour
@@ -222,6 +231,7 @@ Search, Replace
 # des tournavelles
 # de la trinité
 # Allée du temps libre,way/611521176,way/891886028
+# du Temple
 
 # U
 
