@@ -158,6 +158,7 @@ Search, Replace
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
 (?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
+(?i)^(.+)\bde\sla\sMaison\sCarr[ée]e\b(.*)$,\1de la Maison Carrée\2
 # des Murs
 
 # N
@@ -168,12 +169,13 @@ Search, Replace
 (?i)^(.+)\bNotre\sDame\sde\sla\s(\w+)\b(.*)$,\1Notre-Dame-de-la-\2\3
 (?i)^(.+)\bNotre\sDame\sdu\s(\w+)\b(.*)$,\1Notre-Dame-du-\2\3
 (?i)^(.+)\bNotre\sDame\sdes\s(\w+)\b(.*)$,\1Notre-Dame-des-\2\3
+(?i)^(.+)\bNotre\sDame\sd'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
 # ^Place$
-# ^(place|PLACE|[Pp][Ll]\.?)\s(.*)$,Place \2
+(?i)^(Place|Pl\.?)\b(.+)$,Place\2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
 # (r'^(passage)\b(.*)$', r'Passage\2'),
 # (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre de Ronsard\2
