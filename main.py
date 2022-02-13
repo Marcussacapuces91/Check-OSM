@@ -275,7 +275,9 @@ class Application:
                         if replace != value:
                             change = True
                             root = xml.etree.ElementTree.fromstring(
-                                requests.get(f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}').content
+                                requests.get(
+                                    f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}'
+                                ).content
                             )
                             match root[0].tag:
                                 case 'node':
@@ -466,14 +468,20 @@ if __name__ == '__main__':
     )
 
     app = Application()
-    requests.get('http://localhost:8111/load_object', params={'objects': { 'r/1403916' }, 'addtags': { 'name': 'France métropolitaine'}})
+    requests.get(
+        'http://localhost:8111/load_object',
+        params={
+            'objects': {'r/1403916'},
+            'addtags': {'name': 'France métropolitaine'}
+        }
+    )
     # liste = {
     #     'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
     #     'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
     #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
     # }
-    # liste = {'essonne', 'france'}
-    liste = {'france'}
+    liste = {'essonne', 'ile_de_france'}
+    # liste = {'france'}
     for filename in liste:
         with esy.osm.pbf.File(f'{filename}.osm.pbf') as osm_pbf:
             app.names = {}
