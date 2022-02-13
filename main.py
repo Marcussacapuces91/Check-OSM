@@ -334,7 +334,7 @@ class Application:
                                     }
                                 )
                                 value = replace
-                                break
+                                #break
                 if start == value:
                     return value
 
@@ -480,8 +480,8 @@ if __name__ == '__main__':
     #     'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
     #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
     # }
-    liste = {'essonne', 'ile_de_france'}
-    # liste = {'france'}
+    # liste = {'essonne', 'ile_de_france'}
+    liste = {'france'}
     for filename in liste:
         with esy.osm.pbf.File(f'{filename}.osm.pbf') as osm_pbf:
             app.names = {}
