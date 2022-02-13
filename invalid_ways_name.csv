@@ -107,6 +107,7 @@ Search, Replace
 (?i)^(.*)\b[ÉEé]tang\b(.*)$,\1Étang\2
 (?i)^(.+)\bd'\s?Eau\b(.*)$,\1d'Eau\2
 (?i)^(.*)\b[ÉEé]lise\b(.*)$,\1Élise\2
+(?i)^(.+)\bl'\s?[Éée]pine\b(.*)$,\1d'Épine\2
 
 # F
 (?i)^(.*)\bF[eé]lix\sFran[cç]ois\b(.*)$,\1Félix François\2
@@ -127,6 +128,7 @@ Search, Replace
 # H
 (?i)^(.*)\bHenri\sDunant\b(.*)$',\1Henri Dunant\2
 (?i)^(.+)\bdes\sHospitaliers\b(.*)$,\1des Hospitaliers\2
+(?i)^(.+)\bl'\s?\sH[Ôôo]tel\sde\sVille\b(.*)$,\1l'Hôtel de Ville\2
 
 # I
 (?i)^Impasse\b(.*)$,Impasse\1
@@ -159,7 +161,7 @@ Search, Replace
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
 (?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
-(?i)^(.+)\bde\sla\sMaison\sCarr[ée]e\b(.*)$,\1de la Maison Carrée\2
+(?i)^(.+)\bde\sla\sMaison\sCarr[Éée]e\b(.*)$,\1de la Maison Carrée\2
 # des Murs
 
 # N
@@ -172,8 +174,13 @@ Search, Replace
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]des[\s\-](\w+)\b(.*)$,\1Notre-Dame-des-\2\3
 #(?i)^(.+)\bNotre[\s\-]|Dame[\s\-]d'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
-# Notre-Dame d'Alet
-# Notre-Dame-de-Bon Secours
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]d'Alet\b(.*)$,\1Notre-Dame-d'Alet\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]d'[Éée]sp[Éée]rance\b(.*)$,\1Notre-Dame-d'Espérance\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-de-Bon-Secours\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]du[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-du-Bon-Secours\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]des[\s\-]Sept[\s\-]Douleurs\b(.*)$,\1Notre-Dame-des-Sept-Douleurs\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bonne[\s\-]Nouvelle\b(.*)$,\1Notre-Dame-de-Bonne-Nouvelle\2
+# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Santa[\s\-]Cruz\b(.*)$,\1Notre-Dame-de-Santa-Cruz\2
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
