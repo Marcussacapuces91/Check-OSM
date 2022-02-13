@@ -162,9 +162,13 @@ Search, Replace
 
 # N
 # ^N\s?\d+$
-# r'^(.*)\bNELSON\sMANDELA\Z(.*)$',
-# (r'\b(N\.-D\.|Nôtre Dame)\b', r'Notre-Dame'),
-# de nivelle
+(?i)^(.+)\bNelson\sMandela\b(.*)$,\1Nelson Mandela\2
+(?i)^(.+)\b(N\.-D\.|N[Ôôo]tre\sDame)\b(.*)$,\1Notre-Dame\3
+(?i)^(.+)\bNotre\sDame\sde\s(\w+)\b(.*)$,\1Notre-Dame-de-\2\3
+(?i)^(.+)\bNotre\sDame\sde\sla\s(\w+)\b(.*)$,\1Notre-Dame-de-la-\2\3
+(?i)^(.+)\bNotre\sDame\sdu\s(\w+)\b(.*)$,\1Notre-Dame-du-\2\3
+(?i)^(.+)\bNotre\sDame\sdes\s(\w+)\b(.*)$,\1Notre-Dame-des-\2\3
+(?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
