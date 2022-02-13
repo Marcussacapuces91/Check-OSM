@@ -136,6 +136,7 @@ Search, Replace
 # J
 (?i)^(.*)\bJean-Baptiste\sde\sla\sQuintinie(.*)$,\1Jean-Baptiste de la Quintinie\2
 (?i)^(.+)\bdu\sMar[eé]chal\sJoffre\b(.*)$,\1du Maréchal Joffre\2
+# Jeanne d'arc
 
 # K
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
