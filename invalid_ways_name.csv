@@ -164,13 +164,15 @@ Search, Replace
 # N
 # ^N\s?\d+$
 (?i)^(.+)\bNelson\sMandela\b(.*)$,\1Nelson Mandela\2
-(?i)^(.+)\b(N\.-D\.|N[Ôôo]tre\sDame)\b(.*)$,\1Notre-Dame\3
-(?i)^(.+)\bNotre\sDame\sde\s(\w+)\b(.*)$,\1Notre-Dame-de-\2\3
-(?i)^(.+)\bNotre\sDame\sde\sla\s(\w+)\b(.*)$,\1Notre-Dame-de-la-\2\3
-(?i)^(.+)\bNotre\sDame\sdu\s(\w+)\b(.*)$,\1Notre-Dame-du-\2\3
-(?i)^(.+)\bNotre\sDame\sdes\s(\w+)\b(.*)$,\1Notre-Dame-des-\2\3
-(?i)^(.+)\bNotre\sDame\sd'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
+(?i)^(.+)\b(N\.[\s\-]D\.|N[Ôôo]tre[\s\-]Dame)\b(.*)$,\1Notre-Dame\3
+(?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-](\w+)\b(.*)$,\1Notre-Dame-de-\2\3
+(?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-]la[\s\-](\w+)\b(.*)$,\1Notre-Dame-de-la-\2\3
+(?i)^(.+)\bNotre[\s\-]Dame[\s\-]du[\s\-](\w+)\b(.*)$,\1Notre-Dame-du-\2\3
+(?i)^(.+)\bNotre[\s\-]Dame[\s\-]des[\s\-](\w+)\b(.*)$,\1Notre-Dame-des-\2\3
+#(?i)^(.+)\bNotre[\s\-]|Dame[\s\-]d'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
+# Notre-Dame d'Alet
+# Notre-Dame-de-Bon Secours
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
