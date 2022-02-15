@@ -107,7 +107,7 @@ Search, Replace
 (?i)^(.*)\b[ÉEé]tang\b(.*)$,\1Étang\2
 (?i)^(.+)\bd'\s?Eau\b(.*)$,\1d'Eau\2
 (?i)^(.*)\b[ÉEé]lise\b(.*)$,\1Élise\2
-(?i)^(.+)\bl'\s?[Éée]pine\b(.*)$,\1d'Épine\2
+(?i)^(.+)\bl'\s?[Éée]pine\b(.*)$,\1l'Épine\2
 
 # F
 (?i)^(.*)\bF[eé]lix\sFran[cç]ois\b(.*)$,\1Félix François\2
@@ -116,8 +116,8 @@ Search, Replace
 # G
 # ^G[Rr]\s?\d+$
 # ^[Gg]rande?-Rue
-(?i)^(.*)\b^Geneviève\sde\sGaule\sAnthonioz\b(.*)$'
-(?i)^(.*)\b^Geneviève\sAnthonioz\sde\sGaule\b(.*)$'
+(?i)^(.*)\b^Geneviève\sde\sGaule\sAnthonioz\b(.*)$
+(?i)^(.*)\b^Geneviève\sAnthonioz\sde\sGaule\b(.*)$
 (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$,\1Charles de Gaulle\2
 (?i)^(.+)\bdu\sG[Éée]n[Éée]ral\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
 (?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
@@ -174,20 +174,22 @@ Search, Replace
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]des[\s\-](\w+)\b(.*)$,\1Notre-Dame-des-\2\3
 #(?i)^(.+)\bNotre[\s\-]|Dame[\s\-]d'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]d'Alet\b(.*)$,\1Notre-Dame-d'Alet\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]d'[Éée]sp[Éée]rance\b(.*)$,\1Notre-Dame-d'Espérance\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-de-Bon-Secours\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]du[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-du-Bon-Secours\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]des[\s\-]Sept[\s\-]Douleurs\b(.*)$,\1Notre-Dame-des-Sept-Douleurs\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bonne[\s\-]Nouvelle\b(.*)$,\1Notre-Dame-de-Bonne-Nouvelle\2
-# (?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Santa[\s\-]Cruz\b(.*)$,\1Notre-Dame-de-Santa-Cruz\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]d'Alet\b(.*)$,\1Notre-Dame-d'Alet\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]d'[Éée]sp[Éée]rance\b(.*)$,\1Notre-Dame-d'Espérance\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-de-Bon-Secours\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]du[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-du-Bon-Secours\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]des[\s\-]Sept[\s\-]Douleurs\b(.*)$,\1Notre-Dame-des-Sept-Douleurs\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bonne[\s\-]Nouvelle\b(.*)$,\1Notre-Dame-de-Bonne-Nouvelle\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Santa[\s\-]Cruz\b(.*)$,\1Notre-Dame-de-Santa-Cruz\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]la[\s\-]L[Éée]gion[\s\-]d'Honneur\b(.*)$,\1Notre-Dame-de-la-Légion-d'Honneur\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]du[\s\-]Grand[\s\-]March[Éée]\b(.*)$,\1Notre-Dame-du-Grand-Marché\2
+(?i)^(.+)Notre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Rem[Èèe]de\b(.*)$,\1Notre-Dame-de-Bon-Remède\2
 
 # P
 # (r'\bde\bla\bpisciculture$', r'de la Pisciculture'),
-# ^Place$
 (?i)^(Place|Pl\.?)\b(.+)$,Place\2
 # (r"^(.*)\sla\spierre(\s.*)?$", r"\1 la Pierre\2"),
-# (r'^(passage)\b(.*)$', r'Passage\2'),
+(?i)^(Passage)\b(.+)$,Passage\2
 # (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre de Ronsard\2
 # (?i)^(.*)\bG[ée]n([eé]ral)?\sPatton\b(.*)$,\1Général Patton\3
 # (?i)^(.+)\bdu\sParc\b(.*)$,\1du Parc\2
@@ -199,9 +201,11 @@ Search, Replace
 # du petit
 # du parc
 # Rue Pierre Maitre
+(?i)^(Pont)\b(.+)$,Pont\2
+
 # Q
-# (?i)^Qrt\b(.*),Quartier\1
-# Quai
+(?i)^(Quartier|Qrt)\b(.+),Quartier\2
+(?i)^(Quai)\b(.+)$,Quai\2
 
 # R
 # r'^Raquette',
@@ -249,6 +253,7 @@ Search, Replace
 # de la trinité
 # Allée du temps libre,way/611521176,way/891886028
 # du Temple
+# Traverse
 
 # U
 
