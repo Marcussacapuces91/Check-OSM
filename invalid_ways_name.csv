@@ -41,7 +41,7 @@ Search, Replace
 (?i)^(Chemin\sRural)\b(.*)$,Chemin Rural\2
 (?i)^(Chemin\sVicinal)\b(.*)$,Chemin Vicinal\2
 (?i)^(Chemin\sd.Exploitation)\b(.*)$,Chemin d'Exploitation\2
-(?i)^(C\.C\.?|C\.CIAL|Centre\sCommerciale?)\b(.*)$,Centre Commercial\2
+(?i)^(C\.C\.|C\.C|C\.CIAL\.?|Centre\sCommerciale?\.?)\b(.*)$,Centre Commercial\2
 
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
