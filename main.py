@@ -271,7 +271,11 @@ class Application:
                 if len(row) == 2:
                     match = row[0].search(entry_.tags[key])
                     if match:
-                        replace = match.expand(row[1])
+                        try:
+                            replace = match.expand(row[1])
+                        except re.error as e:
+                            print(f'{e} : {row[1]}')
+                            raise e
                         if replace != entry_.tags[key]:
                             root = xml.etree.ElementTree.fromstring(
                                 requests.get(
