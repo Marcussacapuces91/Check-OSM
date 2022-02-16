@@ -17,9 +17,6 @@ Search, Replace
 (?i)^(.+)\bles\sAcacias\b(.*)$,\1les Acacias\2
 (?i)^(.+)\bAlexandre\sIII\b(.*)$,\1Alexandre III\2
 
-# ^[aA]ncienne\sRD\s?(\d+)$
-# ^[aA]ncienne\sRN\s?(\d+)$
-
 # B
 # ^Borne\sFrontière\s(\d+)$
 (?i)^Bas\b(.+)$,Bas\1
@@ -35,9 +32,8 @@ Search, Replace
 
 # C
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
-(?i)^Chemin(|\sCommunal|\sRural)\sdit\sde\b(.*)$,Chemin de\2
-(?i)^Chemin(|\sCommunal|\sRural)\sdit\sdes\b(.*)$,Chemin des\2
-(?i)^Chemin(|\sCommunal|\sRural)\sdit\sdu\b(.*)$,Chemin du\2
+(?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
+(?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(Che?m?\.?|Chemii?|Chemin)\b(.*)$,Chemin\2
 (?i)^Chemin\sAncien\sChemin\b(.*)$,Ancien Chemin\1
 (?i)^Chemin\sChemin\b(.*)$,Chemin\1
@@ -45,7 +41,7 @@ Search, Replace
 (?i)^(Chemin\sRural)\b(.*)$,Chemin Rural\2
 (?i)^(Chemin\sVicinal)\b(.*)$,Chemin Vicinal\2
 (?i)^(Chemin\sd.Exploitation)\b(.*)$,Chemin d'Exploitation\2
-(?i)^(C\.C\.?|C\.CIAL)\b(.*)$,Centre Commercial\2
+(?i)^(C\.C\.?|C\.CIAL|Centre\sCommerciale?)\b(.*)$,Centre Commercial\2
 
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
@@ -231,33 +227,39 @@ Search, Replace
 (?i)^Rue\sHaute\b(.*),Rue Haute\1
 (?i)^(R[Éée]sidence|Res\.?)\b(.*),Résidence\2
 (?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
-# ^[Rr](ue|oute) [Ss]ans [Nn]om$
+(?i)^(Ancienne\s)?RN\b(.*)$
+(?i)^(Ancienne\s)?RD\b(.*)$
+
+(?i)^(Rue|Route)\ssans\sNom$
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
 # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
 # (?i)^(.*)\bRaymond\sPointcar[eé]\b(.*)$
-# (?i)^(.+)\bde\sla\sR[ée]publique\b(.*)$
-# de la roche
-# Allée du ruisseau,way/224100537
-# Au Renard
+(?i)^(.+)\bde\sla\sR[Éée]publique\b(.*)$,\1de la République\2
+(?i)^(.+)\bde\sla\sRoche\b(.*)$,\1de la Roche\2
+(?i)^(.+)\bdu\sRuisseau\b(.*)$,\1du Ruisseau\2
+(?i)^(.+)\bau\sRenard\b(.*)$,\1au Renard\2
 # zi du Pont rouge
 
 # S
-# r'[Ss]t[e] Anne',
-# (r"^(.*)\bSaint-[Eée]tienne\Z(.*)", r"\1Saint-Étienne\2"),
-# (r"^(.*)\bSaint-[Éée]xup[eé]ry\Z(.*)", r"\1Saint-Exupéry\2"),
-# (r"^(.*)\bSaint-[Ll]eger\Z(.*)", r"\1Saint-Léger\2"),
-# (r"^(.*)\bSaint-[Rr]emy\Z(.*)", r"\1Saint-Rémy\2"),
-# ^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
-# ^(sentier|SENTIER)\s(.*)$,Sentier \2
-# de saint-sauveur
-# du seux
-# Saint-Louis
-# Saint-Martin
-# (r'\b[Gg]eorges [Ss]and\b', r'George Sand'),       # George
-# Allée du sol,way/617262166
-# Allée du sous bois,way/796497695
-# Impasse de la Sablière
-# à Scie
+(?i)^Sentier\b(.*)$,Sentier\1
+
+(?i)^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
+(?i)^(.+)\bSainte[\s-]Anne\b(.*)$,\1Sainte-Anne\2
+(?i)^(.+)\bSaint[\s-][Éée]tienne\b(.*)$,\1Saint-Étienne\2
+(?i)^(.+)\bSaint[\s-][Éée]xup[Éée]ry\b(.*)$,\1Saint-Exupéry\2
+(?i)^(.+)\bSaint[\s-]L[Éée]ger\b(.*)$,\1Saint-Léger\2
+(?i)^(.+)\bSaint[\s-]Louis\b(.*)$,\1Saint-Louis\2
+(?i)^(.+)\bSaint[\s-]Martin\b(.*)$,\1Saint-Martin\2
+(?i)^(.+)\bSaint[\s-]R[Éée]my\b(.*)$,\1Saint-Rémy\2
+(?i)^(.+)\bSaint[\s-]Sauveur\b(.*)$,\1Saint-Sauveur\2
+
+(?i)^(.+)\b[Ààa]\sScie\b(.*)$,\1à Scie\2
+(?i)^(.+)\bde\sla\sSabli[Èèe]re\b(.*)$,\1de la Sablière\2
+(?i)^(.+)\bdu\sSeux\b(.*)$,\1du Seux\2
+(?i)^(.+)\bdu\sSol\b(.*)$,\1du Sol\2
+(?i)^(.+)\bdu\sSous[-\s]bois\b(.*)$,\1du Sous-bois\2
+
+(?i)^(.+)\bGeorges?\sSand\b\b(.*)$,\1George Sand\2
 
 # T
 # de la tour
