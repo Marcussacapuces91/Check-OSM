@@ -293,7 +293,11 @@ Search, Replace
 # r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
 # r'^[Zz]\.? ?[Cc].?\s',
 # r'^[Zz]\.? ?[Ii].?\s',
-# (?i)^Zone\sIndustriel
+# (?i)^Zone\sIndustriel(le)?\b(.*)$,Zone Industrielle\2
+# (?i)^Zone\sArtisanale\b(.*)$,Zone Artisanale\1
+# (?i)^Zone\sCommerciale\b(.*)$,Zone Commerciale\1
+# (?i)^Zone\sd'Activit[Ééèe]s?\b(.*)$,Zone d'Activité\1
+
 
 # Abréviation
 # r'^\w+ [A-Z]+\.',               # Abréviation
