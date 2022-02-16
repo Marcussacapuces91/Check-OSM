@@ -277,11 +277,13 @@ class Application:
                             print(f'{e} : {row[1]}')
                             raise e
                         if replace != entry_.tags[key]:
-                            root = xml.etree.ElementTree.fromstring(
-                                requests.get(
-                                    f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}'
-                                ).content
-                            )
+                            req = requests.get(f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}')
+                            try:
+                                req.raise_for_status()
+                            except requests.exceptions.HTTPError as e:
+                                if req.status_code == 410:  # Element Gone !
+                                    return entry_.tags[key]
+                            root = xml.etree.ElementTree.fromstring(req.content)
                             match root[0].tag:
                                 case 'node':
                                     new_entry = esy.osm.pbf.Node(
