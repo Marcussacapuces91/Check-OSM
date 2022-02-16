@@ -45,6 +45,7 @@ Search, Replace
 (?i)^(Chemin\sRural)\b(.*)$,Chemin Rural\2
 (?i)^(Chemin\sVicinal)\b(.*)$,Chemin Vicinal\2
 (?i)^(Chemin\sd.Exploitation)\b(.*)$,Chemin d'Exploitation\2
+(?i)^(C\.C\.?|C\.CIAL)\b(.*)$,Centre Commercial\2
 
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
@@ -127,6 +128,7 @@ Search, Replace
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
 (?i)^(.+)\bdes\sGuignards\b(.*)$,\1des Guignards\2
 (?i)^(.+)\bGuitard\b(.*)$,\1Guitard\2
+(?i)^(.+)\bde\sGuesnou\b(.*)$,\1de Guesnou\2
 
 # H
 (?i)^(.*)\bHenri\sDunant\b(.*)$',\1Henri Dunant\2
@@ -153,11 +155,13 @@ Search, Replace
 (?i)^(.*)\b(Lotos[se]ement|Lotiseement|Lot\.)\b(.+)$,\1Lotissement\3
 (?i)^(.*)\bLieu\sdit\sStrutta\b(.*)$,\1Lieu dit Strutta\2
 (?i)^(.+)\bG[Éée]n[Éée]ral\sLeclerc\b(.*)$,\1Général Leclerc\2
+(?i)^(.+)\bde\sl'Europe\b(.*)$,\1de l'Europe\2
 
 # M
 (?i)^Mont[Éée]e\b(.*)$,Montée\1
 (?i)^(.+)\bde\sla\sMairie\b(.*)$,\1de la Mairie\2
 (?i)^(.+)\bde\sMary\sTavy\b(.*)$,\1de Mary Tavy\2
+(?i)^(.+)\bPierre\sMaitre\b(.*)$,\1Pierre Maitre\2
 (?i)^\bdes\sMarr?onn?iers\b(.*)$,\1des Marronniers\2
 (?i)^\bdu\sMarr?onn?ier\b(.*)$,\1du Marronnier\2
 (?i)^(.*)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
@@ -187,15 +191,14 @@ Search, Replace
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-]la[\s\-]L[Éée]gion[\s\-]d'Honneur\b(.*)$,\1Notre-Dame-de-la-Légion-d'Honneur\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]du[\s\-]Grand[\s\-]March[Éée]\b(.*)$,\1Notre-Dame-du-Grand-Marché\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Rem[Èèe]de\b(.*)$,\1Notre-Dame-de-Bon-Remède\2
-# Avenue nord du phare
+(?i)^(Avenue)\sNord\b(.+)$,\1 Nord\2
 
 # P
 (?i)^(Passage)\b(.+)$,Passage\2
 (?i)^(Place|Pl\.?)\b(.+)$,Place\2
 (?i)^(Pont)\b(.+)$,Pont\2
 # (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre de Ronsard\2
-# Rue Pierre Maitre
-# Passage LOYS PRAT
+(?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
 (?i)^(.*)\bG[Éée]n([Éée]ral)?\sPatton\b(.*)$,\1Général Patton\3
 (?i)^(.+)\bla\sPierre\b(.*)$,\1la Pierre\2
 (?i)^(.+)\bdu\sParc\b(.*)$,\1du Parc\2
@@ -221,17 +224,15 @@ Search, Replace
 (?i)^(Quai)\b(.+)$,Quai\2
 
 # R
-# r'^Raquette',
-# Residence du Châtaignier
-# (r'^(Résdence|Res)\b(.*)$', r'Résidence\2'),
-# ^(.*)\b[Rr]te\Z(.*)$
-# ^(route|ROUTE)\s(.*)$,Route \2
+(?i)^Raquette\b(.*),Raquette\1
+(?i)^(Route|Rte\.?)\b(.*),Route\2
+(?i)^Rues?\b(.*),Rue\1
+(?i)^Rue\sBasse\b(.*),Rue Basse\1
+(?i)^Rue\sHaute\b(.*),Rue Haute\1
+(?i)^(R[Éée]sidence|Res\.?)\b(.*),Résidence\2
+(?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
 # ^[Rr](ue|oute) [Ss]ans [Nn]om$
 # r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-# ^(rues?|RUE)\s(.*)$,Rue \2
-# ^Rond-?\s?[Pp]oint\b(.*)$,Rond-point\1
-# ^rond-point\b(.*)$,Rond-point\1
-# r'rue haute',
 # r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
 # (?i)^(.*)\bRaymond\sPointcar[eé]\b(.*)$
 # (?i)^(.+)\bde\sla\sR[ée]publique\b(.*)$
