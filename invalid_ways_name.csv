@@ -243,8 +243,9 @@ Search, Replace
 # S
 (?i)^Sentier\b(.*)$,Sentier\1
 
-(?i)^(.*)\b([Ss]aint(e?)|St)\s(.*),\1Saint\3-\4
+(?i)^(.*)\b([Ss]aint|St)(e?)\s(.*),\1Saint\3-\4
 (?i)^(.+)\bSainte[\s-]Anne\b(.*)$,\1Sainte-Anne\2
+(?i)^(.+)\bSainte[\s-]Barbe\b(.*)$,\1Sainte-Barbe\2
 (?i)^(.+)\bSaint[\s-][Éée]tienne\b(.*)$,\1Saint-Étienne\2
 (?i)^(.+)\bSaint[\s-][Éée]xup[Éée]ry\b(.*)$,\1Saint-Exupéry\2
 (?i)^(.+)\bSaint[\s-]L[Éée]ger\b(.*)$,\1Saint-Léger\2
@@ -292,6 +293,7 @@ Search, Replace
 # r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
 # r'^[Zz]\.? ?[Cc].?\s',
 # r'^[Zz]\.? ?[Ii].?\s',
+# (?i)^Zone\sIndustriel
 
 # Abréviation
 # r'^\w+ [A-Z]+\.',               # Abréviation
