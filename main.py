@@ -264,16 +264,15 @@ class Application:
         )
         """Types (tags) de voies auxquelles les tests de nommage s'appliquent."""
 
-        def check_name(key: str, value: str, entry_) -> str:
+        def check_name(entry_, key: str) -> str:
             # 1er tour pour chercher 1 match
-            change = False
+            # new_entry = None
             for row in self._invalid_ways_name:
                 if len(row) == 2:
-                    match = row[0].search(value)
+                    match = row[0].search(entry_.tags[key])
                     if match:
                         replace = match.expand(row[1])
-                        if replace != value:
-                            change = True
+                        if replace != entry_.tags[key]:
                             root = xml.etree.ElementTree.fromstring(
                                 requests.get(
                                     f'https://api.openstreetmap.org/api/0.6/{_nwr(entry_)}/{entry_.id}'
@@ -281,28 +280,31 @@ class Application:
                             )
                             match root[0].tag:
                                 case 'node':
-                                    entry_ = esy.osm.pbf.Node(
+                                    new_entry = esy.osm.pbf.Node(
                                         id=root[0].attrib['id'],
                                         tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
                                         lonlat=(float(root[0].attrib['lon']), float(root[0].attrib['lat']))
                                     )
+                                    break
                                 case 'way':
-                                    entry_ = esy.osm.pbf.Way(
+                                    new_entry = esy.osm.pbf.Way(
                                         id=root[0].attrib['id'],
                                         tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
                                         refs=None
                                     )
+                                    break
                                 case 'relation':
-                                    entry_ = esy.osm.pbf.Relation(
+                                    new_entry = esy.osm.pbf.Relation(
                                         id=root[0].attrib['id'],
                                         tags={i.attrib['k']: i.attrib['v'] for i in root[0].iter('tag')},
                                         members=None
                                     )
-                            # logging.warning(f'Load "{entry_}"')
-                            break
-            if not change:
-                return value
+                                    break
+            else:   # not Find, no break;
+                return entry_.tags[key]
 
+            # logging.warning(f'Typo "{row[0].pattern}" reload\n{new_entry}')
+            value = new_entry.tags[key]
             while True:  # Repeat search until no more
                 start = value
                 for row in self._invalid_ways_name:
@@ -313,9 +315,8 @@ class Application:
                             logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
                             requests.get(
                                 'http://localhost:8111/load_object',
-                                params={'objects': _nwr(entry_) + str(entry_.id)}
+                                params={'objects': _nwr(new_entry) + str(new_entry.id)}
                             )
-                            return value
                         elif len(row) == 2:   # search & replace
                             try:
                                 replace = match.expand(row[1])
@@ -330,25 +331,22 @@ class Application:
                                 requests.get(
                                     'http://localhost:8111/load_object',
                                     params={
-                                        'objects': _nwr(entry_) + str(entry_.id),
+                                        'objects': _nwr(new_entry) + str(new_entry.id),
                                         'addtags': f'{key}={replace}'
                                     }
                                 )
                                 value = replace
-                                #break
-                if start == value:
+                if value == start:
                     return value
 
-        try:
+        try:    # if keys doesn't exist
             match entry:
                 case esy.osm.pbf.file.Node():
-                    check_name('addr:street', entry.tags['addr:street'], entry)
-
+                    check_name(entry, 'addr:street')
                 case esy.osm.pbf.file.Way() if entry.tags['highway'] in highway_value_list:
-                    check_name('name', entry.tags['name'], entry)
-
+                    check_name(entry, 'name')
                 case esy.osm.pbf.file.Relation() if entry.tags['type'] == 'associatedStreet':
-                    check_name('name', entry.tags['name'], entry)
+                    check_name(entry, 'name')
         except KeyError:
             pass
 
@@ -442,7 +440,7 @@ class Application:
             now = datetime.datetime.now()
             end = start + (now - start) / ((i + 1) / size)
             print(i, f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
-                  f'Names : {len(self.names)}, Errors : {self.errors}',
+                  f'Names : {len(self.names)} - Errors : {self.errors}',
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
 
