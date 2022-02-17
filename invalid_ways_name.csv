@@ -237,7 +237,7 @@ de LA CROIX Saint-MARC
 (?i)^Raquette\b(.*),Raquette\1
 (?i)^(Route\.|Rte\.?|Route)\b(.*),Route\2
 (?i)^Route\sNationale\b(.*),Route Nationale\1
-(?i)^RN(\d)+(.*),Route Nationale \1\2
+(?i)^RN(\d+)(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
 (?i)^Rue\sHaute\b(.*),Rue Haute\1
