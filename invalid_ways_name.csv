@@ -36,6 +36,7 @@ Search, Replace
 (?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(Che?m?\.?|Chemii?|Chemin)\b(.*)$,Chemin\2
 (?i)^Chemin\sAncien\sChemin\b(.*)$,Ancien Chemin\1
+(?i)^(.+)\d(Vx\sChem|Vieux\sChemin)\d(.*)$,\1Vieux Chemin\3
 (?i)^Chemin\sChemin\b(.*)$,Chemin\1
 # r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
 (?i)^(Chemin\sRural)\b(.*)$,Chemin Rural\2
@@ -72,7 +73,10 @@ Search, Replace
 (?i)^(.+)\bles\sCoteaux\b(.*)$,\1les Coteaux\2
 (?i)^(.+)\bdu\sCol\b(.*)$,\1du Col\2
 (?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
+(?i)^(.+)\bde\sla\sCroix\b(.*)$,\1de la Croix\2
+(?i)^(.+)\bde\sla\sCroix\sRouge\b(.*)$,\1de la Croix-Rouge\2
 
+de LA CROIX Saint-MARC
 # r'(.*)\bJ.C. Cave$',
 
 # D
@@ -109,8 +113,10 @@ Search, Replace
 (?i)^(.+)\bl'\s?[Éée]pine\b(.*)$,\1l'Épine\2
 
 # F
+(?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
 (?i)^(.*)\bF[eé]lix\sFran[cç]ois\b(.*)$,\1Félix François\2
 (?i)^(.+)\bRen[eé]\sFouque\s?-?\s?(Carro)?\b(.*)$,\1René Fouque\3
+(?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 
 # G
 # ^G[Rr]\s?\d+$
@@ -122,6 +128,7 @@ Search, Replace
 (?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
 (?i)^(.+)\bdes\sGuillaumes\b(.*)$,\1des Guillaumes\2
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
+(?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
 (?i)^(.+)\bdes\sGuignards\b(.*)$,\1des Guignards\2
 (?i)^(.+)\bGuitard\b(.*)$,\1Guitard\2
 (?i)^(.+)\bde\sGuesnou\b(.*)$,\1de Guesnou\2
@@ -133,6 +140,7 @@ Search, Replace
 (?i)^(.+)\bdu\s(Cdt|Commandant)\sl'Herminier\b(.*)$,\1du Commandant l'Herminier\3
 
 # I
+(?i)^Immeuble\b(.*)$,Immeuble\1
 (?i)^Impasse\b(.*)$,Impasse\1
 (?i)^(Imp\.|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
@@ -146,6 +154,7 @@ Search, Replace
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
 
 # L
+(?i)^Lieu( ?)dit\b(.*)$,Lieu\1dit\2
 (?i)^(.*)\bLant[eè]rne\b(.*)$,\1Lanterne\2
 (?i)^(.*)\bLotissement\b(.+)$,\1Lotissement\2
 (?i)^(.*)\b(Lotos[se]ement|Lotiseement|Lot\.)\b(.+)$,\1Lotissement\3
@@ -163,8 +172,9 @@ Search, Replace
 (?i)^(.*)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
 (?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
-(?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
+(?i)^(.+)\bdes\sMaheux\b(.*)$,\1des Maheux\2
 (?i)^(.+)\bde\sla\sMaison\sCarr[Éée]e\b(.*)$,\1de la Maison Carrée\2
+(?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
 (?i)^(.+)\bdes\sMurs\b(.*)$,\1des Murs\2
 
 # N
@@ -196,6 +206,7 @@ Search, Replace
 # (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre de Ronsard\2
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
 (?i)^(.*)\bG[Éée]n([Éée]ral)?\sPatton\b(.*)$,\1Général Patton\3
+(?i)^(.+)\bdu\sPage\b(.*)$,\1du Page\2
 (?i)^(.+)\bla\sPierre\b(.*)$,\1la Pierre\2
 (?i)^(.+)\bdu\sParc\b(.*)$,\1du Parc\2
 (?i)^(.+)\bdes\sP[Ââa]tas\b(.*)$,\1des Pâtas\2
@@ -205,6 +216,7 @@ Search, Replace
 (?i)^(.+)\bde\sla\sPlaine\b(.*)$,\1de la Plaine\2
 (?i)^(.+)\bdu\sPlan\b(.*)$,\1du Plan\2
 (?i)^(.+)\bdu\sPlan\sInclin[Éée]\b(.*)$,\1du Plan Incliné\2
+
 (?i)^(.+)\bdu\sPont\b(.*)$,\1du Pont\2
 (?i)^(.+)\bdu\sPont\sCapureau\b(.*)$,\1du Pont Capureau\2
 (?i)^(.+)\bdu\sPont\sdes\sHalles\b(.*)$,\1du Pont des Halles\2
@@ -212,6 +224,8 @@ Search, Replace
 (?i)^(.+)\bdu\sPont\sLogoden\b(.*)$,\1du Pont Logoden\2
 (?i)^(.+)\bdu\sPont\sMathieu\b(.*)$,\1du Pont Mathieu\2
 (?i)^(.+)\bdu\sPont\sMontaudran\b(.*)$,\1du Pont Montaudran\2
+
+(?i)^(.+)\bde\sPierre\b(.*)$,\1de Pierre\2
 (?i)^(.+)\bdu\sPort\b(.*)$,\1du Port\2
 (?i)^(.+)\bde\sla\sPrairie\b(.*)$,\1de la Prairie\2
 
@@ -221,12 +235,15 @@ Search, Replace
 
 # R
 (?i)^Raquette\b(.*),Raquette\1
-(?i)^(Route|Rte\.?)\b(.*),Route\2
+(?i)^(Route\.|Rte\.?|Route)\b(.*),Route\2
+(?i)^Route\sNationale\b(.*),Route Nationale\1
+(?i)^RN(\d)+(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
 (?i)^Rue\sHaute\b(.*),Rue Haute\1
 (?i)^(R[Éée]sidence|Res\.?)\b(.*),Résidence\2
 (?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
+(?i)^Rd[ -]+pt\b(.*)$,Rond-Point\1
 (?i)^(Ancienne\s)?RN\b(.*)$
 (?i)^(Ancienne\s)?RD\b(.*)$
 
@@ -245,12 +262,23 @@ Search, Replace
 
 (?i)^(.*)\b([Ss]aint|St)(e?)\s(.*),\1Saint\3-\4
 (?i)^(.+)\bSainte[\s-]Anne\b(.*)$,\1Sainte-Anne\2
-(?i)^(.+)\bSainte[\s-]Barbe\b(.*)$,\1Sainte-Barbe\2
+(?i)^(.+)\bSaint[\s-]Antoine\b(.*)$,\1Saint-Antoine\2
+(?i)^(.+)\bSainte[\s-]Barbes\b(.*)$,\1Sainte-Barbes\2
+(?i)^(.+)\bSainte[\s-]Croix\b(.*)$,\1Sainte-Croix\2
 (?i)^(.+)\bSaint[\s-][Éée]tienne\b(.*)$,\1Saint-Étienne\2
 (?i)^(.+)\bSaint[\s-][Éée]xup[Éée]ry\b(.*)$,\1Saint-Exupéry\2
+(?i)^(.+)\bSaint[\s-]Genis\b(.*)$,\1Saint-Genis\2
+(?i)^(.+)\bSaint[\s-]Germain\b(.*)$,\1Saint-Germain\2
+(?i)^(.+)\bSaint[\s-]Jean\b(.*)$,\1Saint-Jean\2
+(?i)^(.+)\bSaint[\s-]Jean[\s-]Baptiste\b(.*)$,\1Saint-Jean-Baptiste\2
+(?i)^(.+)\bSaint[\s-]Joseph\b(.*)$,\1Saint-Joseph\2
+(?i)^(.+)\bSaint[\s-]Julien\b(.*)$,\1Saint-Julien\2
 (?i)^(.+)\bSaint[\s-]L[Éée]ger\b(.*)$,\1Saint-Léger\2
 (?i)^(.+)\bSaint[\s-]Louis\b(.*)$,\1Saint-Louis\2
+(?i)^(.+)\bSaint[\s-]Marc\b(.*)$,\1Saint-Marc\2
+(?i)^(.+)\bSainte[\s-]Marguerite\b(.*)$,\1Sainte-Marguerite\2
 (?i)^(.+)\bSaint[\s-]Martin\b(.*)$,\1Saint-Martin\2
+(?i)^(.+)\bSaint[\s-]Nizier\b(.*)$,\1Saint-Nizier\2
 (?i)^(.+)\bSaint[\s-]R[Éée]my\b(.*)$,\1Saint-Rémy\2
 (?i)^(.+)\bSaint[\s-]Sauveur\b(.*)$,\1Saint-Sauveur\2
 
