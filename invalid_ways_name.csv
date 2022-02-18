@@ -31,6 +31,7 @@ Search, Replace
 (?i)^(.+)\bde\sla\sBataille\sde\sStalingrad\b(.*)$,\1de la Bataille de Stalingrad\2
 
 # C
+(?i)^Carrefour\b(.+)$,Carrefour\1
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
 (?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
@@ -74,9 +75,8 @@ Search, Replace
 (?i)^(.+)\bdu\sCol\b(.*)$,\1du Col\2
 (?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
 (?i)^(.+)\bde\sla\sCroix\b(.*)$,\1de la Croix\2
-(?i)^(.+)\bde\sla\sCroix\sRouge\b(.*)$,\1de la Croix-Rouge\2
+(?i)^(.+)\bde\sla\sCroix([\s-])+Rouge\b(.*)$,\1de la Croix\2Rouge\3
 
-de LA CROIX Saint-MARC
 # r'(.*)\bJ.C. Cave$',
 
 # D
@@ -224,6 +224,7 @@ de LA CROIX Saint-MARC
 (?i)^(.+)\bdu\sPont\sLogoden\b(.*)$,\1du Pont Logoden\2
 (?i)^(.+)\bdu\sPont\sMathieu\b(.*)$,\1du Pont Mathieu\2
 (?i)^(.+)\bdu\sPont\sMontaudran\b(.*)$,\1du Pont Montaudran\2
+(?i)^(.+)\bdu\sPont\sRouge\b(.*)$,\1du Pont Rouge\2
 
 (?i)^(.+)\bde\sPierre\b(.*)$,\1de Pierre\2
 (?i)^(.+)\bdu\sPort\b(.*)$,\1du Port\2
@@ -236,7 +237,7 @@ de LA CROIX Saint-MARC
 # R
 (?i)^Raquette\b(.*),Raquette\1
 (?i)^(Route\.|Rte\.?|Route)\b(.*),Route\2
-(?i)^Route\sNationale\b(.*),Route Nationale\1
+(?i)^Route\sNationale(\sNum[Éée]ro)?\b(.*),Route Nationale\2
 (?i)^RN(\d+)(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
@@ -244,18 +245,17 @@ de LA CROIX Saint-MARC
 (?i)^(R[Éée]sidence|Res\.?)\b(.*),Résidence\2
 (?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
 (?i)^Rd[ -]+pt\b(.*)$,Rond-Point\1
-(?i)^(Ancienne\s)?RN\b(.*)$
-(?i)^(Ancienne\s)?RD\b(.*)$
+# (?i)^(Ancienne\s)?RN\b(.*)$
+# (?i)^(Ancienne\s)?RD\b(.*)$
 
 (?i)^(Rue|Route)\ssans\sNom$
-# r'^[Rr]oute [Dd][eé]partementale (No|Numéro|n°|N°|№)',
-# r'^.* Roger-Martin du Gard',    # sans tiret "Roger Martin du Gard"
-# (?i)^(.*)\bRaymond\sPointcar[eé]\b(.*)$
+(?i)^Route\sD[Éée]partementale\s(No|Numéro|n°|N°|№)\b(.*)$
+(?i)^(.+)\bRoger[\s-]Martin\sdu\sGard\b(.*)$,\1Roger Martin du Gard\2
+(?i)^(.+)\bRaymond\sPointcar[Éée]\b(.*)$,\1Raymond Poincaré\2
 (?i)^(.+)\bde\sla\sR[Éée]publique\b(.*)$,\1de la République\2
 (?i)^(.+)\bde\sla\sRoche\b(.*)$,\1de la Roche\2
 (?i)^(.+)\bdu\sRuisseau\b(.*)$,\1du Ruisseau\2
 (?i)^(.+)\bau\sRenard\b(.*)$,\1au Renard\2
-# zi du Pont rouge
 
 # S
 (?i)^Sentier\b(.*)$,Sentier\1
@@ -291,16 +291,17 @@ de LA CROIX Saint-MARC
 (?i)^(.+)\bGeorges?\sSand\b\b(.*)$,\1George Sand\2
 
 # T
-# de la tour
-# du tinal
-# du télégraphe
-# des tournavelles
-# des terreaux
-# des tournavelles
-# de la trinité
-# Allée du temps libre,way/611521176,way/891886028
-# du Temple
-# Traverse
+(?i)^Traverse\b(.*)$,Traverse\1
+
+(?i)^(.+)\bdu\sT[Éée]l[Éée]graphe\b(.*)$,\1du Télégraphe\2
+(?i)^(.+)\bdu\sTemple\b(.*)$,\1du Temple\2
+(?i)^(.+)\bdu\sTemps\b(.*)$,\1du Temps\2
+(?i)^(.+)\bdu\sTemps\sLibre\b(.*)$,\1du Temps Libre\2
+(?i)^(.+)\bdes\sTerreaux\b(.*)$,\1des Terreaux\2
+(?i)^(.+)\bdu\sTinal\b(.*)$,\1du Tinal\2
+(?i)^(.+)\bde\sla\sTour\b(.*)$,\1de la Tour\2
+(?i)^(.+)\bdes\sTournavelles\b(.*)$,\1des Tournavelles\2
+(?i)^(.+)\bde\sla\sTrinit[Éée]\b(.*)$,\1de la Trinité\2
 
 # U
 
