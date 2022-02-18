@@ -114,8 +114,11 @@ Search, Replace
 
 # F
 (?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
-(?i)^(.*)\bF[eé]lix\sFran[cç]ois\b(.*)$,\1Félix François\2
+
+(?i)^(.*)\bFabre d'[Éée]glantine\b(.*)$,\1Fabre d'Églantine\2
+(?i)^(.*)\bF[Éée]lix\sFran[Ççc]ois\b(.*)$,\1Félix François\2
 (?i)^(.+)\bRen[eé]\sFouque\s?-?\s?(Carro)?\b(.*)$,\1René Fouque\3
+
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 
 # G
@@ -149,6 +152,7 @@ Search, Replace
 (?i)^(.*)\bJean-Baptiste\sde\sla\sQuintinie(.*)$,\1Jean-Baptiste de la Quintinie\2
 (?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
 (?i)^(.+)\bJeanne\sd'Arc\b(.*)$,\1Jeanne d'Arc\2
+(?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\110 Juin 1944\3
 
 # K
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
@@ -203,7 +207,6 @@ Search, Replace
 (?i)^(Passage)\b(.+)$,Passage\2
 (?i)^(Place|Pl\.?)\b(.+)$,Place\2
 (?i)^(Pont)\b(.+)$,Pont\2
-# (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre de Ronsard\2
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
 (?i)^(.*)\bG[Éée]n([Éée]ral)?\sPatton\b(.*)$,\1Général Patton\3
 (?i)^(.+)\bdu\sPage\b(.*)$,\1du Page\2
@@ -237,8 +240,10 @@ Search, Replace
 # R
 (?i)^Raquette\b(.*),Raquette\1
 (?i)^(Route\.|Rte\.?|Route)\b(.*),Route\2
+(?i)^Route\sD[Éée]partementale(\sNum[Éée]ro)?\b(.*),Route Départementale\2
+(?i)^RD ?(\d+)(.*),Route Départementale \1\2
 (?i)^Route\sNationale(\sNum[Éée]ro)?\b(.*),Route Nationale\2
-(?i)^RN(\d+)(.*),Route Nationale \1\2
+(?i)^RN ?(\d+)(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
 (?i)^Rue\sHaute\b(.*),Rue Haute\1
@@ -253,7 +258,10 @@ Search, Replace
 (?i)^(.+)\bRoger[\s-]Martin\sdu\sGard\b(.*)$,\1Roger Martin du Gard\2
 (?i)^(.+)\bRaymond\sPointcar[Éée]\b(.*)$,\1Raymond Poincaré\2
 (?i)^(.+)\bde\sla\sR[Éée]publique\b(.*)$,\1de la République\2
+(?i)^(.+)\bde\sla\sRivi[Èèe]re\b(.*)$,\1de la Rivière\2
 (?i)^(.+)\bde\sla\sRoche\b(.*)$,\1de la Roche\2
+(?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre Ronsard\2
+(?i)^(.*)\bPierre\sde\sRonsard\b(.*),\1Pierre de Ronsard\2
 (?i)^(.+)\bdu\sRuisseau\b(.*)$,\1du Ruisseau\2
 (?i)^(.+)\bau\sRenard\b(.*)$,\1au Renard\2
 
@@ -306,14 +314,18 @@ Search, Replace
 # U
 
 # V
-# ^(voie|VOIE)\Z(.*)$,Voie\1
-# ^[Vv][Cc]\Z(.*)$,Voie Communale\1
-# (r'^[Vv]oie(|\s[Cc]ommunale|\s[Rr]urale)\s[Dd]ite\s[Dd]e\s(.*)$', r'Voie de \2'),
+(?i)^Voie\b(.*)$,Voie\1
+(?i)^VC\b(.*)$,Voie Communale\1
+(?i)^Voie(|\sCommunale|\sRurale)\sDite\sde\b(.+)$,Voie de\2
+(?i)^Voie(|\sCommunale|\sRurale)\sDite\sdu\b(.+)$,Voie du\2
+(?i)^Voie(|\sCommunale|\sRurale)\sDite\sdes\b(.+)$,Voie des\2
+
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
-# (?i)^(.+)\bde\sla\sVigne\b(.*),\1de la Vigne\2
-# Allée du verger,way/882846538
-# Rue du Petit vessin
+(?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
+(?i)^(.+)\bde\sla\sVigne\b(.*),\1de la Vigne\2
+(?i)^(.+)\bdu\sVerger\b(.*),\1du Verger\2
+(?i)^(.+)\bdu\sPetit\sVessin\b(.*),\1du Petit Vessin\2
 
 # W
 # Allée du wagonnage,way/131016379
@@ -327,6 +339,8 @@ Search, Replace
 # (?i)^Zone\sCommerciale\b(.*)$,Zone Commerciale\1
 # (?i)^Zone\sd'Activit[Ééèe]s?\b(.*)$,Zone d'Activité\1
 
+# Numérique
+^\d+\b(.*)
 
 # Abréviation
 # r'^\w+ [A-Z]+\.',               # Abréviation
