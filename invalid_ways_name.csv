@@ -47,6 +47,8 @@ Search, Replace
 
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\b(E.|[Éée]douard)\sCharret\b(.*)$,\1Édouard Charret\3
+(?i)^(.+)\bFran[çc]oise\sClemen[çc]on\b(.*)$,\1Françoise Clemençon\3
+
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
 (?i)^(.+)\bdu\sChamp\sde\sFoire\b(.*)$,\1du Champ de Foire\2
 (?i)^(.+)\bdu\sG[eé]n[eé]ral\sde\sChareton\b(.*)$,\1Général de Chareton\2
@@ -90,6 +92,8 @@ Search, Replace
 (?i)^(.+)\bdes\sDalys\b(.*)$,\1des Dalys\2
 (?i)^(.+)\bde\sla\sDuys\b(.*)$,\1de la Duys\2
 (?i)^Digue\b(.+)$,Digue\1
+(?i)^(.+)\bFran[çc]oise\Dorl[Éée]ac\b(.*)$,\1Françoise Dorléac\2
+
 # (?i)^(.+)\bdite?\b(.+)$
 
 # E
@@ -126,8 +130,13 @@ Search, Replace
 (?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
 
 (?i)^(.*)\bFabre d'[Éée]glantine\b(.*)$,\1Fabre d'Églantine\2
-(?i)^(.*)\bF[Éée]lix\sFran[Ççc]ois\b(.*)$,\1Félix François\2
+(?i)^(.*)\bF[Éée]lix\b(.*)$,\1Félix\2
+(?i)^(.*)\bFélix\sFran[Ççc]ois\b(.*)$,\1Félix François\2
 (?i)^(.+)\bRen[eé]\sFouque\s?-?\s?(Carro)?\b(.*)$,\1René Fouque\3
+(?i)^(.*)\bFran[Ççc]ois\b(.*)$,\1François\2
+(?i)^(.*)\bFran[Ççc]oise\b(.*)$,\1Françoise\2
+(?i)^(.*)\bF[Èèe]re\b(.*)$,\1Frère\2
+(?i)^(.*)\bF[Èèe]res\b(.*)$,\1Frères\2
 
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 
@@ -184,7 +193,7 @@ Search, Replace
 (?i)^(.+)\bdes\sMarr?onn?iers\b(.*)$,\1des Marronniers\2
 (?i)^(.+)\bdu\sMarr?onn?ier\b(.*)$,\1du Marronnier\2
 (?i)^(.+)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
-(?i)^(.+)\b(F\.?|Fran[çc]ois)\sMitterrand\b(.*)$,\1François Mitterrand\3
+(?i)^(.+)\b(F\.?|Fran[çc]ois)\sMitterr?and\b(.*)$,\1François Mitterrand\3
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
 (?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
 (?i)^(.+)\bdes\sMaheux\b(.*)$,\1des Maheux\2
