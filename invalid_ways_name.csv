@@ -153,7 +153,7 @@ Search, Replace
 
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
 (?i)^(.+)\bdu\sG[Éée]n[Éée]ral\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
-(?i)^(.+)\b[Éée]mile\Genet\b(.*)$,\1Émile Genet\2
+(?i)^(.+)\b[Éée]mile\sGenet\b(.*)$,\1Émile Genet\2
 (?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
 (?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
 (?i)^(.+)\bde\sGuesnou\b(.*)$,\1de Guesnou\2
@@ -336,7 +336,7 @@ Search, Replace
 (?i)^(.+)\bdes\sTerreaux\b(.*)$,\1des Terreaux\2
 (?i)^(.+)\bdu\sTinal\b(.*)$,\1du Tinal\2
 (?i)^(.+)\bde\sla\sTour\b(.*)$,\1de la Tour\2
-(?i)^(.+)\bLouise[\s-][Éée]milie\sde\sLa\sTour\sd'Auvergne$,\1Louise-Émilie de La Tour d'Auvergne\2
+(?i)^(.+)\bLouise[\s-][Éée]milie\sde\sLa\sTour\sd'Auvergne(.*)$,\1Louise-Émilie de La Tour d'Auvergne\2
 (?i)^(.+)\bde\sla\sTour\sBoileau\b(.*)$,\1de la Tour Boileau\2
 (?i)^(.+)\bGeorges\sde\sLa\sTour\b(.*)$,\1Georges de La Tour\2
 (?i)^(.+)\bQuentin\sde\sLa\sTour\b(.*)$,\1Quentin de La Tour\2
