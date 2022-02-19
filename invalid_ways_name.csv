@@ -280,10 +280,11 @@ Search, Replace
 # S
 (?i)^Sentier\b(.*)$,Sentier\1
 
-(?i)^(.*)\b([Ss]aint|St)(e?)\s(.*),\1Saint\3-\4
+(?i)^(.*)\b(Saint|St)(e?)[\s-](.*),\1Saint\3-\4
 (?i)^(.+)\bSainte[\s-]Anne\b(.*)$,\1Sainte-Anne\2
 (?i)^(.+)\bSaint[\s-]Antoine\b(.*)$,\1Saint-Antoine\2
 (?i)^(.+)\bSainte[\s-]Barbes\b(.*)$,\1Sainte-Barbes\2
+(?i)^(.+)\bSaint[\s-]Chamond\b(.*)$,\1Saint-Chamond\2
 (?i)^(.+)\bSainte[\s-]Croix\b(.*)$,\1Sainte-Croix\2
 (?i)^(.+)\bSaint[\s-]Denis\b(.*)$,\1Saint-Denis\2
 (?i)^(.+)\bSaint[\s-][Éée]tienne\b(.*)$,\1Saint-Étienne\2
