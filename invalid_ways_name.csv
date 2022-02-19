@@ -136,8 +136,8 @@ Search, Replace
 (?i)^(.*)\bFran[Ççc]ois\b(.*)$,\1François\2
 (?i)^(.*)\bFran[Ççc]oise\b(.*)$,\1Françoise\2
 (?i)^(.+)\bFr[Éée]d[Éée]ric\b(.*)$,\1Frédéric\2
-(?i)^(.*)\bF[Èèe]re\b(.*)$,\1Frère\2
-(?i)^(.*)\bF[Èèe]res\b(.*)$,\1Frères\2
+(?i)^(.*)\bFr[Èèe]re\b(.*)$,\1Frère\2
+(?i)^(.*)\bFr[Èèe]res\b(.*)$,\1Frères\2
 
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 
@@ -149,14 +149,16 @@ Search, Replace
 (?i)^(.*)\b^Genevi[Èèe]ve\sde\sGaule[\s-]+Anthonioz\b(.*)$,\1Geneviève de Gaulle-Anthonioz\2
 (?i)^(.*)\b^Geneviève\sAnthonioz[\s-]+de\sGaule\b(.*),$\1Geneviève de Gaulle-Anthonioz\2
 (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$,\1Charles de Gaulle\2
-(?i)^(.+)\bdu\sG[Éée]n[Éée]ral\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
-(?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
-(?i)^(.+)\bdes\sGuillaumes\b(.*)$,\1des Guillaumes\2
-(?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
-(?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
-(?i)^(.+)\bdes\sGuignards\b(.*)$,\1des Guignards\2
 (?i)^(.+)\bGuitard\b(.*)$,\1Guitard\2
+
+(?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
+(?i)^(.+)\bdu\sG[Éée]n[Éée]ral\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
+(?i)^(.+)\b[Éée]mile\Genet\b(.*)$,\1Émile Genet\2
+(?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
+(?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
 (?i)^(.+)\bde\sGuesnou\b(.*)$,\1de Guesnou\2
+(?i)^(.+)\bdes\sGuignards\b(.*)$,\1des Guignards\2
+(?i)^(.+)\bdes\sGuillaumes\b(.*)$,\1des Guillaumes\2
 
 # H
 (?i)^(.*)\bHenri\sDunant\b(.*)$',\1Henri Dunant\2
@@ -266,7 +268,7 @@ Search, Replace
 (?i)^Route\sD[Éée]partementale(\sNum[Éée]ro|\sN\s|\sN°\s?)?\b(.*),Route Départementale\2
 (?i)^RD ?(\d+)(.*),Route Départementale \1\2
 (?i)^Route\sForesti[Èèe]re\d(.*),Route Forestière\1
-(?i)^Route\sNationale(\sNum[Éée]ro|\sN\s|\sN°\s?)?\b(.*),Route Nationale\2
+(?i)^Route\sNationale(\sNum[Éée]ro|\sN|\sN°\s?)?\b(.*),Route Nationale\2
 (?i)^RN ?(\d+)(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
