@@ -2,6 +2,7 @@ import csv
 import datetime
 import logging
 import re
+import timeit
 import xml.etree.ElementTree
 
 import esy.osm.pbf
@@ -26,14 +27,14 @@ class Application:
         with open('deprecated_keys.csv', newline='', encoding="utf8") as f_deprec:
             reader = csv.reader(f_deprec)
             next(reader)  # Saute la 1ère ligne
-            self._deprecated_keys = (row[0] for row in reader)
+            self._deprecated_keys = frozenset(row[0] for row in reader)
 
         logging.debug("Loading deprecated tags.")
         self._deprecated_tags = list()
         with open('deprecated_tags.csv', newline='', encoding="utf8") as f_deprec:
             reader = csv.reader(f_deprec)
             next(reader)
-            self._deprecated = (
+            self._deprecated_tags = frozenset(
                 (row[0], row[1]) for row in reader
             )
 
@@ -78,15 +79,16 @@ class Application:
                     try:
                         r0 = re.compile(row[0])
                     except re.error as e:
-                        raise(Exception(f'{e} : "{row[0]}"'))
+                        print(repr(e))
+                        print('Exception on regexp :', e.msg)
+                        print('in ',e.pattern)
+                        print(' ' * e.pos, '---^')
+                        raise
                     if len(row) == 1:
                         l_.append((r0,))
                     else:
                         l_.append((r0, row[1]))
-            self._invalid_ways_name = frozenset(l_)
-#            for r in self._invalid_ways_name:
-#                print(r)
-#            exit(0)
+            self._invalid_ways_name = l_
 
     def add_names(self, entry):
         """Compte les libellés de 'name' dans une liste les regroupant tous."""
