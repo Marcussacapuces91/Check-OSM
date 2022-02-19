@@ -327,8 +327,11 @@ class Application:
                         try:
                             replace = match.expand(row[1])
                         except re.error as e:
-                            print(f'{e} : {row[1]}')
-                            raise e
+                            print(repr(e))
+                            print('Exception on regexp :', e.msg)
+                            print('in ', e.pattern)
+                            print(' ' * e.pos, '---^')
+                            raise
                         if replace != value:
                             self.errors += 1
                             logging.error(
