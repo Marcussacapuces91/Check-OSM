@@ -146,8 +146,8 @@ Search, Replace
 # ^[Gg]rande?-Rue
 (?i)^(.*)\bGalil[Éée]e\b(.*)$,\1Galilée\2
 (?i)^(.*)\bGalli[Éée]ni\b(.*)$,\1Gallieni\2
-(?i)^(.*)\b^Geneviève\sde\sGaule\sAnthonioz\b(.*)$
-(?i)^(.*)\b^Geneviève\sAnthonioz\sde\sGaule\b(.*)$
+(?i)^(.*)\b^Genevi[Èèe]ve\sde\sGaule[\s-]+Anthonioz\b(.*)$,\1Geneviève de Gaulle-Anthonioz\2
+(?i)^(.*)\b^Geneviève\sAnthonioz[\s-]+de\sGaule\b(.*),$\1Geneviève de Gaulle-Anthonioz\2
 (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$,\1Charles de Gaulle\2
 (?i)^(.+)\bdu\sG[Éée]n[Éée]ral\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
 (?i)^(.+)\bdu\sGrand\b(.*)$,\1du Grand\2
