@@ -311,39 +311,36 @@ class Application:
 
             # logging.warning(f'Typo "{row[0].pattern}" reload\n{new_entry}')
             value = new_entry.tags[key]
-            while True:  # Repeat search until no more
-                start = value
-                for row in self._invalid_ways_name:
-                    match = row[0].search(value)
-                    if match:
-                        if len(row) == 1:     # search
+            for row in self._invalid_ways_name:
+                match = row[0].search(value)
+                if match:
+                    if len(row) == 1:     # search
+                        self.errors += 1
+                        logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
+                        requests.get(
+                            'http://localhost:8111/load_object',
+                            params={'objects': _nwr(new_entry) + str(new_entry.id)}
+                        )
+                    elif len(row) == 2:   # search & replace
+                        try:
+                            replace = match.expand(row[1])
+                        except re.error as e:
+                            print(f'{e} : {row[1]}')
+                            raise e
+                        if replace != value:
                             self.errors += 1
-                            logging.warning(f'Erreur/Typo "{row[0].pattern}" sur "{key}"="{value}"')
+                            logging.error(
+                                f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
+                            )
                             requests.get(
                                 'http://localhost:8111/load_object',
-                                params={'objects': _nwr(new_entry) + str(new_entry.id)}
+                                params={
+                                    'objects': _nwr(new_entry) + str(new_entry.id),
+                                    'addtags': f'{key}={replace}'
+                                }
                             )
-                        elif len(row) == 2:   # search & replace
-                            try:
-                                replace = match.expand(row[1])
-                            except re.error as e:
-                                print(f'{e} : {row[1]}')
-                                raise e
-                            if replace != value:
-                                self.errors += 1
-                                logging.error(
-                                    f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
-                                )
-                                requests.get(
-                                    'http://localhost:8111/load_object',
-                                    params={
-                                        'objects': _nwr(new_entry) + str(new_entry.id),
-                                        'addtags': f'{key}={replace}'
-                                    }
-                                )
-                                value = replace
-                if value == start:
-                    return value
+                            value = replace
+            return value
 
         try:    # if keys doesn't exist
             match entry:
