@@ -123,8 +123,8 @@ Search, Replace
 (?i)^(.+)\bEug[Èèe]ne\b(.*)$,\1Eugène\2
 (?i)^(.+)\bEug[Éée]nie\b(.*)$,\1Eugénie\2
 (?i)^(.+)\b(E.\s?|Eugénie)\sBrosse\b(.*)$,\1Eugénie Brosse\3
-(?i)^(.+)\b[Éée]va\b(.*)$,\1Eva\2
-(?i)^(.+)\b[Éée]variste\b(.*)$,\1Evariste\2
+(?i)^(.+)\b[Éée]va\b(.*)$,\1Éva\2
+(?i)^(.+)\b[Éée]variste\b(.*)$,\1Évariste\2
 
 # F
 (?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
@@ -135,6 +135,7 @@ Search, Replace
 (?i)^(.+)\bRen[eé]\sFouque\s?-?\s?(Carro)?\b(.*)$,\1René Fouque\3
 (?i)^(.*)\bFran[Ççc]ois\b(.*)$,\1François\2
 (?i)^(.*)\bFran[Ççc]oise\b(.*)$,\1Françoise\2
+(?i)^(.+)\bFr[Éée]d[Éée]ric\b(.*)$,\1Frédéric\2
 (?i)^(.*)\bF[Èèe]re\b(.*)$,\1Frère\2
 (?i)^(.*)\bF[Èèe]res\b(.*)$,\1Frères\2
 
@@ -143,6 +144,8 @@ Search, Replace
 # G
 # ^G[Rr]\s?\d+$
 # ^[Gg]rande?-Rue
+(?i)^(.*)\bGalil[Éée]e\b(.*)$,\1Galilée\2
+(?i)^(.*)\bGalli[Éée]ni\b(.*)$,\1Gallieni\2
 # (?i)^(.*)\b^Geneviève\sde\sGaule\sAnthonioz\b(.*)$
 # (?i)^(.*)\b^Geneviève\sAnthonioz\sde\sGaule\b(.*)$
 (?i)^(.*)\bCharles\sde\sGaulle\b(.*)$,\1Charles de Gaulle\2
