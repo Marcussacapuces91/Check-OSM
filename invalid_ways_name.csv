@@ -47,6 +47,7 @@ Search, Replace
 
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\b(E.|[Éée]douard)\sCharret\b(.*)$,\1Édouard Charret\3
+(?i)^(.+)\b[Éée]mile\sCombes\b(.*)$,\1Émile Combes\2
 (?i)^(.+)\bFran[çc]oise\sClemen[çc]on\b(.*)$,\1Françoise Clemençon\3
 
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
@@ -62,8 +63,8 @@ Search, Replace
 (?i)^(.+)\bdes\sCh[aâ]taignes\b(.*)$,\1des Châtaignes\2
 (?i)^(.+)\bdu\sCh[Êêe]ne\b(.*)$,\1du Chêne\2
 (?i)^(.+)\bdes\sCh[Êêe]nes\b(.*)$,\1des Chênes\2
-(?i)^(.+)\bdu\sCimeti[eè]re\b(.*)$,\1du Cimetière\2
-(?i)^(.+)\bdes\sCimeti[eè]res\b(.*)$,\1des Cimetières\2
+(?i)^(.+)\bdu\sCimeti[Èèe]re\b(.*)$,\1du Cimetière\2
+(?i)^(.+)\bdes\sCimeti[Èèe]res\b(.*)$,\1des Cimetières\2
 (?i)^(.+)\bGeorges\sCl[eé]menceau\b(.*)$,\1Georges Clemenceau\2
 (?i)^(.+)\bdes\sclos(.*)$,\1des Clos\2
 (?i)^(.+)\bdu\sClos\b(.*)$,\1du Clos\2
@@ -140,6 +141,7 @@ Search, Replace
 (?i)^(.*)\bFr[Èèe]res\b(.*)$,\1Frères\2
 
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
+(?i)^(.+)\bdu\s(Faubourg|Fbg\.|Fbg)\b(.*)$,\1du Faubourg\3
 
 # G
 # ^G[Rr]\s?\d+$
@@ -176,7 +178,7 @@ Search, Replace
 (?i)^(.*)\bJean-Baptiste\sde\sla\sQuintinie(.*)$,\1Jean-Baptiste de la Quintinie\2
 (?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
 (?i)^(.+)\bJeanne\sd'Arc\b(.*)$,\1Jeanne d'Arc\2
-(?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\110 Juin 1944\3
+(?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\g<1>10 Juin 1944\3
 
 # K
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
@@ -192,6 +194,7 @@ Search, Replace
 
 # M
 (?i)^Mont[Éée]e\b(.*)$,Montée\1
+(?i)^(.+)\bdu\s8\sMai\s(19)?45\b(.*)$,\1du 8 Mai 1945\3
 (?i)^(.+)\bde\sla\sMairie\b(.*)$,\1de la Mairie\2
 (?i)^(.+)\bde\sMary\sTavy\b(.*)$,\1de Mary Tavy\2
 (?i)^(.+)\bPierre\sMaitre\b(.*)$,\1Pierre Maitre\2
@@ -215,7 +218,6 @@ Search, Replace
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]du[\s\-](\w+)\b(.*)$,\1Notre-Dame-du-\2\3
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]des[\s\-](\w+)\b(.*)$,\1Notre-Dame-des-\2\3
 #(?i)^(.+)\bNotre[\s\-]|Dame[\s\-]d'(\w+)\b(.*)$,\1Notre-Dame-d'\2\3
-(?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]d'Alet\b(.*)$,\1Notre-Dame-d'Alet\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]d'[Éée]sp[Éée]rance\b(.*)$,\1Notre-Dame-d'Espérance\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Secours\b(.*)$,\1Notre-Dame-de-Bon-Secours\2
@@ -227,6 +229,10 @@ Search, Replace
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]du[\s\-]Grand[\s\-]March[Éée]\b(.*)$,\1Notre-Dame-du-Grand-Marché\2
 (?i)^(.+)\bNotre[\s\-]Dame[\s\-]de[\s\-]Bon[\s\-]Rem[Èèe]de\b(.*)$,\1Notre-Dame-de-Bon-Remède\2
 (?i)^(Avenue)\sNord\b(.+)$,\1 Nord\2
+
+(?i)^(.+)\bdu\s11\sNovembre\b(.*)$,\1du 11 Novembre\2
+(?i)^(.+)\bdu\s11\sNovembre\s(19)?18\b(.*)$,\1du 11 Novembre 1918\3
+(?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
 # P
 (?i)^(Passage)\b(.+)$,Passage\2
@@ -265,10 +271,10 @@ Search, Replace
 # R
 (?i)^Raquette\b(.*),Raquette\1
 (?i)^(Route\.|Rte\.?|Route)\b(.*),Route\2
-(?i)^Route\sD[Éée]partementale(\sNum[Éée]ro|\sN\s|\sN°\s?)?\b(.*),Route Départementale\2
+(?i)^Route\sD[Éée]partementale(\sNum[Éée]ro|\sN|\sN°?)?\b(.*),Route Départementale\2
 (?i)^RD ?(\d+)(.*),Route Départementale \1\2
 (?i)^Route\sForesti[Èèe]re\d(.*),Route Forestière\1
-(?i)^Route\sNationale(\sNum[Éée]ro|\sN|\sN°\s?)?\b(.*),Route Nationale\2
+(?i)^Route\sNationale(\sNum[Éée]ro|\sN|\sN°)?\b(.*),Route Nationale\2
 (?i)^RN ?(\d+)(.*),Route Nationale \1\2
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
@@ -293,30 +299,31 @@ Search, Replace
 
 # S
 (?i)^Sentier\b(.*)$,Sentier\1
+(?i)^Square\b(.*)$,Square\1
 
 (?i)^(.*)\b(Saint|St)(e?)[\s-](.*),\1Saint\3-\4
-(?i)^(.+)\bSainte[\s-]Anne\b(.*)$,\1Sainte-Anne\2
-(?i)^(.+)\bSaint[\s-]Antoine\b(.*)$,\1Saint-Antoine\2
-(?i)^(.+)\bSainte[\s-]Barbes\b(.*)$,\1Sainte-Barbes\2
-(?i)^(.+)\bSaint[\s-]Chamond\b(.*)$,\1Saint-Chamond\2
-(?i)^(.+)\bSainte[\s-]Croix\b(.*)$,\1Sainte-Croix\2
-(?i)^(.+)\bSaint[\s-]Denis\b(.*)$,\1Saint-Denis\2
-(?i)^(.+)\bSaint[\s-][Éée]tienne\b(.*)$,\1Saint-Étienne\2
-(?i)^(.+)\bSaint[\s-][Éée]xup[Éée]ry\b(.*)$,\1Saint-Exupéry\2
-(?i)^(.+)\bSaint[\s-]Genis\b(.*)$,\1Saint-Genis\2
-(?i)^(.+)\bSaint[\s-]Germain\b(.*)$,\1Saint-Germain\2
-(?i)^(.+)\bSaint[\s-]Jean\b(.*)$,\1Saint-Jean\2
-(?i)^(.+)\bSaint[\s-]Jean[\s-]Baptiste\b(.*)$,\1Saint-Jean-Baptiste\2
-(?i)^(.+)\bSaint[\s-]Joseph\b(.*)$,\1Saint-Joseph\2
-(?i)^(.+)\bSaint[\s-]Julien\b(.*)$,\1Saint-Julien\2
-(?i)^(.+)\bSaint[\s-]L[Éée]ger\b(.*)$,\1Saint-Léger\2
-(?i)^(.+)\bSaint[\s-]Louis\b(.*)$,\1Saint-Louis\2
-(?i)^(.+)\bSaint[\s-]Marc\b(.*)$,\1Saint-Marc\2
-(?i)^(.+)\bSainte[\s-]Marguerite\b(.*)$,\1Sainte-Marguerite\2
-(?i)^(.+)\bSaint[\s-]Martin\b(.*)$,\1Saint-Martin\2
-(?i)^(.+)\bSaint[\s-]Nizier\b(.*)$,\1Saint-Nizier\2
-(?i)^(.+)\bSaint[\s-]R[Éée]my\b(.*)$,\1Saint-Rémy\2
-(?i)^(.+)\bSaint[\s-]Sauveur\b(.*)$,\1Saint-Sauveur\2
+(?i)^(.+)\bSainte[\s-]+Anne\b(.*)$,\1Sainte-Anne\2
+(?i)^(.+)\bSaint[\s-]+Antoine\b(.*)$,\1Saint-Antoine\2
+(?i)^(.+)\bSainte[\s-]+Barbes\b(.*)$,\1Sainte-Barbes\2
+(?i)^(.+)\bSaint[\s-]+Chamond\b(.*)$,\1Saint-Chamond\2
+(?i)^(.+)\bSainte[\s-]+Croix\b(.*)$,\1Sainte-Croix\2
+(?i)^(.+)\bSaint[\s-]+Denis\b(.*)$,\1Saint-Denis\2
+(?i)^(.+)\bSaint[\s-]+[Éée]tienne\b(.*)$,\1Saint-Étienne\2
+(?i)^(.+)\bSaint[\s-]+[Éée]xup[Éée]ry\b(.*)$,\1Saint-Exupéry\2
+(?i)^(.+)\bSaint[\s-]+Genis\b(.*)$,\1Saint-Genis\2
+(?i)^(.+)\bSaint[\s-]+Germain\b(.*)$,\1Saint-Germain\2
+(?i)^(.+)\bSaint[\s-]+Jean\b(.*)$,\1Saint-Jean\2
+(?i)^(.+)\bSaint[\s-]+Jean[\s-]Baptiste\b(.*)$,\1Saint-Jean-Baptiste\2
+(?i)^(.+)\bSaint[\s-]+Joseph\b(.*)$,\1Saint-Joseph\2
+(?i)^(.+)\bSaint[\s-]+Julien\b(.*)$,\1Saint-Julien\2
+(?i)^(.+)\bSaint[\s-]+L[Éée]ger\b(.*)$,\1Saint-Léger\2
+(?i)^(.+)\bSaint[\s-]+Louis\b(.*)$,\1Saint-Louis\2
+(?i)^(.+)\bSaint[\s-]+Marc\b(.*)$,\1Saint-Marc\2
+(?i)^(.+)\bSainte[\s-]+Marguerite\b(.*)$,\1Sainte-Marguerite\2
+(?i)^(.+)\bSaint[\s-]+Martin\b(.*)$,\1Saint-Martin\2
+(?i)^(.+)\bSaint[\s-]+Nizier\b(.*)$,\1Saint-Nizier\2
+(?i)^(.+)\bSaint[\s-]+R[Éée]my\b(.*)$,\1Saint-Rémy\2
+(?i)^(.+)\bSaint[\s-]+Sauveur\b(.*)$,\1Saint-Sauveur\2
 
 (?i)^(.+)\b[Ààa]\sScie\b(.*)$,\1à Scie\2
 (?i)^(.+)\bde\sla\sSabli[Èèe]re\b(.*)$,\1de la Sablière\2
@@ -328,6 +335,7 @@ Search, Replace
 
 # T
 (?i)^Traverse\b(.*)$,Traverse\1
+(?i)^(.+)\bFrançois\nToullec\b(.*)$,\1François Toullec\2
 
 (?i)^(.+)\bdu\sT[Éée]l[Éée]graphe\b(.*)$,\1du Télégraphe\2
 (?i)^(.+)\bdu\sTemple\b(.*)$,\1du Temple\2
