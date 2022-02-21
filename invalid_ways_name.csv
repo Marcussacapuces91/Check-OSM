@@ -27,8 +27,10 @@ Search, Replace
 (?i)^(.+)\bdu\sPetit\sBois\b(.*)$,\1du Petit Bois\2
 (?i)^(.+)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
 (?i)^(.+)\bde\sla\sbrasserie\b(.*)$,\1de la Brasserie\2
-(?i)^(BD|Boulevard)\b(.*)$,Boulevard\2
+(?i)^(.+)\bdu\sBoulevard\b(.*)$,\1du Boulevard\2
+(?i)^(.+)\bde\sla\sBouquerie\b(.*)$,\1de la Bouquerie\2
 (?i)^(.+)\bde\sla\sBataille\sde\sStalingrad\b(.*)$,\1de la Bataille de Stalingrad\2
+(?i)^(.+)\bdes\sBruy[Èèe]res\b(.*)$,\1des Bruyères\2
 
 # C
 (?i)^Carrefour\b(.+)$,Carrefour\1
@@ -279,6 +281,7 @@ Search, Replace
 (?i)^Rues?\b(.*),Rue\1
 (?i)^Rue\sBasse\b(.*),Rue Basse\1
 (?i)^Rue\sHaute\b(.*),Rue Haute\1
+(?i)^(Ruelle|RLE)\b(.*),Ruelle\2
 (?i)^(R[Éée]sidence|Res\.?)\b(.*),Résidence\2
 (?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
 (?i)^Rd[ -]+pt\b(.*)$,Rond-Point\1
@@ -335,7 +338,8 @@ Search, Replace
 
 # T
 (?i)^Traverse\b(.*)$,Traverse\1
-(?i)^(.+)\bFrançois\nToullec\b(.*)$,\1François Toullec\2
+(?i)^(.+)\bFrançois\sToullec\b(.*)$,\1François Toullec\2
+(?i)^(.+)\bElsa\sTriolet\b(.*)$,\1Elsa Triolet\2
 
 (?i)^(.+)\bdu\sT[Éée]l[Éée]graphe\b(.*)$,\1du Télégraphe\2
 (?i)^(.+)\bdu\sTemple\b(.*)$,\1du Temple\2
@@ -369,23 +373,24 @@ Search, Replace
 (?i)^(.+)\bdu\sPetit\sVessin\b(.*),\1du Petit Vessin\2
 
 # W
-# Allée du wagonnage,way/131016379
+(?i)^(.+)\bdu\sWagonnage\b(.*),\1du Wagonnage\2
 
 # Z
-# r'^[Zz]\.? ?[Aa][CcEe]?.?\s',
-# r'^[Zz]\.? ?[Cc].?\s',
-# r'^[Zz]\.? ?[Ii].?\s',
-# (?i)^Zone\sIndustriel(le)?\b(.*)$,Zone Industrielle\2
-# (?i)^Zone\sArtisanale\b(.*)$,Zone Artisanale\1
-# (?i)^Zone\sCommerciale\b(.*)$,Zone Commerciale\1
-# (?i)^Zone\sd'Activit[Ééèe]s?\b(.*)$,Zone d'Activité\1
+(?i)^Z[\. ]*A[\. ]*E?\.?\b(.*)$
+(?i)^Z[\. ]*ACE?\.?\b(.*)$
+(?i)^Z[\. ]*C\.?\b(.*)$
+(?i)^Z[\. ]*I\.?\b(.*)$
+(?i)^Zone\sIndustriel(le)?\b(.*)$,Zone Industrielle\2
+(?i)^Zone\sArtisanale\b(.*)$,Zone Artisanale\1
+(?i)^Zone\sCommerciale\b(.*)$,Zone Commerciale\1
+(?i)^Zone\sd'Activit[Ééèe]s?\b(.*)$,Zone d'Activité\1
 
 # Numérique
 ^\d+\b(.*)
 
 # Abréviation
-# r'^\w+ [A-Z]+\.',               # Abréviation
-# r'^\w+\.',                      # Abréviation sur 1er mot
+^(.+)\s[A-Z]+\.                # Abréviation
+^\w+\.                         # Abréviation sur 1er mot
 
 ^(.+[^«]) ([^»].*)$,\1 \2
 ^(.+)\s\s(.*)$,\1 \2
