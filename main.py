@@ -337,14 +337,16 @@ class Application:
                             logging.error(
                                 f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
                             )
-                            requests.get(
-                                'http://localhost:8111/load_object',
-                                params={
-                                    'objects': _nwr(new_entry) + str(new_entry.id),
-                                    'addtags': f'{key}={replace}'
-                                }
-                            )
                             value = replace
+
+            if value != new_entry.tags[key]:
+                requests.get(
+                    'http://localhost:8111/load_object',
+                    params={
+                        'objects': _nwr(new_entry) + str(new_entry.id),
+                        'addtags': f'{key}={replace}'
+                    }
+                )
             return value
 
         try:    # if keys doesn't exist
