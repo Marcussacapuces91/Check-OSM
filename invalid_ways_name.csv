@@ -24,6 +24,7 @@ Search, Replace
 (?i)^(.+)\bdu\sBois\b(.*)$,\1du Bois\2
 (?i)^(.+)\bdes\sBois\b(.*)$,\1des Bois\2
 (?i)^(.+)\bdu\sPetit\sBallon\b(.*)$,\1du Petit Ballon\2
+(?i)^(.+)\bde\sBel[\s-]+Air\b(.*)$,\1de Bel-Air\2
 (?i)^(.+)\bdu\sPetit\sBois\b(.*)$,\1du Petit Bois\2
 (?i)^(.+)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
 (?i)^(.+)\bde\sla\sbrasserie\b(.*)$,\1de la Brasserie\2
@@ -144,6 +145,7 @@ Search, Replace
 
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 (?i)^(.+)\bdu\s(Faubourg|Fbg\.|Fbg)\b(.*)$,\1du Faubourg\3
+(?i)^(.+)\bles\sFreydières\b(.*)$,\1les Freydières\2
 
 # G
 # ^G[Rr]\s?\d+$
@@ -338,7 +340,7 @@ Search, Replace
 
 # T
 (?i)^Traverse\b(.*)$,Traverse\1
-(?i)^(.+)\bFrançois\sToullec\b(.*)$,\1François Toullec\2
+(?i)^(.+)\bFran[çc]ois\sToullec\b(.*)$,\1François Toullec\2
 (?i)^(.+)\bElsa\sTriolet\b(.*)$,\1Elsa Triolet\2
 
 (?i)^(.+)\bdu\sT[Éée]l[Éée]graphe\b(.*)$,\1du Télégraphe\2
@@ -383,7 +385,8 @@ Search, Replace
 (?i)^Zone\sIndustriel(le)?\b(.*)$,Zone Industrielle\2
 (?i)^Zone\sArtisanale\b(.*)$,Zone Artisanale\1
 (?i)^Zone\sCommerciale\b(.*)$,Zone Commerciale\1
-(?i)^Zone\sd'Activit[Ééèe]s?\b(.*)$,Zone d'Activité\1
+(?i)^Zone\sd'Activit[Ééèe]\b(.*)$,Zone d'Activité\1
+(?i)^Zone\sd'Activit[Ééèe]s\b(.*)$,Zone d'Activités\1
 
 # Numérique
 ^\d+\b(.*)
