@@ -42,7 +42,7 @@ Search, Replace
 (?i)^Chemin\sAncien\sChemin\b(.*)$,Ancien Chemin\1
 (?i)^(.+)\d(Vx\sChem|Vieux\sChemin)\d(.*)$,\1Vieux Chemin\3
 (?i)^Chemin\sChemin\b(.*)$,Chemin\1
-# r'^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+',
+^(CR|[Cc]hemin\s[Rr]ural)\s(No|Numéro|n°|N°|№)?\s\d+
 (?i)^(Chemin\sRural)\b(.*)$,Chemin Rural\2
 (?i)^(Chemin\sVicinal)\b(.*)$,Chemin Vicinal\2
 (?i)^(Chemin\sd.Exploitation)\b(.*)$,Chemin d'Exploitation\2
@@ -87,7 +87,7 @@ Search, Replace
 # r'(.*)\bJ.C. Cave$',
 
 # D
-# (?i)^D\s?\d+$
+(?i)^D\s?\d+$
 (?i)^(.+)\bd'\b(.+)$,\1d'\2
 (?i)^(.+)\bde\b(.+)$,\1de\2
 (?i)^(.+)\bdu\b(.+)$,\1du\2
