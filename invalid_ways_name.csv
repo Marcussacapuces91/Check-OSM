@@ -24,7 +24,7 @@ Search, Replace
 (?i)^(.+)\bdu\sBois\b(.*)$,\1du Bois\2
 (?i)^(.+)\bdes\sBois\b(.*)$,\1des Bois\2
 (?i)^(.+)\bdu\sPetit\sBallon\b(.*)$,\1du Petit Ballon\2
-(?i)^(.+)\bde\sBel[\s-]+Air\b(.*)$,\1de Bel-Air\2
+# NON ! (?i)^(.+)\bde\sBel[\s-]+Air\b(.*)$,\1de Bel-Air\2
 (?i)^(.+)\bdu\sPetit\sBois\b(.*)$,\1du Petit Bois\2
 (?i)^(.+)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
 (?i)^(.+)\bde\sla\sbrasserie\b(.*)$,\1de la Brasserie\2
