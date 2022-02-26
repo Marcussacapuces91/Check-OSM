@@ -313,6 +313,7 @@ class Application:
 
             # logging.warning(f'Typo "{row[0].pattern}" reload\n{new_entry}')
             value = new_entry.tags[key]
+            error_msg = None
             for row in self._invalid_ways_name:
                 match = row[0].search(value)
                 if match:
@@ -334,12 +335,13 @@ class Application:
                             raise
                         if replace != value:
                             self.errors += 1
-                            logging.error(
-                                f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
-                            )
+                            error_msg = f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
                             value = replace
 
             if value != new_entry.tags[key]:
+                self.errors += 1
+                if error_msg is not None:
+                    logging.error(error_msg)
                 requests.get(
                     'http://localhost:8111/load_object',
                     params={
@@ -490,9 +492,18 @@ if __name__ == '__main__':
     #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
     # }
     # liste = {'essonne', 'ile_de_france'}
-    liste = {'france'}
-    for filename in liste:
-        with esy.osm.pbf.File(f'{filename}.osm.pbf') as osm_pbf:
+    liste = {'alsace', 'aquitaine', 'auvergne', 'basse_normandie', 'bourgogne', 'bretagne', 'centre', 'champagne_ardenne', 'corse', 'franche_comte', 'haute_normandie', 'ile_de_france', 'languedoc_roussillon', 'limousin', 'lorraine', 'midi_pyrenees', 'nord_pas_de_calais', 'picardie', 'poitou_charentes', 'provence_alpes_cote_d_azur', 'rhone_alpes'}
+
+    for region in liste:
+        print(f'Loading {region}', end='')
+        r = requests.get(f'https://download.openstreetmap.fr/extracts/europe/france/{region}.osm.pbf')
+        r.raise_for_status()
+        print(f' - Writing {region}.osm.pbf file', end='')
+        with open(f'{region}.osm.pbf', 'wb') as dest:
+            dest.write(r.content)
+        print(' - Done.')
+
+        with esy.osm.pbf.File(f'{region}.osm.pbf') as osm_pbf:
             app.names = {}
             app.parse(osm_pbf)
-            app.save_names(f'names_{filename}.csv')
+            app.save_names(f'names_{region}.csv')
