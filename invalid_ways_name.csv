@@ -8,6 +8,7 @@ Search, Replace
 (?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^Ancienne\b(.*)$,Ancienne\1
 (?i)^(.*)\bAerodrome\b(.*)$,\1Aérodrome\2
+
 (?i)^(.+)\b[Dd]es\sAlouettes$,\1des Alouettes
 (?i)^(.+)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
 (?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
@@ -15,13 +16,18 @@ Search, Replace
 (?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
 (?i)^(.+)\bdes\sAmin[ée]es\b(.*)$,\1des Aminées\2
 (?i)^(.+)\bdes\sAlli[ée]s\b(.*)$,\1des Alliés\2
+(?i)^(.+)\bdes\sAubiers\b(.*)$,\1des Aubiers\2
 (?i)^(.+)\bles\sAcacias\b(.*)$,\1les Acacias\2
+
+(?i)^(.+)\bAlbert\s1e?r\b(.*)$,\1Albert 1er\2
 (?i)^(.+)\bAlexandre\sIII\b(.*)$,\1Alexandre III\2
 
 # B
 # ^Borne\sFrontière\s(\d+)$
 (?i)^Bas\b(.+)$,Bas\1
 (?i)^(BD|Boulevard)\b(.+)$,Boulevard\2
+
+(?i)^(.+)\bBalguerie\sStuttenberg\b(.*)$,\1Balguerie Stuttenberg\2
 (?i)^(.+)\bdu\sBois\b(.*)$,\1du Bois\2
 (?i)^(.+)\bdes\sBois\b(.*)$,\1des Bois\2
 (?i)^(.+)\bdu\sPetit\sBallon\b(.*)$,\1du Petit Ballon\2
@@ -375,7 +381,7 @@ Search, Replace
 (?i)^Voie(|\sCommunale|\sRurale)\sDite\sdu\b(.+)$,Voie du\2
 (?i)^Voie(|\sCommunale|\sRurale)\sDite\sdes\b(.+)$,Voie des\2
 
-(?i)^Voie\sVerte\b(.*)$,Voie Verte/1
+(?i)^Voie\sVerte\b(.*)$,Voie Verte\1
 
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
