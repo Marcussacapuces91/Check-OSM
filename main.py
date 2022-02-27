@@ -334,7 +334,6 @@ class Application:
                             print(' ' * e.pos, '---^')
                             raise
                         if replace != value:
-                            self.errors += 1
                             error_msg = f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
                             value = replace
 
@@ -483,7 +482,7 @@ if __name__ == '__main__':
         'http://localhost:8111/load_object',
         params={
             'objects': {'r/1403916'},
-            'addtags': {'name': 'France métropolitaine'}
+#            'addtags': {'name': 'France métropolitaine'}
         }
     )
     # liste = {
@@ -495,6 +494,15 @@ if __name__ == '__main__':
     liste = {'alsace', 'aquitaine', 'auvergne', 'basse_normandie', 'bourgogne', 'bretagne', 'centre', 'champagne_ardenne', 'corse', 'franche_comte', 'haute_normandie', 'ile_de_france', 'languedoc_roussillon', 'limousin', 'lorraine', 'midi_pyrenees', 'nord_pas_de_calais', 'picardie', 'poitou_charentes', 'provence_alpes_cote_d_azur', 'rhone_alpes'}
 
     for region in liste:
+        requests.get(
+            'http://localhost:8111/load_object',
+            params={
+                'objects': {'r/1403916'},
+                'new_layer': True,
+                'layer_name': region
+                #            'addtags': {'name': 'France métropolitaine'}
+            }
+        )
         print(f'Loading {region}', end='')
         r = requests.get(f'https://download.openstreetmap.fr/extracts/europe/france/{region}.osm.pbf')
         r.raise_for_status()
