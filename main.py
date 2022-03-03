@@ -212,51 +212,6 @@ class Application:
     def check_highway_name(self, entry):
         """Pour un sous-ensemble des highway, vérifie le contenu du champ name et sa validité"""
 
-        # highway_type_valid_list = {
-        #     '^Abbaye', '^(Grande )?Allée', '^Autoroute', r'^(Petite )?Avenue\s',
-        #     '^Belvédère', '^Boucle', r'^Boulevard\s', '^(Le )?Bois', '^Bretelle',
-        #     '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^Château',
-        #     '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
-        #     '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
-        #     '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
-        #     '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine',
-        #     '^Duplex',
-        #     '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
-        #     r'^Faubourg\s', '^Fossé',
-        #     '^(Grand )?Giratoire', '^Gué',
-        #     '^Hameau',
-        #     '^(Petite )?Impass?e', '^Itinéraire',
-        #     '^Jardins?',
-        #     '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
-        #     '^Mail', '^Montée', '^Montoir',
-        #     '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
-        #     "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
-        #     '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
-        #     '^Quartier', '^Quai',
-        #     '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
-        #     "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
-        #     '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
-        #     '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
-        #     '^Vallée', '^Vallon', '^Venelle', '^Véloroute', '^Viaduc', '^Villa',
-        #     '^(Ancienne |Petite |Nouvelle )?Voie',
-        #     '^Voirie',
-        #     '^Zone Artisanale', "^Zone d'Activité", '^Zone Industrielle',
-        #
-        #     # Nord
-        #     '^Ratzengaesschen', '.* Straete$', '.*stra[ae]t$', '.*dreve$',
-        #
-        #     # Alsace
-        #     r'^(|Alter? |Einen |Grosser |Klein(er)? |Le |Mittel |Mittlerer |Oberer |Ober[- ]|Unter[- ]|Unterer ' + \
-        #     r'|Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
-        #     '^Engpfaede$',
-        #
-        #     # Autoroutes nationales
-        #     "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
-        #     '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
-        #     '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$", "^L'Ariégeoise$",
-        # }
-        # """Set des noms de voies acceptés"""
-
         highway_value_list = (
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
             'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link',
@@ -478,13 +433,13 @@ if __name__ == '__main__':
     )
 
     app = Application()
-    requests.get(
-        'http://localhost:8111/load_object',
-        params={
-            'objects': {'r/1403916'},
-#            'addtags': {'name': 'France métropolitaine'}
-        }
-    )
+#     requests.get(
+#         'http://localhost:8111/load_object',
+#         params={
+#             'objects': {'r/1403916'},
+# #            'addtags': {'name': 'France métropolitaine'}
+#         }
+#     )
     # liste = {
     #     'nord', 'ardennes', 'meuse', 'meurthe_et_moselle', 'moselle', 'bas_rhin', 'haut_rhin', 'doubs', 'jura',
     #     'ain', 'haute_savoie', 'savoie', 'hautes_alpes', 'alpes_de_haute_provence', 'alpes_maritimes', 'var',
