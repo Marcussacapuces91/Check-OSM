@@ -1,7 +1,5 @@
 Search, Replace
 
-#     '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
-#     '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
 #     '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
 #     '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine',
 #     '^Duplex',
@@ -96,6 +94,15 @@ Search, Replace
 (?i)^Chasse\b(.+)$,Chasse\1
 (?i)^Chaussée\b(.+)$,Chaussée\1
 (?i)^Ch[Aâa]teau\b(.+)$,Château\1
+(?i)^(Ancien\s|Grand\s|Ancien\sGrand\s|Le\s|Nouveau\s|Petit\s|Vieux\s)?Chemin\b(.+)$,\1Chemin\2
+(?i)^Cit[Éée]\b(.+)$,Cité\1
+(?i)^Circuit\b(.+)$,Circuit\1
+(?i)^Clo[Îîi]tre\b(.+)$,Cloître\1
+(?i)^Clos\b(.+)$,Clos\1
+(?i)^Col\b(.+)$,Col\1
+(?i)^(Basse\s)?Corniche\b(.+)$,\1Corniche\2
+(?i)^(Grande\s)?Cour\b(.+)$,\1Cour\2
+(?i)^Cours\b(.+)$,Cours\1
 
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
 (?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
