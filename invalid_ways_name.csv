@@ -1,7 +1,5 @@
 Search, Replace
 
-#     '^Belvédère', '^Boucle', r'^Boulevard\s', '^(Le )?Bois', '^Bretelle',
-#     '^Carreau', '^Carrefour', '^Chasse', '^Chaussée', '^Château',
 #     '^(Ancien |Grand |Ancien Grand |Le |Nouveau |Petit |Vieux )?Chemin',
 #     '^Cité', '^Circuit', '^Cloître', '^Clos', '^Col', '^(Basse )?Corniche', '^(Grande )?Cour', '^Cours',
 #     '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
@@ -71,9 +69,15 @@ Search, Replace
 # B
 # ^Borne\sFrontière\s(\d+)$
 (?i)^Bas\b(.+)$,Bas\1
+(?i)^Belv[Éée]d[Èèe]re\b(.*)$,Belvédère\1
+(?i)^Boucle\b(.*)$,Boucle\1
+(?i)^(Le\s)?Bois\b(.*)$,\1Bois\2
 (?i)^(BD|Boulevard)\b(.+)$,Boulevard\2
+(?i)^Bretelle\b(.*)$,Bretelle\1
 
 (?i)^(.+)\bBalguerie\sStuttenberg\b(.*)$,\1Balguerie Stuttenberg\2
+(?i)^(.+)\bJos[Éée]phine\sBaker\b(.*)$,\1Joséphine Baker\2
+
 (?i)^(.+)\bdu\sBois\b(.*)$,\1du Bois\2
 (?i)^(.+)\bdes\sBois\b(.*)$,\1des Bois\2
 (?i)^(.+)\bdu\sPetit\sBallon\b(.*)$,\1du Petit Ballon\2
@@ -87,7 +91,12 @@ Search, Replace
 (?i)^(.+)\bdes\sBruy[Èèe]res\b(.*)$,\1des Bruyères\2
 
 # C
+(?i)^Carreau\b(.+)$,Carreau\1
 (?i)^Carrefour\b(.+)$,Carrefour\1
+(?i)^Chasse\b(.+)$,Chasse\1
+(?i)^Chaussée\b(.+)$,Chaussée\1
+(?i)^Ch[Aâa]teau\b(.+)$,Château\1
+
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
 (?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
@@ -138,8 +147,7 @@ Search, Replace
 (?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
 (?i)^(.+)\bde\sla\sCroix\b(.*)$,\1de la Croix\2
 (?i)^(.+)\bde\sla\sCroix([\s-])+Rouge\b(.*)$,\1de la Croix\2Rouge\3
-
-# r'(.*)\bJ.C. Cave$',
+(?i)^(.*)\bJ.C. Cave(.*)$
 
 # D
 (?i)^D\s?\d+$
@@ -265,11 +273,13 @@ Search, Replace
 (?i)^(.+)\bdu\sMarr?onn?ier\b(.*)$,\1du Marronnier\2
 (?i)^(.+)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
 (?i)^(.+)\b(F\.?|Fran[çc]ois)\sMitterr?and\b(.*)$,\1François Mitterrand\3
-(?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
-(?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
+
 (?i)^(.+)\bdes\sMaheux\b(.*)$,\1des Maheux\2
 (?i)^(.+)\bde\sla\sMaison\sCarr[Éée]e\b(.*)$,\1de la Maison Carrée\2
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
+(?i)^(.+)\bdes\sM[Éée]dailles\b(.*),\1des Médailles\2
+(?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
+(?i)^(.+)\bdu\sVieux\sMoulin\b(.*)$,\1du Vieux Moulin\2
 (?i)^(.+)\bdes\sMurs\b(.*)$,\1des Murs\2
 
 # N
