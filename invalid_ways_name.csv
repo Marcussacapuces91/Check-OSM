@@ -86,6 +86,7 @@ Search, Replace
 (?i)^(.+)\bdu\sBoulevard\b(.*)$,\1du Boulevard\2
 (?i)^(.+)\bde\sla\sBouquerie\b(.*)$,\1de la Bouquerie\2
 (?i)^(.+)\bde\sla\sBataille\sde\sStalingrad\b(.*)$,\1de la Bataille de Stalingrad\2
+(?i)^(.+)\bde\sBrouzac\b(.*)$,\1de Brouzac\2
 (?i)^(.+)\bdes\sBruy[Èèe]res\b(.*)$,\1des Bruyères\2
 
 # C
@@ -103,6 +104,10 @@ Search, Replace
 (?i)^(Basse\s)?Corniche\b(.+)$,\1Corniche\2
 (?i)^(Grande\s)?Cour\b(.+)$,\1Cour\2
 (?i)^Cours\b(.+)$,Cours\1
+(?i)^(Vieille\s)?C[Ôôo]te\b(.+)$,\1Côte\2
+(?i)^Contournement\b(.+)$,Contournement\1
+(?i)^Coul[Éée]e\b(.+)$,Coulée\1
+(?i)^Croisement\b(.+)$,Croisement\1
 
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
 (?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
@@ -451,6 +456,7 @@ Search, Replace
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 (?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
+(?i)^(.+)\bla\sVille\b(.*),\1la Ville\2
 (?i)^(.+)\bde\sla\sVigne\b(.*),\1de la Vigne\2
 (?i)^(.+)\bdu\sVerger\b(.*),\1du Verger\2
 (?i)^(.+)\bdu\sPetit\sVessin\b(.*),\1du Petit Vessin\2
