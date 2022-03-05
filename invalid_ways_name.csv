@@ -1,8 +1,5 @@
 Search, Replace
 
-#     '^(Vieille )?Côte', '^Contournement', '^Coulée', '^Croisement',
-#     '^(Ancienne )?Départementale', '^Descente', '^Desserte', '^Déviation', '^Diffuseur', '^Domaine',
-#     '^Duplex',
 #     '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
 #     r'^Faubourg\s', '^Fossé',
 #     '^(Grand )?Giratoire', '^Gué',
@@ -162,6 +159,14 @@ Search, Replace
 (?i)^(.*)\bJ.C. Cave(.*)$
 
 # D
+(?i)^(Ancienne\s)?D[Éée]partementale\b(.*)$,\1Départementale\2
+(?i)^Descente\b(.*)$,Descente\1
+(?i)^Desserte\b(.*)$,Desserte\1
+(?i)^D[Éée]viation\b(.*)$,Déviation\1
+(?i)^Diffuseur\b(.*)$,Diffuseur\1
+(?i)^Domaine\b(.*)$,Domaine\1
+(?i)^Duplex\b(.*)$,Duplex\1
+
 (?i)^D\s?\d+$
 (?i)^(.+)\bd'\b(.+)$,\1d'\2
 (?i)^(.+)\bde\b(.+)$,\1de\2
@@ -335,7 +340,6 @@ Search, Replace
 (?i)^(.+)\bde\sla\sPlaine\b(.*)$,\1de la Plaine\2
 (?i)^(.+)\bdu\sPlan\b(.*)$,\1du Plan\2
 (?i)^(.+)\bdu\sPlan\sInclin[Éée]\b(.*)$,\1du Plan Incliné\2
-
 (?i)^(.+)\bdu\sPont\b(.*)$,\1du Pont\2
 (?i)^(.+)\bdu\sPont\sCapureau\b(.*)$,\1du Pont Capureau\2
 (?i)^(.+)\bdu\sPont\sdes\sHalles\b(.*)$,\1du Pont des Halles\2
@@ -344,9 +348,9 @@ Search, Replace
 (?i)^(.+)\bdu\sPont\sMathieu\b(.*)$,\1du Pont Mathieu\2
 (?i)^(.+)\bdu\sPont\sMontaudran\b(.*)$,\1du Pont Montaudran\2
 (?i)^(.+)\bdu\sPont\sRouge\b(.*)$,\1du Pont Rouge\2
-
 (?i)^(.+)\bde\sPierre\b(.*)$,\1de Pierre\2
 (?i)^(.+)\bdu\sPort\b(.*)$,\1du Port\2
+(?i)^(.+)\bdu\sPuits\b(.*)$,\1du Puits\2
 (?i)^(.+)\bde\sla\sPrairie\b(.*)$,\1de la Prairie\2
 
 # Q
