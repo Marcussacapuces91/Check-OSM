@@ -1,6 +1,5 @@
 Search, Replace
 
-#     '^Échangeur', '^Escalier', '^Espace', '^Esplanade', '^Eurovélo',
 #     r'^Faubourg\s', '^Fossé',
 #     '^(Grand )?Giratoire', '^Gué',
 #     '^Hameau',
@@ -29,12 +28,24 @@ Search, Replace
 #     r'|Vorderer?)[A-Z].*( Gasse|gasse?| Pfad|pfad|strasse| Weg|-Weg|weg)$',
 #     '^Engpfaede$',
 #
-#     # Autoroutes nationales
-#     "^L'Aquitaine$", '^La Francilienne$', '^L’Océane$', "^L'Européenne$", '^La Comtoise$', '^La Provençale$',
-#     '^La Languedocienne$', '^La Méridienne$', "^L'Arverne$", '^La Transeuropéenne$', "^L'Occitane$",
-#     '^La Catalane$', "^L'Autoroute de l'Arbre$", '^La Pyrénéenne$', "^L'Armoricaine$", "^L'Ariégeoise$",
-# }
 
+# Autoroutes nationales
+(?i)^L'Aquitaine$
+(?i)^La Francilienne$
+(?i)^L['’]Océane$
+(?i)^L'Européenne$
+(?i)^La\sComtoise$
+(?i)^La\sProven[Cç]ale$
+(?i)^La\sLanguedocienne$
+(?i)^La\sM[Éée]ridienne$
+(?i)^L'Arverne$
+(?i)^La\sTranseuropéenne$
+(?i)^L'Occitane$
+(?i)^La\sCatalane$
+(?i)^L'Autoroute\sde\sl'Arbre$
+(?i)^La\sPyrénéenne$
+(?i)^L'Armoricaine$
+(?i)^L'Ariégeoise$
 
 # A
 (?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
@@ -184,6 +195,12 @@ Search, Replace
 # (?i)^(.+)\bdite?\b(.+)$
 
 # E
+(?i)^[Éée]changeur\b(.*)$,Échangeur\1
+(?i)^Escalier\b(.*)$,Escalier\1
+(?i)^Espace\b(.*)$,Espace\1
+(?i)^Esplanade\b(.*)$,Esplanade\1
+(?i)^Eurov[Éée]lo\b(.*)$,Eurovélo\1
+
 (?i)^(.*)\b[ÉEé]cole\b(.*)$,\1École\2
 (?i)^(.+)\bde\sl'[ÉEé]cole\b(.*)$,\1de l'École\2
 (?i)^(.*)\b[ÉEé]coles\b(.*)$,\1Écoles\2
