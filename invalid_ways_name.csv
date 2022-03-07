@@ -1,7 +1,5 @@
 Search, Replace
 
-#     '^(Petite )?Impass?e', '^Itinéraire',
-#     '^Jardins?',
 #     '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
 #     '^Mail', '^Montée', '^Montoir',
 #     '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
@@ -57,8 +55,8 @@ Search, Replace
 (?i)^(.*)\bAbbaye\b(.*)$,\1Abbaye\2
 
 (?i)^(.+)\b[Dd]es\sAlouettes$,\1des Alouettes
+(?i)^(.+)\bde\sl'An\s2000\b(.*)$,\1de l'An 2000\2
 (?i)^(.+)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
-(?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
 (?i)^(.+)\bl['\s]Archev[eê]que\b(.*)$,\1l'Archevêque\2
 (?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
 (?i)^(.+)\bdes\sAmin[ée]es\b(.*)$,\1des Aminées\2
@@ -251,7 +249,7 @@ Search, Replace
 
 # G
 (?i)^Grand\b(.*)$,Grand\1
-(?i)^(Grand\s)?Giratoire\b(.*)$,\1 Giratoire\2
+(?i)^(Grand\s)?Giratoire\b(.*)$,\1Giratoire\2
 (?i)^Gu[Éée]\b(.*)$,Gué\1
 (?i)^GR\s?\d+$
 # ^[Gg]rande?-Rue
@@ -285,9 +283,12 @@ Search, Replace
 (?i)^Immeuble\b(.*)$,Immeuble\1
 (?i)^Impasse\b(.*)$,Impasse\1
 (?i)^(Imp\.|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
+(?i)^Itin[Éée]raire\b(.*)$,Itinéraire\1
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 
 # J
+(?i)^Jardin(s?)\b(.*)$,Jardin\1\2
+
 (?i)^(.*)\bJean-Baptiste\sde\sla\sQuintinie(.*)$,\1Jean-Baptiste de la Quintinie\2
 (?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
 (?i)^(.+)\bJeanne\sd'Arc\b(.*)$,\1Jeanne d'Arc\2
@@ -315,6 +316,7 @@ Search, Replace
 (?i)^(.+)\bdu\sMarr?onn?ier\b(.*)$,\1du Marronnier\2
 (?i)^(.+)\b(Fran[çc]ois|F\.?)\sMauriac\b(.*)$,\1François Mauriac\3
 (?i)^(.+)\b(F\.?|Fran[çc]ois)\sMitterr?and\b(.*)$,\1François Mitterrand\3
+(?i)^(.*)\b[Aa]\.?\sMalraux(.*)$,\1André Malraux\2
 
 (?i)^(.+)\bdes\sMaheux\b(.*)$,\1des Maheux\2
 (?i)^(.+)\bde\sla\sMaison\sCarr[Éée]e\b(.*)$,\1de la Maison Carrée\2
