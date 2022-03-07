@@ -46,7 +46,7 @@ Search, Replace
 (?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
 (?i)^Grande\s(All[ée][ée]|Al\.)\b(.*)$,Grande Allée\2
 (?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du)\b(.+)$,Allée \2\3
-(?i)^(Ave?\.?|Avenue)\b(.*)$,Avenue\2
+(?i)^(Ave?\.|Ave?|Avenue)\b(.*)$,Avenue\2
 (?i)^Petite\sAvenue\b(.*)$,Petite Avenue\1
 (?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^Ancienne\b(.*)$,Ancienne\1
@@ -134,6 +134,7 @@ Search, Replace
 (?i)^(.+)\b(E.|[Éée]douard)\sCharret\b(.*)$,\1Édouard Charret\3
 (?i)^(.+)\b[Éée]mile\sCombes\b(.*)$,\1Émile Combes\2
 (?i)^(.+)\bFran[çc]oise\sClemen[çc]on\b(.*)$,\1Françoise Clemençon\3
+(?i)^(.+)\b(Petit\s)Calvaire\b(.*)$,\1\2Calvaire\3
 
 (?i)^(.+)\bdu\sCanal\b(.*)$,\1du Canal\2
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
@@ -233,7 +234,7 @@ Search, Replace
 
 # F
 (?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
-(?i)^Foss[Éée]\b(.*)$,Fossé\1
+# Fosse/Fossé possible : Non ! (?i)^Foss[Éée]\b(.*)$,Fossé\1
 
 (?i)^(.*)\bFabre d'[Éée]glantine\b(.*)$,\1Fabre d'Églantine\2
 (?i)^(.*)\bF[Éée]lix\b(.*)$,\1Félix\2
@@ -248,6 +249,7 @@ Search, Replace
 (?i)^(.+)\bde\sFer\b(.*)$,\1de Fer\2
 (?i)^(.+)\bdu\s(Faubourg|Fbg\.|Fbg)\b(.*)$,\1du Faubourg\3
 (?i)^(.+)\bles\sFreydi[Èèe]res\b(.*)$,\1les Freydières\2
+(?i)^(.+)\bde\sFontagne\b(.*)$,\1de Fontagne\2
 
 # G
 (?i)^Grand\b(.*)$,Grand\1
@@ -410,6 +412,7 @@ Search, Replace
 
 (?i)^(Rue|Route)\ssans\sNom$
 (?i)^Route\sD[Éée]partementale\s(No|Numéro|n°|N°|№)\b(.*)$
+(?i)^(.+)\ble\sRamponneau\b(.*)$,\1le Ramponneau\2
 (?i)^(.+)\bRoger[\s-]Martin\sdu\sGard\b(.*)$,\1Roger Martin du Gard\2
 (?i)^(.+)\bRaymond\sPointcar[Éée]\b(.*)$,\1Raymond Poincaré\2
 (?i)^(.+)\bde\sla\sR[Éée]publique\b(.*)$,\1de la République\2
@@ -461,6 +464,8 @@ Search, Replace
 
 # T
 (?i)^Traverse\b(.*)$,Traverse\1
+(?i)^Traversi[Èèe]re\b(.*)$,Traversière\1
+
 (?i)^(.+)\bFran[çc]ois\sToullec\b(.*)$,\1François Toullec\2
 (?i)^(.+)\bElsa\sTriolet\b(.*)$,\1Elsa Triolet\2
 
@@ -482,6 +487,7 @@ Search, Replace
 # U
 
 # V
+(?i)^Venelle\b(.*)$,Venelle\1
 (?i)^Voie\b(.*)$,Voie\1
 (?i)^VC\b(.*)$,Voie Communale\1
 (?i)^Voie(|\sCommunale|\sRurale)\sDite\sde\b(.+)$,Voie de\2
