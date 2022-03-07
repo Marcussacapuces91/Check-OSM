@@ -93,6 +93,8 @@ Search, Replace
 (?i)^(.+)\bdes\sBruy[Èèe]res\b(.*)$,\1des Bruyères\2
 
 # C
+(?i)^Cap\b(.+)$,Cap\1
+(?i)^Cap\sLi[Éée]vin\b(.+)$,Cap Liévin\1
 (?i)^Carreau\b(.+)$,Carreau\1
 (?i)^Carrefour\b(.+)$,Carrefour\1
 (?i)^Chasse\b(.+)$,Chasse\1
@@ -295,6 +297,7 @@ Search, Replace
 (?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\g<1>10 Juin 1944\3
 
 # K
+(?i)^(.+)\bde\sKerguily\b(.*)$,\1de Kerguily\2
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
 
 # L
@@ -355,6 +358,7 @@ Search, Replace
 (?i)^Passage\b(.+)$,Passage\1
 (?i)^Petit\b(.+)$,Petit\1
 (?i)^(Place|Pl\.?)\b(.+)$,Place\2
+(?i)^Grand\sPlace\b(.*)$,Grand Place\1
 (?i)^Pont\b(.+)$,Pont\1
 
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
@@ -489,6 +493,7 @@ Search, Replace
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 (?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
+(?i)^(.+)\bVelpeau\b(.*)$,\1Velpeau\2
 (?i)^(.+)\bla\sVille\b(.*),\1la Ville\2
 (?i)^(.+)\bde\sla\sVigne\b(.*),\1de la Vigne\2
 (?i)^(.+)\bdu\sVerger\b(.*),\1du Verger\2
