@@ -1,7 +1,5 @@
 Search, Replace
 
-#     r'^Faubourg\s', '^Fossé',
-#     '^(Grand )?Giratoire', '^Gué',
 #     '^Hameau',
 #     '^(Petite )?Impass?e', '^Itinéraire',
 #     '^Jardins?',
@@ -104,6 +102,8 @@ Search, Replace
 (?i)^Chaussée\b(.+)$,Chaussée\1
 (?i)^Ch[Aâa]teau\b(.+)$,Château\1
 (?i)^(Ancien\s|Grand\s|Ancien\sGrand\s|Le\s|Nouveau\s|Petit\s|Vieux\s)?Chemin\b(.+)$,\1Chemin\2
+(?i)^Chemin\sForestier\b(.*)$,Chemin Forestier\1
+(?i)^Chemin\sRural\b(.*)$,Chemin Rural\1
 (?i)^Cit[Éée]\b(.+)$,Cité\1
 (?i)^Circuit\b(.+)$,Circuit\1
 (?i)^Clo[Îîi]tre\b(.+)$,Cloître\1
@@ -199,39 +199,42 @@ Search, Replace
 (?i)^Escalier\b(.*)$,Escalier\1
 (?i)^Espace\b(.*)$,Espace\1
 (?i)^Esplanade\b(.*)$,Esplanade\1
-(?i)^Eurov[Éée]lo\b(.*)$,Eurovélo\1
+(?i)^EuroV[Éée]lo\b(.*)$,EuroVelo\1
 
-(?i)^(.*)\b[ÉEé]cole\b(.*)$,\1École\2
-(?i)^(.+)\bde\sl'[ÉEé]cole\b(.*)$,\1de l'École\2
-(?i)^(.*)\b[ÉEé]coles\b(.*)$,\1Écoles\2
-(?i)^(.+)\b[ÉEé]cureuil\b(.*)$,\1Écureuil\2
-(?i)^(.+)\b[ÉEé]cureuils\b(.*)$,\1Écureuils\2
-(?i)^(.*)\b[ÉEé]glise\b(.*)$,\1Église\2
+(?i)^(.*)\b[Éée]cole\b(.*)$,\1École\2
+(?i)^(.+)\bde\sl'[Éée]cole\b(.*)$,\1de l'École\2
+(?i)^(.+)\bdes\s[Éée]coliers\b(.*)$,\1des Écoliers\2
+(?i)^(.*)\b[Éée]coles\b(.*)$,\1Écoles\2
+(?i)^(.+)\b[Éée]cureuil\b(.*)$,\1Écureuil\2
+(?i)^(.+)\b[Éée]cureuils\b(.*)$,\1Écureuils\2
+(?i)^(.+)\bde\sl'[Éée]galit[Éée]\b(.*)$,\1de l'Égalité\2
+(?i)^(.*)\b[Éée]glise\b(.*)$,\1Église\2
 (?i)^(.+)\bde\sl'[ÉEé]glise\b(.*)$,\1de l'Église\2
-(?i)^(.*)\b[ÉEé]glises\b(.*)$,\1Églises\2
-(?i)^(.*)\b[ÉEé]rable\b(.*)$,\1Érable\2
-(?i)^(.*)\b[ÉEé]rabless\b(.*)$,\1Érables\2
+(?i)^(.*)\b[Éée]glises\b(.*)$,\1Églises\2
+(?i)^(.*)\b[Éée]rable\b(.*)$,\1Érable\2
+(?i)^(.*)\b[Éée]rabless\b(.*)$,\1Érables\2
 (?i)^[Eé]changeur\b(.*)$,Échangeur\1
-(?i)^(.*)\b[ÉEé]crins\b(.*)$,\1Écrins\2
-(?i)^(.*)\b[ÉEé]tienne\sBilli[eè]res\b(.*)$,\1Étienne Billières\2
-(?i)^(.*)\b[ÉEé]tienne\set\sMathilde\sPinault\b(.*)$,\1Étienne et Mathilde Pinault\2
-(?i)^(.+)\bde\sl'[ÉEé]trat\b(.*)$,\1de l'Étrat\2
-(?i)^(.*)\b[ÉEé]tang\b(.*)$,\1Étang\2
+(?i)^(.*)\b[Éée]crins\b(.*)$,\1Écrins\2
+(?i)^(.*)\b[Éée]tienne\sBilli[eè]res\b(.*)$,\1Étienne Billières\2
+(?i)^(.*)\b[Éée]tienne\set\sMathilde\sPinault\b(.*)$,\1Étienne et Mathilde Pinault\2
+(?i)^(.+)\bde\sl'[Éée]trat\b(.*)$,\1de l'Étrat\2
+(?i)^(.*)\b[Éée]tang\b(.*)$,\1Étang\2
 (?i)^(.+)\bd'\s?Eau\b(.*)$,\1d'Eau\2
-(?i)^(.*)\b[ÉEé]lise\b(.*)$,\1Élise\2
-(?i)^(.*)\b[ÉEé]mile\b(.*)$,\1Émile\2
+(?i)^(.*)\b[Éée]lise\b(.*)$,\1Élise\2
+(?i)^(.*)\b[Éée]mile\b(.*)$,\1Émile\2
 (?i)^(.+)\bl'\s?[Éée]pine\b(.*)$,\1l'Épine\2
 (?i)^(.+)\b[Éée]ric\b(.*)$,\1Éric\2
 (?i)^(.+)\b[Éée]tienne\b(.*)$,\1Étienne\2
 (?i)^(.+)\b[Éée]tretat\b(.*)$,\1Étretat\2
 (?i)^(.+)\bEug[Èèe]ne\b(.*)$,\1Eugène\2
 (?i)^(.+)\bEug[Éée]nie\b(.*)$,\1Eugénie\2
-(?i)^(.+)\b(E.\s?|Eugénie)\sBrosse\b(.*)$,\1Eugénie Brosse\3
+(?i)^(.+)\b(E.\s?|Eug[Éée]nie)\sBrosse\b(.*)$,\1Eugénie Brosse\3
 (?i)^(.+)\b[Éée]va\b(.*)$,\1Éva\2
 (?i)^(.+)\b[Éée]variste\b(.*)$,\1Évariste\2
 
 # F
 (?i)^(Faubourg|Fbg\.|Fbg)\b(.*)$,Faubourg\2
+(?i)^Foss[Éée]\b(.*)$,Fossé\1
 
 (?i)^(.*)\bFabre d'[Éée]glantine\b(.*)$,\1Fabre d'Églantine\2
 (?i)^(.*)\bF[Éée]lix\b(.*)$,\1Félix\2
@@ -248,7 +251,9 @@ Search, Replace
 (?i)^(.+)\bles\sFreydi[Èèe]res\b(.*)$,\1les Freydières\2
 
 # G
-# ^G[Rr]\s?\d+$
+(?i)^(Grand\s)?Giratoire\b(.*)$,\1 Giratoire\2
+(?i)^Gu[Éée]\b(.*)$,Gué\1
+(?i)^GR\s?\d+$
 # ^[Gg]rande?-Rue
 (?i)^(.*)\bGalil[Éée]e\b(.*)$,\1Galilée\2
 (?i)^(.*)\bGalli[Éée]ni\b(.*)$,\1Gallieni\2
@@ -259,6 +264,7 @@ Search, Replace
 (?i)^(.+)\bGambetta\b(.*)$,\1Gambetta\2
 
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
+(?i)^(.+)\bde\sla\sGare\b(.*)$,\1de la Gare\2
 (?i)^(.+)\bdu\sG[Éée]n[Éée]rale?\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
 (?i)^(.+)\b[Éée]mile\sGenet\b(.*)$,\1Émile Genet\2
 (?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
