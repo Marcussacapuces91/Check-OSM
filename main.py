@@ -268,7 +268,7 @@ class Application:
 
             # logging.warning(f'Typo "{row[0].pattern}" reload\n{new_entry}')
             value = new_entry.tags[key]
-            error_msg = None
+            error_msg = []
             for row in self._invalid_ways_name:
                 match = row[0].search(value)
                 if match:
@@ -289,13 +289,16 @@ class Application:
                             print(' ' * e.pos, '---^')
                             raise
                         if replace != value:
-                            error_msg = f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
+                            error_msg.append(
+                                f'Correction/Typo "{row[0].pattern}" sur "{key}"="{value}" -> "{replace}"'
+                            )
                             value = replace
 
             if value != new_entry.tags[key]:
                 self.errors += 1
-                if error_msg is not None:
-                    logging.error(error_msg)
+                if len(error_msg):
+                    for msg in error_msg:
+                        logging.error(msg)
                 requests.get(
                     'http://localhost:8111/load_object',
                     params={
