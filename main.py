@@ -240,6 +240,7 @@ class Application:
                             except requests.exceptions.HTTPError as e:
                                 if req.status_code == 410:  # Element Gone !
                                     return entry_.tags[key]
+                                raise e
                             root = xml.etree.ElementTree.fromstring(req.content)
                             match root[0].tag:
                                 case 'node':
