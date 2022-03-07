@@ -2,7 +2,6 @@ import csv
 import datetime
 import logging
 import re
-import timeit
 import xml.etree.ElementTree
 
 import esy.osm.pbf
@@ -81,7 +80,7 @@ class Application:
                     except re.error as e:
                         print(repr(e))
                         print('Exception on regexp :', e.msg)
-                        print('in ',e.pattern)
+                        print('in ', e.pattern)
                         print(' ' * e.pos, '---^')
                         raise
                     if len(row) == 1:
@@ -320,7 +319,6 @@ class Application:
         except KeyError:
             pass
 
-
     def parse_block(self, block_, nodes_: int, ways_: int, relations_: int) -> (int, int, int):
         for entry in block_:
             match type(entry):
@@ -434,7 +432,12 @@ if __name__ == '__main__':
     #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
     # }
     # liste = {'essonne', 'ile_de_france'}
-    liste = {'alsace', 'aquitaine', 'auvergne', 'basse_normandie', 'bourgogne', 'bretagne', 'centre', 'champagne_ardenne', 'corse', 'franche_comte', 'haute_normandie', 'ile_de_france', 'languedoc_roussillon', 'limousin', 'lorraine', 'midi_pyrenees', 'nord_pas_de_calais', 'picardie', 'poitou_charentes', 'provence_alpes_cote_d_azur', 'rhone_alpes'}
+    liste = {
+        'alsace', 'aquitaine', 'auvergne', 'basse_normandie', 'bourgogne', 'bretagne', 'centre', 'champagne_ardenne',
+        'corse', 'franche_comte', 'haute_normandie', 'ile_de_france', 'languedoc_roussillon', 'limousin', 'lorraine',
+        'midi_pyrenees', 'nord_pas_de_calais', 'picardie', 'poitou_charentes', 'provence_alpes_cote_d_azur',
+        'rhone_alpes'
+    }
 
     for region in liste:
         requests.get(
