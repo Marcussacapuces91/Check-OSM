@@ -1,6 +1,5 @@
 Search, Replace
 
-#     '^Hameau',
 #     '^(Petite )?Impass?e', '^Itinéraire',
 #     '^Jardins?',
 #     '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
@@ -251,6 +250,7 @@ Search, Replace
 (?i)^(.+)\bles\sFreydi[Èèe]res\b(.*)$,\1les Freydières\2
 
 # G
+(?i)^Grand\b(.*)$,Grand\1
 (?i)^(Grand\s)?Giratoire\b(.*)$,\1 Giratoire\2
 (?i)^Gu[Éée]\b(.*)$,Gué\1
 (?i)^GR\s?\d+$
@@ -274,6 +274,8 @@ Search, Replace
 (?i)^(.+)\bdes\sGuillaumes\b(.*)$,\1des Guillaumes\2
 
 # H
+(?i)^Hameau\b(.*),Hameau\1
+
 (?i)^(.*)\bHenri\sDunant\b(.*)$',\1Henri Dunant\2
 (?i)^(.+)\bdes\sHospitaliers\b(.*)$,\1des Hospitaliers\2
 (?i)^(.+)\bl'\s?H[Ôôo]tel\sde\sVille\b(.*)$,\1l'Hôtel de Ville\2
@@ -348,9 +350,11 @@ Search, Replace
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
 # P
-(?i)^(Passage)\b(.+)$,Passage\2
+(?i)^Passage\b(.+)$,Passage\1
+(?i)^Petit\b(.+)$,Petit\1
 (?i)^(Place|Pl\.?)\b(.+)$,Place\2
-(?i)^(Pont)\b(.+)$,Pont\2
+(?i)^Pont\b(.+)$,Pont\1
+
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
 (?i)^(.*)\bG[Éée]n([Éée]ral)?\sPatton\b(.*)$,\1Général Patton\3
 (?i)^(.+)\bdu\sPage\b(.*)$,\1du Page\2
