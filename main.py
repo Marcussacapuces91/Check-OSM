@@ -316,22 +316,6 @@ class Application:
         except KeyError:
             pass
 
-        # if False:    # Utilisation de la white-list ?
-        #     try:
-        #         # Pas de black -> test white-list
-        #         for valid in highway_type_valid_list:
-        #             if re.match(valid, entry.tags['name']):     # OK
-        #                 return
-        #         # Pas trouvé en white-list -> erreur
-        #         self.errors += 1
-        #         logging.info(
-        #             f"Type de voie inconnue ({entry.tags['name']})",
-        #             extra={'type': _nwr(entry), 'id': entry.id}
-        #         )
-        #         # n = _nwr(entry) + str(entry.id)
-        #         # requests.get('http://localhost:8111/load_object', params={'objects': n})
-        #     except KeyError:
-        #         pass
 
     def parse_block(self, block_, nodes_: int, ways_: int, relations_: int) -> (int, int, int):
         for entry in block_:
