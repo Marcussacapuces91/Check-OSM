@@ -130,6 +130,7 @@ Search, Replace
 (?i)^(C\.C\.|C\.C|C\.CIAL\.?|Centre\sCommerciale?\.?)\b(.*)$,Centre Commercial\2
 (?i)^Cours\b(.+)$,Cours\1
 
+(?i)^(.+)\bCalvaire\b(.*)$,\1Calvaire\2
 (?i)^(.+)\bCalmette\set\sGu[eé]rin\b(.*)$,\1Calmette et Guérin\2
 (?i)^(.+)\b(E.|[Éée]douard)\sCharret\b(.*)$,\1Édouard Charret\3
 (?i)^(.+)\b[Éée]mile\sCombes\b(.*)$,\1Émile Combes\2
@@ -155,6 +156,7 @@ Search, Replace
 (?i)^(.+)\bGeorges\sCl[eé]menceau\b(.*)$,\1Georges Clemenceau\2
 (?i)^(.+)\bdes\sclos(.*)$,\1des Clos\2
 (?i)^(.+)\bdu\sClos\b(.*)$,\1du Clos\2
+(?i)^(.+)\bClos\sGagneur\b(.*)$,\1Clos Gagneur\2
 (?i)^(.+)\bClos\sNeuf\b(.*)$,\1Clos Neuf\2
 (?i)^(.+)\bdu\sColombier\b(.*)$,\1du Colombier\2
 (?i)^(.+)\bde\sla\sCombe\b(.*)$,\1de la Combe\2
@@ -257,6 +259,7 @@ Search, Replace
 (?i)^Gu[Éée]\b(.*)$,Gué\1
 (?i)^GR\s?\d+$
 # ^[Gg]rande?-Rue
+(?i)^Grand\sRue(.*)$,Grand Rue\1
 (?i)^(.*)\bGalil[Éée]e\b(.*)$,\1Galilée\2
 (?i)^(.*)\bGalli[Éée]ni\b(.*)$,\1Gallieni\2
 (?i)^(.*)\b^Genevi[Èèe]ve\sde\sGaule[\s-]+Anthonioz\b(.*)$,\1Geneviève de Gaulle-Anthonioz\2
