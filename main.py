@@ -449,7 +449,7 @@ if __name__ == '__main__':
             'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/savoie.osm.pbf',
             'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/haute_savoie.osm.pbf'
         }),
-        ('Bourgogne-France-Comté', {
+        ('Bourgogne-Franche-Comté', {
             'https://download.openstreetmap.fr/extracts/europe/france/bourgogne/cote_d_or.osm.pbf',
             'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/doubs.osm.pbf',
             'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/jura.osm.pbf',
