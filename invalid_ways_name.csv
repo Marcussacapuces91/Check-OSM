@@ -262,9 +262,9 @@ Search, Replace
 (?i)^Grand\sRue(.*)$,Grand Rue\1
 (?i)^(.*)\bGalil[Éée]e\b(.*)$,\1Galilée\2
 (?i)^(.*)\bGalli[Éée]ni\b(.*)$,\1Gallieni\2
-(?i)^(.*)\b^Genevi[Èèe]ve\sde\sGaule[\s-]+Anthonioz\b(.*)$,\1Geneviève de Gaulle-Anthonioz\2
-(?i)^(.*)\b^Geneviève\sAnthonioz[\s-]+de\sGaule\b(.*),$\1Geneviève de Gaulle-Anthonioz\2
-(?i)^(.*)\bCharles\sde\sGaulle\b(.*)$,\1Charles de Gaulle\2
+(?i)^(.*)\b^Genevi[Èèe]ve\sde\sGaull?e[\s-]+Anthonioz\b(.*)$,\1Geneviève de Gaulle-Anthonioz\2
+(?i)^(.*)\b^Geneviève\sAnthonioz[\s-]+de\sGaull?e\b(.*),$\1Geneviève de Gaulle-Anthonioz\2
+(?i)^(.*)\bCharles\sde\sGaulles?\b(.*)$,\1Charles de Gaulle\2
 (?i)^(.+)\bGuitard\b(.*)$,\1Guitard\2
 (?i)^(.+)\bGambetta\b(.*)$,\1Gambetta\2
 
@@ -359,6 +359,9 @@ Search, Replace
 (?i)^(.+)\bdu\s11\sNovembre\s(19)?18\b(.*)$,\1du 11 Novembre 1918\3
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
+# O
+(?i)^(.+)\bJean\sd'Ormesson\b(.*)$,\1Jean d'Ormesson\2
+
 # P
 (?i)^Passage\b(.+)$,Passage\1
 (?i)^Petit\b(.+)$,Petit\1
@@ -429,7 +432,7 @@ Search, Replace
 (?i)^(.+)\bAntoine\sRouget\sde\sl’Isle\b(.*)$
 
 # S
-(?i)^Sentier\b(.*)$,Sentier\1
+(?i)^(Petit\s)?Sentier\b(.*)$,\1Sentier\2
 (?i)^Square\b(.*)$,Square\1
 
 (?i)^(.*)\b(Saint|St)(e?)[\s-](.*),\1Saint\3-\4
@@ -485,6 +488,7 @@ Search, Replace
 (?i)^(.+)\bQuentin\sde\sLa\sTour\b(.*)$,\1Quentin de La Tour\2
 (?i)^(.+)\bMaurice[\s-]Quentin\sde\sLa\sTour\b(.*)$,\1Maurice-Quentin de La Tour\2
 (?i)^(.+)\bdes\sTournavelles\b(.*)$,\1des Tournavelles\2
+(?i)^(.+)\bde\sla\sTreille\b(.*)$,\1de la Treille\2
 (?i)^(.+)\bde\sla\sTrinit[Éée]\b(.*)$,\1de la Trinité\2
 
 # U
