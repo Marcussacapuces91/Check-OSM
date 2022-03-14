@@ -1,6 +1,7 @@
 import csv
 import datetime
 import logging
+import os
 import re
 import tempfile
 import xml.etree.ElementTree
@@ -393,7 +394,7 @@ class Application:
             nodes, ways, relations = self.parse_block(block, nodes, ways, relations)
             now = datetime.datetime.now()
             end = start + (now - start) / ((i + 1) / size)
-            print(f'{region}:{i}', f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
+            print(f'{region_}:{i}', f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
                   f'Names : {len(self.names)} - Errors : {self.errors}',
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
@@ -580,16 +581,19 @@ if __name__ == '__main__':
                 #            'addtags': {'name': 'France métropolitaine'}
             }
         )
-        print(f'Loading {region[0]}, Dept', end='')
-        with tempfile.NamedTemporaryFile() as dest:
+        print(f'Loading {region[0]}, reading Depts: ', end='')
+        with tempfile.NamedTemporaryFile(mode='wb', delete=False) as dest:
             for departement in region[1]:
                 r = requests.get(departement)
                 r.raise_for_status()
                 dest.write(r.content)
                 print('.', sep='', end='')
             print(' - Done.')
+            dest.close()
 
             with esy.osm.pbf.File(dest.name) as osm_pbf:
                 app.parse(region[0], osm_pbf)
+
+            os.unlink(dest.name)
 
     app.save_names(f'names.csv')
