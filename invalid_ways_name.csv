@@ -267,6 +267,7 @@ Search, Replace
 (?i)^(.*)\bCharles\sde\sGaulles?\b(.*)$,\1Charles de Gaulle\2
 (?i)^(.+)\bGuitard\b(.*)$,\1Guitard\2
 (?i)^(.+)\bGambetta\b(.*)$,\1Gambetta\2
+(?i)^(.+)\bDocteur\sJean-Fran[Ççc]ois-Xavier\sGirod\b(.*)$,\1Docteur Jean-François-Xavier Girod\2
 
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
 (?i)^(.+)\bde\sla\sGare\b(.*)$,\1de la Gare\2
