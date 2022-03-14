@@ -2,7 +2,9 @@ import csv
 import datetime
 import logging
 import re
+import tempfile
 import xml.etree.ElementTree
+from pprint import pprint
 
 import esy.osm.pbf
 import requests
@@ -376,7 +378,7 @@ class Application:
 
         return nodes_, ways_, relations_
 
-    def parse(self, file: esy.osm.pbf.File) -> None:
+    def parse(self, region_: str, file: esy.osm.pbf.File) -> None:
         """Analyse tout le fichier transmis en 2 passes (1 Collecte des blocs (et taille), 2 analyse des blocs"""
         logging.debug('Parsing fichier à vide.')
         blocks = list(file.blocks)
@@ -391,7 +393,7 @@ class Application:
             nodes, ways, relations = self.parse_block(block, nodes, ways, relations)
             now = datetime.datetime.now()
             end = start + (now - start) / ((i + 1) / size)
-            print(i, f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
+            print(f'{region}:{i}', f'{now.strftime("%H:%M:%S")} ({(i + 1) / size:3.2%}) -> {end.strftime("%H:%M")} :',
                   f'Names : {len(self.names)} - Errors : {self.errors}',
                   f'- Nodes : {nodes:,} - Ways : {ways:,} - Rels : {relations:,}')
         logging.debug('Parsing terminé.')
@@ -418,7 +420,6 @@ if __name__ == '__main__':
         format=r'%(asctime)s [%(lineno)5d] %(levelname)8s - %(funcName)s - %(message)s'
     )
 
-    app = Application()
 #     requests.get(
 #         'http://localhost:8111/load_object',
 #         params={
@@ -432,32 +433,163 @@ if __name__ == '__main__':
     #     'pyrenees_orientales', 'ariege', 'haute_garonne', 'hautes_pyrenees', 'pyrenees_atlantiques'
     # }
     # liste = {'essonne', 'ile_de_france'}
-    liste = {
-        'alsace', 'aquitaine', 'auvergne', 'basse_normandie', 'bourgogne', 'bretagne', 'centre', 'champagne_ardenne',
-        'corse', 'franche_comte', 'haute_normandie', 'ile_de_france', 'languedoc_roussillon', 'limousin', 'lorraine',
-        'midi_pyrenees', 'nord_pas_de_calais', 'picardie', 'poitou_charentes', 'provence_alpes_cote_d_azur',
-        'rhone_alpes'
-    }
+    liste = [
+        ('Auvergne-Rhône-Alpes', {
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/ain.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/auvergne/allier.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/ardeche.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/auvergne/cantal.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/drome.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/isere.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/loire.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/auvergne/haute_loire.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/auvergne/puy_de_dome.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/rhone.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/savoie.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/rhone_alpes/haute_savoie.osm.pbf'
+        }),
+        ('Bourgogne-France-Comté', {
+            'https://download.openstreetmap.fr/extracts/europe/france/bourgogne/cote_d_or.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/doubs.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/jura.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bourgogne/nievre.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/haute_saone.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bourgogne/saone_et_loire.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bourgogne/yonne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/franche_comte/territoire_de_belfort.osm.pbf'
+        }),
+        ('Bretagne', {
+            'https://download.openstreetmap.fr/extracts/europe/france/bretagne/cotes_d_armor.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bretagne/finistere.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bretagne/ille_et_vilaine.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/bretagne/morbihan.osm.pbf'
+        }),
+        ('Centre-Val de Loire', {
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/cher.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/eure_et_loir.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/indre.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/indre_et_loire.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/loir_et_cher.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/centre/loiret.osm.pbf'
+        }),
+        ('Corse', {
+            'https://download.openstreetmap.fr/extracts/europe/france/corse/corse_du_sud.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/corse/haute_corse.osm.pbf'
+        }),
+        ('Grand Est', {
+            'https://download.openstreetmap.fr/extracts/europe/france/champagne_ardenne/ardennes.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/champagne_ardenne/aube.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/alsace/bas_rhin.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/alsace/haut_rhin.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/champagne_ardenne/haute_marne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/champagne_ardenne/marne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/lorraine/meurthe_et_moselle.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/lorraine/meuse.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/lorraine/moselle.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/lorraine/vosges.osm.pbf'
+        }),
+        ('Hauts-de-France', {
+            'https://download.openstreetmap.fr/extracts/europe/france/picardie/aisne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/nord_pas_de_calais/nord.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/picardie/oise.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/nord_pas_de_calais/pas_de_calais.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/picardie/somme.osm.pbf'
+        }),
+        ('Île-de-France', {
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/essonne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/hauts_de_seine.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/paris.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/seine_et_marne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/seine_saint_denis.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/val_d_oise.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/val_de_marne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/ile_de_france/yvelines.osm.pbf'
+        }),
+        ('Normandie', {
+            'https://download.openstreetmap.fr/extracts/europe/france/basse_normandie/calvados.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/haute_normandie/eure.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/basse_normandie/manche.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/basse_normandie/orne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/haute_normandie/seine_maritime.osm.pbf'
+        }),
+        ('Nouvelle-Aquitaine', {
+            'https://download.openstreetmap.fr/extracts/europe/france/poitou_charentes/charente.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/poitou_charentes/charente_maritime.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/limousin/correze.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/limousin/creuse.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/aquitaine/dordogne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/aquitaine/gironde.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/aquitaine/landes.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/aquitaine/lot_et_garonne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/aquitaine/pyrenees_atlantiques.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/poitou_charentes/deux_sevres.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/poitou_charentes/vienne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/limousin/haute_vienne.osm.pbf'
+        }),
+        ('Occitanie', {
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/ariege.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon/aude.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/aveyron.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon/gard.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/haute_garonne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/gers.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon/herault.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/lot.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon/lozere.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/hautes_pyrenees.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/languedoc_roussillon/pyrenees_orientales.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/tarn.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/midi_pyrenees/tarn_et_garonne.osm.pbf'
+        }),
+        ('Pays de la Loire', {
+            'https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire/loire_atlantique.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire/maine_et_loire.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire/mayenne.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire/sarthe.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/pays_de_la_loire/vendee.osm.pbf'
+        }),
+        ('Provence-Alpes-Côte d\'Azur', {
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/alpes_de_haute_provence.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/alpes_maritimes.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/bouches_du_rhone.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/hautes_alpes.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/var.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/vaucluse.osm.pbf'
+        }),
+        ('Autres', {
+            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/central-america/guadeloupe.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/central-america/martinique.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf'
+        })
+    ]
 
+    app = Application()
+    app.names = {}
     for region in liste:
         requests.get(
             'http://localhost:8111/load_object',
             params={
                 'objects': {'r/1403916'},
                 'new_layer': True,
-                'layer_name': region
+                'layer_name': region[0]
                 #            'addtags': {'name': 'France métropolitaine'}
             }
         )
-        print(f'Loading {region}', end='')
-        r = requests.get(f'https://download.openstreetmap.fr/extracts/europe/france/{region}.osm.pbf')
-        r.raise_for_status()
-        print(f' - Writing {region}.osm.pbf file', end='')
-        with open(f'{region}.osm.pbf', 'wb') as dest:
-            dest.write(r.content)
-        print(' - Done.')
+        print(f'Loading {region[0]}, Dept', end='')
+        with tempfile.NamedTemporaryFile() as dest:
+            for departement in region[1]:
+                r = requests.get(departement)
+                r.raise_for_status()
+                dest.write(r.content)
+                print('.', sep='', end='')
+            print(' - Done.')
 
-        with esy.osm.pbf.File(f'{region}.osm.pbf') as osm_pbf:
-            app.names = {}
-            app.parse(osm_pbf)
-            app.save_names(f'names_{region}.csv')
+            with esy.osm.pbf.File(dest.name) as osm_pbf:
+                app.parse(region[0], osm_pbf)
+
+    app.save_names(f'names.csv')
