@@ -557,15 +557,21 @@ if __name__ == '__main__':
             'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/var.osm.pbf',
             'https://download.openstreetmap.fr/extracts/europe/france/provence_alpes_cote_d_azur/vaucluse.osm.pbf'
         }),
-        ('Autres', {
-            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
+        ('Départements d\'outre-mer', {
             'https://download.openstreetmap.fr/extracts/central-america/guadeloupe.osm.pbf',
             'https://download.openstreetmap.fr/extracts/central-america/martinique.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/africa/reunion.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/africa/mayotte.osm.pbf'
+        }),
+        ('Autres territoires', {
+            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
             'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf'
+            'https://download.openstreetmap.fr/extracts/central-america/saint_martin.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/central-america/saint_barthelemy.osm.pbf'
         })
     ]
 
@@ -575,7 +581,8 @@ if __name__ == '__main__':
         requests.get(
             'http://localhost:8111/load_object',
             params={
-                'objects': {'r/1403916'},
+                # 'objects': {'r/1403916'},   # France métropolitaine
+                'objects': {'r/2202162'},   # France
                 'new_layer': True,
                 'layer_name': region[0]
                 #            'addtags': {'name': 'France métropolitaine'}
