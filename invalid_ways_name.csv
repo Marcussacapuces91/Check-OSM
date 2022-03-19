@@ -43,15 +43,15 @@ Search, Replace
 (?i)^L'Ariégeoise$
 
 # A
-(?i)^(All[ée][ée]|Al\.)\b(.*)$,Allée\2
+(?i)^(All[Ééeè][Éée]|Al\.|All)\b(.*)$,Allée\2
 (?i)^Grande\s(All[ée][ée]|Al\.)\b(.*)$,Grande Allée\2
-(?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du)\b(.+)$,Allée \2\3
+(?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du|de\sla)\b(.+)$,Allée \2\3
 (?i)^(Ave?\.|Ave?|Avenue)\b(.*)$,Avenue\2
 (?i)^Petite\sAvenue\b(.*)$,Petite Avenue\1
 (?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^Ancienne\b(.*)$,Ancienne\1
 (?i)^Autoroute\b(.*)$,Autoroute\1
-(?i)^(.*)\bAerodrome\b(.*)$,\1Aérodrome\2
+(?i)^(.*)\bA[Éée]rodrome\b(.*)$,\1Aérodrome\2
 (?i)^(.*)\bAbbaye\b(.*)$,\1Abbaye\2
 
 (?i)^(.+)\b[Dd]es\sAlouettes$,\1des Alouettes
@@ -119,7 +119,7 @@ Search, Replace
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
 (?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
-(?i)^(Che?m?\.?|Chemii?|Chemin)\b(.*)$,Chemin\2
+(?i)^(Ch\.|Che?m?\.|Chemii?|Chemin\.|Chemin)\b(.*)$,Chemin\2
 (?i)^Chemin\sAncien\sChemin\b(.*)$,Ancien Chemin\1
 (?i)^(.+)\d(Vx\sChem|Vieux\sChemin)\d(.*)$,\1Vieux Chemin\3
 (?i)^Chemin\sChemin\b(.*)$,Chemin\1
@@ -169,6 +169,7 @@ Search, Replace
 (?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
 (?i)^(.+)\bde\sla\sCroix\b(.*)$,\1de la Croix\2
 (?i)^(.+)\bde\sla\sCroix([\s-])+Rouge\b(.*)$,\1de la Croix\2Rouge\3
+(?i)^(.+)\bdes\sCl[Éée]mentines\b(.*)$,\1des Clémentines\2
 (?i)^(.*)\bJ.C. Cave(.*)$
 
 # D
@@ -193,6 +194,7 @@ Search, Replace
 (?i)^(.+)\bde\sla\sDuys\b(.*)$,\1de la Duys\2
 (?i)^Digue\b(.+)$,Digue\1
 (?i)^(.+)\bFran[çc]oise\Dorl[Éée]ac\b(.*)$,\1Françoise Dorléac\2
+(?i)^(.+)\bde\sla\sD[Éée]couverte\b(.*)$,\1de la Découverte\2
 
 # (?i)^(.+)\bdite?\b(.+)$
 
@@ -213,6 +215,7 @@ Search, Replace
 (?i)^(.*)\b[Éée]glise\b(.*)$,\1Église\2
 (?i)^(.+)\bde\sl'[ÉEé]glise\b(.*)$,\1de l'Église\2
 (?i)^(.*)\b[Éée]glises\b(.*)$,\1Églises\2
+(?i)^(.+)\bde\sl'[Éée]l[Éée]phant\b(.*)$,\1de l'Éléphant\2
 (?i)^(.*)\b[Éée]rable\b(.*)$,\1Érable\2
 (?i)^(.*)\b[Éée]rabless\b(.*)$,\1Érables\2
 (?i)^[Eé]changeur\b(.*)$,Échangeur\1
@@ -252,6 +255,7 @@ Search, Replace
 (?i)^(.+)\bdu\s(Faubourg|Fbg\.|Fbg)\b(.*)$,\1du Faubourg\3
 (?i)^(.+)\bles\sFreydi[Èèe]res\b(.*)$,\1les Freydières\2
 (?i)^(.+)\bde\sFontagne\b(.*)$,\1de Fontagne\2
+(?i)^(.+)\bdes\sFauvettes\b(.*)$,\1des Fauvettes\2
 
 # G
 (?i)^Grand\b(.*)$,Grand\1
@@ -286,11 +290,12 @@ Search, Replace
 (?i)^(.+)\bdes\sHospitaliers\b(.*)$,\1des Hospitaliers\2
 (?i)^(.+)\bl'\s?H[Ôôo]tel\sde\sVille\b(.*)$,\1l'Hôtel de Ville\2
 (?i)^(.+)\bdu\s(Cdt|Commandant)\sl'Herminier\b(.*)$,\1du Commandant l'Herminier\3
+(?i)^(.+)\bde\sl'Horizon\b(.*)$,\1de l'Horizon\2
 
 # I
 (?i)^Immeuble\b(.*)$,Immeuble\1
 (?i)^Impasse\b(.*)$,Impasse\1
-(?i)^(Imp\.|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
+(?i)^(Imp\.|Imp|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
 (?i)^Itin[Éée]raire\b(.*)$,Itinéraire\1
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 
@@ -301,6 +306,7 @@ Search, Replace
 (?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
 (?i)^(.+)\bJeanne\sd'Arc\b(.*)$,\1Jeanne d'Arc\2
 (?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\g<1>10 Juin 1944\3
+(?i)^(.*)\bdes\sJacarandas\b(.*)$,\1des Jacarandas\2
 
 # K
 (?i)^(.+)\bde\sKerguily\b(.*)$,\1de Kerguily\2
@@ -314,6 +320,7 @@ Search, Replace
 (?i)^(.*)\bLieu\sdit\sStrutta\b(.*)$,\1Lieu dit Strutta\2
 (?i)^(.+)\bG[Éée]n[Éée]ral\sLeclerc\b(.*)$,\1Général Leclerc\2
 (?i)^(.+)\bde\sl'Europe\b(.*)$,\1de l'Europe\2
+(?i)^(.+)\bLeconte\sde\s?Lisle\b(.*)$,\1Leconte de Lisle\2
 
 # M
 (?i)^Mont[Éée]e\b(.*)$,Montée\1
@@ -362,6 +369,7 @@ Search, Replace
 
 # O
 (?i)^(.+)\bJean\sd'Ormesson\b(.*)$,\1Jean d'Ormesson\2
+(?i)^(.+)\bdes\sOra?ngers\b(.*)$,\1des Orangers\2
 
 # P
 (?i)^Passage\b(.+)$,Passage\1
@@ -513,6 +521,7 @@ Search, Replace
 (?i)^(.+)\bdu\sVerger\b(.*),\1du Verger\2
 (?i)^(.+)\bdu\sPetit\sVessin\b(.*),\1du Petit Vessin\2
 (?i)^(.+)\bGeorges\sVilliers\sde\sl’Isle-Adam\b(.*)$
+(?i)^(.+)\b(Dr|Docteur)\sRaymond\sVerg[Èèe]s\b(.*)$,\1Docteur Raymond Vergès\3
 
 # W
 (?i)^(.+)\bdu\sWagonnage\b(.*),\1du Wagonnage\2

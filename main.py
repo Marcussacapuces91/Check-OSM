@@ -566,8 +566,8 @@ if __name__ == '__main__':
         }),
         ('Autres territoires', {
             'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
             'https://download.openstreetmap.fr/extracts/central-america/saint_martin.osm.pbf',
