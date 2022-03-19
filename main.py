@@ -559,19 +559,19 @@ if __name__ == '__main__':
         }),
         ('Départements d\'outre-mer', {
             'https://download.openstreetmap.fr/extracts/central-america/guadeloupe.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/central-america/martinique.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/africa/reunion.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/africa/mayotte.osm.pbf'
+#            'https://download.openstreetmap.fr/extracts/central-america/martinique.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/africa/reunion.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/africa/mayotte.osm.pbf'
         }),
         ('Autres territoires', {
-            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/central-america/saint_martin.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/central-america/saint_barthelemy.osm.pbf'
+#            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/central-america/saint_martin.osm.pbf',
+#            'https://download.openstreetmap.fr/extracts/central-america/saint_barthelemy.osm.pbf'
         })
     ]
 
@@ -588,7 +588,7 @@ if __name__ == '__main__':
                 #            'addtags': {'name': 'France métropolitaine'}
             }
         )
-        print(f'Loading {region[0]}, reading Depts: ', end='')
+        print(f'Loading {region[0]}, loading Depts: ', end='')
         with tempfile.NamedTemporaryFile(mode='wb', delete=False) as dest:
             for departement in region[1]:
                 r = requests.get(departement)
