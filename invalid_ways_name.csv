@@ -101,6 +101,7 @@ Search, Replace
 (?i)^Chaussée\b(.+)$,Chaussée\1
 (?i)^Ch[Aâa]teau\b(.+)$,Château\1
 (?i)^(Ancien\s|Grand\s|Ancien\sGrand\s|Le\s|Nouveau\s|Petit\s|Vieux\s)?Chemin\b(.+)$,\1Chemin\2
+# (?i)^Chemin\.\b(.*)$,Chemin\2
 (?i)^Chemin\sForestier\b(.*)$,Chemin Forestier\1
 (?i)^Chemin\sRural\b(.*)$,Chemin Rural\1
 (?i)^Cit[Éée]\b(.+)$,Cité\1
@@ -117,7 +118,7 @@ Search, Replace
 (?i)^Croisement\b(.+)$,Croisement\1
 
 (?i)^(.+)\bdu\scarv[eé]on\b(.*)$,\1du Carvéon\2
-(?i)^Chemin(|\sCommunal|\sRural)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
+(?i)^Chemin(|\sCommunal|\sRural|\sVicinal)\sdit\s(de|des|du|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(C\.R\.)\sdit\s(d'|de|du|des|de\sla)\b(.*)$,Chemin \2\3
 (?i)^(Ch\.|Che?m?\.|Chemii?|Chemin\.|Chemin)\b(.*)$,Chemin\2
 (?i)^Chemin\sAncien\sChemin\b(.*)$,Ancien Chemin\1
