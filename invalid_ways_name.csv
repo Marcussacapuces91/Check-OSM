@@ -44,7 +44,7 @@ Search, Replace
 
 # A
 (?i)^(All[Ééeè][Éée]|Allée̩e|All?)\b(.*)$,Allée\2
-(?i)^Allée\.(.*)$,Allée\2
+(?i)^Allée\.(.*)$,Allée\1
 (?i)^Grande\s(All[ée][ée]|Al\.)\b(.*)$,Grande Allée\2
 (?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du|de\sla)\b(.+)$,Allée \2\3
 (?i)^(Ave?|Avenue)\b(.*)$,Avenue\2
