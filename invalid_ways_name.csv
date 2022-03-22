@@ -48,7 +48,7 @@ Search, Replace
 (?i)^Grande\s(All[ée][ée]|Al\.)\b(.*)$,Grande Allée\2
 (?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du|de\sla)\b(.+)$,Allée \2\3
 (?i)^(Ave?|Avenue)\b(.*)$,Avenue\2
-(?i)^Avenue\.(.*)$,Avenue\2
+(?i)^Avenue\.(.*)$,Avenue\1
 (?i)^Petite\sAvenue\b(.*)$,Petite Avenue\1
 (?i)^(Anc|Anc\.|Ancien)\b(.*)$,Ancien\2
 (?i)^Ancienne\b(.*)$,Ancienne\1
@@ -70,6 +70,7 @@ Search, Replace
 
 (?i)^(.+)\bAlbert\s1e?r\b(.*)$,\1Albert 1er\2
 (?i)^(.+)\bAlexandre\sIII\b(.*)$,\1Alexandre III\2
+(?i)^(.+)\bSalva[dt]or\sAlli?end[Éée]\b(.*)$,\1Salvador Allende\2
 
 # B
 # ^Borne\sFrontière\s(\d+)$
@@ -82,7 +83,8 @@ Search, Replace
 
 (?i)^(.+)\bBalguerie\sStuttenberg\b(.*)$,\1Balguerie Stuttenberg\2
 (?i)^(.+)\bJos[Éée]phine\sBaker\b(.*)$,\1Joséphine Baker\2
-(?i)^(.*)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
+(?i)^(.+)\bAristide\sBriand\b(.*)$,\1Aristide Briand\2
+(?i)^(.+)\bRaphael\sBarquissau\b(.*)$,\1Raphael Barquissau\2
 
 (?i)^(.+)\bde\sBalata\b(.*)$,\1de Balata\2
 (?i)^(.+)\bdes\sBalatas\b(.*)$,\1des Balatas\2
@@ -94,6 +96,7 @@ Search, Replace
 (?i)^(.+)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
 (?i)^(.+)\bBois\sd'Inde\b(.*)$,\1Bois d'Inde\2
 (?i)^(.+)\bde\sla\sbrasserie\b(.*)$,\1de la Brasserie\2
+(?i)^(.+)\bdes\sBoun?gainvilliers\b(.*)$,\1des Bougainvilliers\2
 (?i)^(.+)\bdu\sBoulevard\b(.*)$,\1du Boulevard\2
 (?i)^(.+)\bde\sla\sBouquerie\b(.*)$,\1de la Bouquerie\2
 (?i)^(.+)\bde\sla\sBataille\sde\sStalingrad\b(.*)$,\1de la Bataille de Stalingrad\2
@@ -181,10 +184,12 @@ Search, Replace
 (?i)^(.+)\bles\sCoteaux\b(.*)$,\1les Coteaux\2
 (?i)^(.+)\bdu\sCol\b(.*)$,\1du Col\2
 (?i)^(.+)\bdu\sCol(\sNoir)?\b(.*)$,\1du Col\2\3
+(?i)^(.+)\bde\sla\sCrois[Éée]e\b(.*)$,\1de la Croisée\2
 (?i)^(.+)\bde\sla\sCroix\b(.*)$,\1de la Croix\2
 (?i)^(.+)\bde\sla\sCroix([\s-])+Rouge\b(.*)$,\1de la Croix\2Rouge\3
 (?i)^(.+)\bdes\sCl[Éée]mentines\b(.*)$,\1des Clémentines\2
 (?i)^(.*)\bJ.C. Cave(.*)$
+(?i)^(.+)\bdes\nCypr[Èèe]s\b(.*)$,\1des Cyprès\2
 
 # D
 (?i)^(Ancienne\s)?D[Éée]partementale\b(.*)$,\1Départementale\2
@@ -296,7 +301,7 @@ Search, Replace
 
 (?i)^(.+)\bde\sGalaure\b(.*)$,\1de Galaure\2
 (?i)^(.+)\bde\sla\sGare\b(.*)$,\1de la Gare\2
-(?i)^(.+)\bdu\sG[Éée]n[Éée]rale?\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\2
+(?i)^(.+)\bdu\s(G[Éée]n[Éée]rale?|G[Éée]n\.?)\sde[-\s]Gaulle\b(.*)$,\1du Général de Gaulle\4
 (?i)^(.+)\b[Éée]mile\sGenet\b(.*)$,\1Émile Genet\2
 (?i)^(.+)\bde\sGissac\b(.*)$,\1de Gissac\2
 (?i)^(.+)\bde\sGoiron\b(.*)$,\1de Goiron\2
@@ -317,8 +322,8 @@ Search, Replace
 
 # I
 (?i)^Immeuble\b(.*)$,Immeuble\1
-(?i)^Impasse\b(.*)$,Impasse\1
-(?i)^(Imp\.|Imp|Impasse\.|Impaa?ss?e)\b(.*)$,Impasse\2
+(?i)^(Imp|Imp|Impasse|Impaa?ss?e)\b(.*)$,Impasse\2
+(?i)^Impasse\.(.*)$,Impasse\1
 (?i)^Itin[Éée]raire\b(.*)$,Itinéraire\1
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 (?i)^(.+)\bde\sl'[Îîi]le\b(.*)$,\1de l'Île\2
@@ -334,6 +339,7 @@ Search, Replace
 (?i)^(.*)\bdes\sJacarandas\b(.*)$,\1des Jacarandas\2
 
 # K
+(?i)^(.+)\bdu\sKartala\b(.*)$,\1du Kartala\2
 (?i)^(.+)\bde\sKerguily\b(.*)$,\1de Kerguily\2
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
 
@@ -434,6 +440,7 @@ Search, Replace
 (?i)^(.+)\bdu\sPuits\b(.*)$,\1du Puits\2
 (?i)^(.+)\bde\sla\sPrairie\b(.*)$,\1de la Prairie\2
 # (?i)^(.+)\bdes\sPoules\sd'Eau\b(.*)$,\1des Poules d'Eau\2
+(?i)^(.+)\bdes\sPrimev[Èèe]re?s\b(.*)$,\1des Primevères\2
 
 # Q
 (?i)^(Quartier|Qrt)\b(.+),Quartier\2
@@ -460,6 +467,7 @@ Search, Replace
 
 (?i)^(Rue|Route)\ssans\sNom$
 (?i)^Route\sD[Éée]partementale\s(No|Numéro|n°|N°|№)\b(.*)$
+(?i)^(.+)\bdes\sRamboutans\b(.*)$,\1des Ramboutans\2
 (?i)^(.+)\ble\sRamponneau\b(.*)$,\1le Ramponneau\2
 (?i)^(.+)\bRoger[\s-]Martin\sdu\sGard\b(.*)$,\1Roger Martin du Gard\2
 (?i)^(.+)\bRaymond\sPointcar[Éée]\b(.*)$,\1Raymond Poincaré\2
@@ -552,10 +560,11 @@ Search, Replace
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 (?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
 (?i)^(.+)\bVelpeau\b(.*)$,\1Velpeau\2
-(?i)^(.+)\bla\sVille\b(.*),\1la Ville\2
-(?i)^(.+)\bde\sla\sVigne\b(.*),\1de la Vigne\2
-(?i)^(.+)\bdu\sVerger\b(.*),\1du Verger\2
-(?i)^(.+)\bdu\sPetit\sVessin\b(.*),\1du Petit Vessin\2
+(?i)^(.+)\bla\sVille\b(.*)$,\1la Ville\2
+(?i)^(.+)\bde\sla\sVigne\b(.*)$,\1de la Vigne\2
+(?i)^(.+)\bde\nla\nVi[Èèe]rge\b(.*)$,\1de la Vierge\2
+(?i)^(.+)\bdu\sVerger\b(.*)$,\1du Verger\2
+(?i)^(.+)\bdu\sPetit\sVessin\b(.*)$,\1du Petit Vessin\2
 (?i)^(.+)\bGeorges\sVilliers\sde\sl’Isle-Adam\b(.*)$
 (?i)^(.+)\b(Dr|Docteur)\sRaymond\sVerg[Èèe]s\b(.*)$,\1Docteur Raymond Vergès\3
 
