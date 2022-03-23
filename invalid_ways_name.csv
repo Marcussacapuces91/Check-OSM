@@ -1,8 +1,5 @@
 Search, Replace
 
-#     '^Levée', '^Les Quatre Routes', '^Lieu-dit', '^Lotissement',
-#     '^Mail', '^Montée', '^Montoir',
-#     '^Parc', '^Parking', '^Parvis', '^Passage', '^Passe', '^Passerelle',
 #     "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
 #     '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
 #     '^Quartier', '^Quai',
@@ -43,10 +40,10 @@ Search, Replace
 (?i)^L'Ariégeoise$
 
 # A
-(?i)^(All[Ééeè][Éée]|Allée̩e|All?)\b(.*)$,Allée\2
+(?i)^(All[Ééeè][Éée]|Allée̩e|All̩e|All?)\b(.*)$,Allée\2
 (?i)^Allée\.(.*)$,Allée\1
-(?i)^Grande\s(All[ée][ée]|Al\.)\b(.*)$,Grande Allée\2
-(?i)^(All[ée][ée]|Al\.)\sdite\s(de|des|du|de\sla)\b(.+)$,Allée \2\3
+(?i)^Grande\s(All[Éée][Éée]|All?)\b(.*)$,Grande Allée\2
+(?i)^(All[Éée][Éée]|Al\.)\sdite\s(de|des|du|de\sla)\b(.+)$,Allée \2\3
 (?i)^(Ave?|Avenue)\b(.*)$,Avenue\2
 (?i)^Avenue\.(.*)$,Avenue\1
 (?i)^Petite\sAvenue\b(.*)$,Petite Avenue\1
@@ -58,6 +55,7 @@ Search, Replace
 (?i)^Anse\b(.*),Anse\1
 (?i)^Grand(e?)\sAnse\b(.*),Grand\1 Anse\2
 
+(?i)^(.+)\bl'Abb[Éée]\b(.*)$,\1l'Abbé\2
 (?i)^(.+)\b(les|des)\sAcacias\b(.*)$,\1\2 Acacias\3
 (?i)^(.+)\bdes\sAlouettes\b(.*)$,\1des Alouettes\2
 (?i)^(.+)\bde\sl'An\s2000\b(.*)$,\1de l'An 2000\2
@@ -100,7 +98,7 @@ Search, Replace
 (?i)^(.+)\bdu\sPetit\sBallon\b(.*)$,\1du Petit Ballon\2
 # NON ! (?i)^(.+)\bde\sBel[\s-]+Air\b(.*)$,\1de Bel-Air\2
 (?i)^(.+)\bBlanche\b(.*)$,\1Blanche\2
-(?i)^(.+)\bdu\sPetit\sBois\b(.*)$,\1Petit Bois\2
+(?i)^(.+)\bdu\sPetit\sBois\b(.*)$,\1du Petit Bois\2
 (?i)^(.+)\bdes\sPetits\sBois\b(.*)$,\1des Petits Bois\2
 (?i)^(.+)\bBois\sd'Inde\b(.*)$,\1Bois d'Inde\2
 (?i)^(.+)\bde\sla\sBrasserie\b(.*)$,\1de la Brasserie\2
@@ -162,6 +160,7 @@ Search, Replace
 (?i)^(.+)\bGrand\sCamp\b(.*)$,\1Grand Camp\2
 (?i)^(.+)\bdes\sCamp[Êêe]ches\b(.*)$,\1des Campêches\2
 (?i)^(.+)\bdu\sCarbet\b(.*)$,\1du Carbet\2
+(?i)^(.+)\bde\sla\sCarri[Èèe]re\b(.*)$,\1de la Carrière\2
 (?i)^(.+)\bdu\sCarillon\b(.*)$,\1du Carillon\2
 (?i)^(.+)\bdu\sChamp\sde\sFoire\b(.*)$,\1du Champ de Foire\2
 (?i)^(.+)\bdu\sG[eé]n[eé]ral\sde\sChareton\b(.*)$,\1Général de Chareton\2
@@ -179,7 +178,7 @@ Search, Replace
 (?i)^(.+)\bdes\sCimeti[Èèe]res\b(.*)$,\1des Cimetières\2
 (?i)^(.+)\bGeorges\sCl[Éée]menceau\b(.*)$,\1Georges Clemenceau\2
 (?i)^(.+)\bdes\sClochettes?\b(.*)$,\1des Clochettes\2
-(?i)^(.+)\b(du|des)\sClos\b(.*)$,\1\2 Clos\2
+(?i)^(.+)\b(du|des)\sClos\b(.*)$,\1\2 Clos\3
 (?i)^(.+)\bClos\sGagneur\b(.*)$,\1Clos Gagneur\2
 (?i)^(.+)\bClos\sNeuf\b(.*)$,\1Clos Neuf\2
 (?i)^(.+)\du\sC(OE|Œ|œ)ur\b(.*)$,\1du Cœur\3
@@ -225,13 +224,15 @@ Search, Replace
 (?i)^(.+)\bDodo\b(.*)$,\1Dodo\2
 (?i)^(.+)\bFran[çc]oise\Dorl[Éée]ac\b(.*)$,\1Françoise Dorléac\2
 (?i)^(.+)\bde\sla\sD[Éée]couverte\b(.*)$,\1de la Découverte\2
+(?i)^(.+)\bJean\sDelautt?re\b(.*)$,\1Jean Delautre\2
+(?i)^(.+)\bdes\sSix\sDeniers\b(.*)$,\1des Six Deniers\2
 (?i)^(.+)\bHenri\sDunant\b(.*)$',\1Henri Dunant\2
 (?i)^(.+)\bJean\sDefos\sdu\sRau\b(.*)$,\1Jean Defos du Rau\2
 
 # (?i)^(.+)\bdite?\b(.+)$
 
 # E
-(?i)^Entr[Éée]*\b(.*)$,Entrée\1
+(?i)^Entr[Éée][Éée]\b(.*)$,Entrée\1
 (?i)^[Éée]changeur\b(.*)$,Échangeur\1
 (?i)^Escalier\b(.*)$,Escalier\1
 (?i)^Espace\b(.*)$,Espace\1
@@ -270,6 +271,7 @@ Search, Replace
 (?i)^(.+)\bEug[Èèe]ne\b(.*)$,\1Eugène\2
 (?i)^(.+)\bEug[Éée]nie\b(.*)$,\1Eugénie\2
 (?i)^(.+)\b(E.\s?|Eug[Éée]nie)\sBrosse\b(.*)$,\1Eugénie Brosse\3
+(?i)^(.+)\bde\sl'Europe\b(.*)$,\1de l'Europe\2
 (?i)^(.+)\b[Éée]va\b(.*)$,\1Éva\2
 (?i)^(.+)\b[Éée]variste\b(.*)$,\1Évariste\2
 
@@ -336,23 +338,29 @@ Search, Replace
 (?i)^(.+)\bde\sl'Horizon\b(.*)$,\1de l'Horizon\2
 
 # I
+(?i)^[Îîi]le\b(.*)$
+
 (?i)^Immeuble\b(.*)$,Immeuble\1
 (?i)^(Imp|Imp|Impasse|Impaa?ss?e)\b(.*)$,Impasse\2
 (?i)^Impasse\.(.*)$,Impasse\1
 (?i)^Itin[Éée]raire\b(.*)$,Itinéraire\1
 (?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 (?i)^(.+)\bde\sl'[Îîi]le\b(.*)$,\1de l'Île\2
+(?i)^(.+)\b[Îîi]le[\s-]de[\s-]France\b(.*)$,\1Île-de-France\2
 (?i)^(.+)\bdes\s[Îîi]les\b(.*)$,\1des Îles\2
 
 # J
 (?i)^Jardin(s?)\b(.*)$,Jardin\1\2
 
+(?i)^(.*)\bdes\sJacarandas\b(.*)$,\1des Jacarandas\2
 (?i)^(.+)\bJean\b(.*)$,\1Jean\2
 (?i)^(.*)\bJean-Baptiste\sde\sla\sQuintinie(.*)$,\1Jean-Baptiste de la Quintinie\2
-(?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
+(?i)^(.+)\bJean\sJaur[Èèe]s\b(.*)$,\1Jean Jaurès\2
+(?i)^(.+)\bJean\sMoulin\b(.*)$,\1Jean Moulin\2
+(?i)^(.+)\bJean\sde\sSaulin\b(.*)$,\1Jean de Saulin\2
 (?i)^(.+)\bJeanne\sd'Arc\b(.*)$,\1Jeanne d'Arc\2
+(?i)^(.+)\bMar[Éée]chal\sJoffre\b(.*)$,\1Maréchal Joffre\2
 (?i)^(.*)\b10\sJuin\s(19)?44\b(.*),\g<1>10 Juin 1944\3
-(?i)^(.*)\bdes\sJacarandas\b(.*)$,\1des Jacarandas\2
 
 # K
 (?i)^(.+)\bdes\sKakis\b(.*)$,\1des Kakis\2
@@ -361,19 +369,28 @@ Search, Replace
 (?i)^(.+)\bde\sKusel\b(.*)$,\1de Kusel\2
 
 # L
-(?i)^Lieu(\s)?dit\b(.*)$,Lieu dit\2
+(?i)^Lev[Éée]e\b(.*)$,Levée\1
+(?i)^Lieu(\s|-)?dit\b(.*)$,Lieu-dit\2
+
 (?i)^(.*)\bLant[eè]rne\b(.*)$,\1Lanterne\2
 (?i)^(.+)\bJean\sLauret\b(.*)$,\1Jean Lauret\2
+(?i)^(.+)\bLaurier\b(.*)$,\1Laurier\2
+(?i)^(.+)\bdes\sLauriers\b(.*)$,\1des Lauriers\2
 (?i)^(.+)\bLavoisier\b(.*)$,\1Lavoisier\2
-(?i)^(.*)\bLotissement\b(.+)$,\1Lotissement\2
-(?i)^(.*)\b(Lotos[se]ement|Lotise+ment|Lot\.)\b(.+)$,\1Lotissement\3
-(?i)^(.*)\bLieu\sdit\sStrutta\b(.*)$,\1Lieu dit Strutta\2
 (?i)^(.+)\bG[Éée]n[Éée]ral\sLeclerc\b(.*)$,\1Général Leclerc\2
-(?i)^(.+)\bde\sl'Europe\b(.*)$,\1de l'Europe\2
 (?i)^(.+)\bLeconte\sde\s?Lisle\b(.*)$,\1Leconte de Lisle\2
+(?i)^(.+)\bJean\s[Éée]tienne\sLenoir\b(.*)$,\1Jean Étienne Lenoir\2
+(?i)^(.*)\bLieu\sdit\sStrutta\b(.*)$,\1Lieu dit Strutta\2
+(?i)^(.+)\bdu\sLion\sd'Or\b(.*)$,\1du Lion d'Or\2
+(?i)^(.*)\bLotissement\b(.+)$,\1Lotissement\2
+(?i)^(.*)\b(Lotos[se]ement|Lotise+ment)\b(.+)$,\1Lotissement\3
+(?i)^(.*)\bLotissement\.(.*)$,\1Lotissement\2
 
 # M
+(?i)^Mail\b(.*)$
+(?i)^Mont\b(.*)$,Mont\1
 (?i)^Mont[Éée]e\b(.*)$,Montée\1
+(?i)^Montoir\b(.*)$
 
 (?i)^(.+)\bdu\s8\sMai\s(19)?45\b(.*)$,\1du 8 Mai 1945\3
 (?i)^(.+)\bde\sla\sMairie\b(.*)$,\1de la Mairie\2
@@ -387,7 +404,9 @@ Search, Replace
 (?i)^(.+)\bdes\sMaheux\b(.*)$,\1des Maheux\2
 (?i)^(.+)\bde\sla\sMaison\sCarr[Éée]e\b(.*)$,\1de la Maison Carrée\2
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
+(?i)^(.+)\bRoger\sMath[Éée]\b(.*)$,\1Roger Mathé\2
 (?i)^(.+)\bdes\sM[Éée]dailles\b(.*)$,\1des Médailles\2
+(?i)^(.+)\bJean\sMichaut\b(.*)$,\1Jean Michaut\2
 (?i)^(.+)\bdes\sMoineaux\b(.*)$,\1des Moineaux\2
 (?i)^(.+)\bMontauban\b(.*)$,\1Montauban\2
 (?i)^(.+)\bdu\sMoulin\b(.*)$,\1du Moulin\2
@@ -428,9 +447,15 @@ Search, Replace
 (?i)^(.+)\bd'Orl[Éée]ans\b(.*)$,\1d'Orléans\2
 
 # P
-(?i)^Passage\b(.+)$,Passage\1
+(?i)^Parc\b(.*)$
+(?i)^Parking\b(.*)$
+(?i)^Parvis\b(.*)$
+(?i)^Passage\b(.*)$
+(?i)^Passe\b(.*)$
+(?i)^Passerelle\b(.*)$
 (?i)^Petit\b(.+)$,Petit\1
-(?i)^(Place|Pl\.?)\b(.+)$,Place\2
+(?i)^(Place|Pl)\b(.+)$,Place\2
+(?i)^Place\.(.+)$,Place\2
 (?i)^Grand\sPlace\b(.*)$,Grand Place\1
 (?i)^Pont\b(.+)$,Pont\1
 
@@ -446,6 +471,7 @@ Search, Replace
 (?i)^(.+)\bdes\sPerroquets\b(.*)$,\1des Perroquets\2
 (?i)^(.+)\bdu\sPhare\b(.*)$,\1du Phare\2
 (?i)^(.+)\bla\sPierre\b(.*)$,\1la Pierre\2
+(?i)^(.+)\bJean\sPierrot\b(.*)$,\1Jean Pierrot\2
 (?i)^(.+)\bdes\sPins\b(.*)$,\1des Pins\2
 (?i)^(.+)\bde\sla\sPisciculture\b(.*)$,\1de la Pisciculture\2
 (?i)^(.+)\bde\sla\sPlage\b(.*)$,\1de la Plage\2
@@ -475,6 +501,7 @@ Search, Replace
 # R
 (?i)^Raquette\b(.*),Raquette\1
 (?i)^(Route\.|Route|Rte\.|Rte)\b(.*),Route\2
+(?i)^Les\sQuatre\sRoutes\b(.*)$
 (?i)^Route\sD[Éée]partementale(\sNum[Éée]ro|\sN|\sN°?)?\b(.*),Route Départementale\2
 (?i)^RD ?(\d+)(.*),Route Départementale \1\2
 (?i)^Route\sForesti[Èèe]re\d(.*),Route Forestière\1
@@ -503,6 +530,7 @@ Search, Replace
 (?i)^(.+)\bCharles\sde\sla\sRochefoucaud\b(.*)$,\1Charles de la Rochefoucaud\2
 (?i)^(.*)\bPierre\sRonsard\b(.*),\1Pierre Ronsard\2
 (?i)^(.*)\bPierre\sde\sRonsard\b(.*),\1Pierre de Ronsard\2
+(?i)^(.*)\bJean[\s-]Jacques\sRousseau\b(.*),\1Jean-Jacques Rousseau\2
 (?i)^(.+)\bdu\sRuisseau\b(.*)$,\1du Ruisseau\2
 (?i)^(.+)\bau\sRenard\b(.*)$,\1au Renard\2
 (?i)^(.+)\bAntoine\sRouget\sde\sl’Isle\b(.*)$
@@ -538,8 +566,9 @@ Search, Replace
 (?i)^(.+)\bSaint[\s-]+Sauveur\b(.*)$,\1Saint-Sauveur\2
 (?i)^(.*)\b(Saint|St)(e?)[\s-](.*),\1Saint\3-\4
 
-(?i)^(.+)\b[Ààa]\sScie\b(.*)$,\1à Scie\2
 (?i)^(.+)\bde\sla\sSabli[Èèe]re\b(.*)$,\1de la Sablière\2
+(?i)^(.+)\bdes\sSapins\b(.*)$,\1des Sapins\2
+(?i)^(.+)\b[Ààa]\sScie\b(.*)$,\1à Scie\2
 (?i)^(.+)\bdu\sSeux\b(.*)$,\1du Seux\2
 (?i)^(.+)\bdu\sSol\b(.*)$,\1du Sol\2
 (?i)^(.+)\bdu\sSous[-\s]bois\b(.*)$,\1du Sous-bois\2
@@ -586,6 +615,7 @@ Search, Replace
 # r'^[Vv]oie [Cc]ommunale (No|Numéro|n°|N°|№)',
 # r"^(.*)\bVoie Ferr[èe]e\Z(.*)$",
 (?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
+(?i)^(.+)\bde\sla\sVau\b(.*),\1de la Vau\2
 (?i)^(.+)\bVelpeau\b(.*)$,\1Velpeau\2
 (?i)^(.+)\bla\sVille\b(.*)$,\1la Ville\2
 (?i)^(.+)\bde\sla\sVigne\b(.*)$,\1de la Vigne\2
