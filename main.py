@@ -560,7 +560,7 @@ if __name__ == '__main__':
         ('DOM Atlantique : Martinique, Guadeloupe & Guyane', {
             'https://download.openstreetmap.fr/extracts/central-america/guadeloupe.osm.pbf',
             'https://download.openstreetmap.fr/extracts/central-america/martinique.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/south-america/guyane.osm.pbf'
         }),
         ('DOM Océan Indien : Réunion & Mayotte', {
             'https://download.openstreetmap.fr/extracts/africa/reunion.osm.pbf',
@@ -568,16 +568,16 @@ if __name__ == '__main__':
         }),
         ('Autres territoires Atlantique', {
             'https://download.openstreetmap.fr/extracts/central-america/saint_martin.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/central-america/saint_barthelemy.osm.pbf'
-            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/central-america/saint_barthelemy.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/north-america/saint_pierre_et_miquelon.osm.pbf'
         }),
         ('Autres territoires Océan indien', {
-            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/africa/france_taaf.osm.pbf'
         }),
         ('Autres territoires Océanie-Pacifique', {
             'https://download.openstreetmap.fr/extracts/oceania/france_taaf.osm.pbf',
             'https://download.openstreetmap.fr/extracts/oceania/new_caledonia.osm.pbf',
-            'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf',
+            'https://download.openstreetmap.fr/extracts/oceania/wallis_et_futuna.osm.pbf'
         })
     ]
 
