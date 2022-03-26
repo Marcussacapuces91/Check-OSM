@@ -344,10 +344,12 @@ Search, Replace
 (?i)^(Imp|Imp|Impasse|Impaa?ss?e)\b(.*)$,Impasse\2
 (?i)^Impasse\.(.*)$,Impasse\1
 (?i)^Itin[Éée]raire\b(.*)$,Itinéraire\1
-(?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
+
 (?i)^(.+)\bde\sl'[Îîi]le\b(.*)$,\1de l'Île\2
 (?i)^(.+)\b[Îîi]le[\s-]de[\s-]France\b(.*)$,\1Île-de-France\2
 (?i)^(.+)\bdes\s[Îîi]les\b(.*)$,\1des Îles\2
+(?i)^(.+)\bde\sl'Imp[Éée]rial\b(.*)$,\1de l'Impérial\2
+(?i)^(.+)\bde\sl'Industrie\b(.*)$,\1de l'Industrie\2
 
 # J
 (?i)^Jardin(s?)\b(.*)$,Jardin\1\2
@@ -371,6 +373,8 @@ Search, Replace
 # L
 (?i)^Lev[Éée]e\b(.*)$,Levée\1
 (?i)^Lieu(\s|-)?dit\b(.*)$,Lieu-dit\2
+
+^(.+)\bl'\s\b([aÉéÈèeiouy])(.*)$,\1l'\2\3
 
 (?i)^(.*)\bLant[eè]rne\b(.*)$,\1Lanterne\2
 (?i)^(.+)\bJean\sLauret\b(.*)$,\1Jean Lauret\2
