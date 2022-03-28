@@ -1,6 +1,5 @@
 Search, Replace
 
-#     "^(Ancienne |Grande |Grand'?|Petite )?Place", '^Placette',
 #     '^Patio', '^Pénétrante', '^Périphérique', '^Piste', '^(Grand )?Pont', '^Port', '^Porte', '^Promenade',
 #     '^Quartier', '^Quai',
 #     '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
@@ -458,9 +457,10 @@ Search, Replace
 (?i)^Passe\b(.*)$
 (?i)^Passerelle\b(.*)$
 (?i)^Petit\b(.+)$,Petit\1
-(?i)^(Place|Pl)\b(.+)$,Place\2
+(?i)^(Ancienne\s|Grande\s|Petite\s|)(Place|Pl)\b(.+)$,\1Place\2
 (?i)^Place\.(.+)$,Place\2
 (?i)^Grand\sPlace\b(.*)$,Grand Place\1
+(?i)^Placette\b(.+)$,Placette\1
 (?i)^Pont\b(.+)$,Pont\1
 
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
