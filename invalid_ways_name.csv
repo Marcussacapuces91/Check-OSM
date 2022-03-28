@@ -457,7 +457,7 @@ Search, Replace
 (?i)^Passe\b(.*)$
 (?i)^Passerelle\b(.*)$
 (?i)^Petit\b(.+)$,Petit\1
-(?i)^(Ancienne\s|Grande\s|Petite\s|)(Place|Pl)\b(.+)$,\1Place\2
+(?i)^(Ancienne\s|Grande\s|Petite\s|)(Place|Pl)\b(.+)$,\1Place\3
 (?i)^Place\.(.+)$,Place\2
 (?i)^Grand\sPlace\b(.*)$,Grand Place\1
 (?i)^Placette\b(.+)$,Placette\1
