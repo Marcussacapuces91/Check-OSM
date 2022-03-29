@@ -217,7 +217,8 @@ class Application:
         highway_value_list = (
             'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential',
             'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link',
-            'living_street', 'pedestrian', 'bus_guideway', 'road', 'busway',
+            'living_street', 'pedestrian',
+            'bus_guideway', 'road', 'busway', 'bus_stop',
             'path',
             # 'service', 'track'
         )
