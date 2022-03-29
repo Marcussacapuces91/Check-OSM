@@ -56,14 +56,15 @@ Search, Replace
 (?i)^(.+)\bl'Abb[Éée]\b(.*)$,\1l'Abbé\2
 (?i)^(.+)\b(les|des)\sAcacias\b(.*)$,\1\2 Acacias\3
 (?i)^(.+)\bdes\sAlouettes\b(.*)$,\1des Alouettes\2
-(?i)^(.+)\bde\sl'An\s2000\b(.*)$,\1de l'An 2000\2
-(?i)^(.+)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
-(?i)^(.+)\bl['\s]Archev[eê]que\b(.*)$,\1l'Archevêque\2
 (?i)^(.+)\bdes\sAlli[ée]s\b(.*)$,\1des Alliés\2
 (?i)^(.+)\bdes\sAmin[ée]es\b(.*)$,\1des Aminées\2
 (?i)^(.+)\bde\sl'Amiti[Éée]\b(.*)$,\1de l'Amitié\2
+(?i)^(.+)\bde\sl'An\s2000\b(.*)$,\1de l'An 2000\2
+(?i)^(.+)\bde\sl'Ancien\b(.*)$,\1de l'Ancien\2
+(?i)^(.+)\bl['\s]Archev[Êêe]que\b(.*)$,\1l'Archevêque\2
 (?i)^(.+)\bde\sl'Ari[Èèe]ge\b(.*)$,\1de l'Ariège\2
 (?i)^(.+)\bdes\sAubiers\b(.*)$,\1des Aubiers\2
+(?i)^(.+)\bd['\s]Avignon\b(.*)$,\1d'Avignon\2
 
 (?i)^(.+)\bAlbert\s1e?r\b(.*)$,\1Albert 1er\2
 (?i)^(.+)\bAlexandre\sIII\b(.*)$,\1Alexandre III\2
@@ -438,6 +439,7 @@ Search, Replace
 
 (?i)^(.+)\bdu\s11\sNovembre\b(.*)$,\1du 11 Novembre\2
 (?i)^(.+)\bdu\s11\sNovembre\s(19)?18\b(.*)$,\1du 11 Novembre 1918\3
+(?i)^(.+)\bde\sN[Îîi]mes\b(.*)$,\1de Nîmes\2
 (?i)^(.+)\bde\sNivelle\b(.*)$,\1de Nivelle\2
 
 # O
