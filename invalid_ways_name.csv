@@ -1,7 +1,5 @@
 Search, Replace
 
-#     '^Quartier', '^Quai',
-#     '^Rampe', '^Résidence', '^Ring', '^Rocade', '^Rond-Point', '^(Ancienne |Grande |Petite |Vieille )?Route',
 #     "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
 #     '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
 #     '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
@@ -38,6 +36,8 @@ Search, Replace
 (?i)^L'Ariégeoise$
 
 # A
+(?i)^Acc[Èèée]s\b(.*)$,Accès\1
+(?i)^Aire\b(.*)$,Aire\1
 (?i)^(All[Ééeè][Éée]|Allée̩e|All̩e|All?)\b(.*)$,Allée\2
 (?i)^Allée\.(.*)$,Allée\1
 (?i)^Grande\s(All[Éée][Éée]|All?)\b(.*)$,Grande Allée\2
@@ -509,24 +509,26 @@ Search, Replace
 (?i)^(Quai)\b(.+)$,Quai\2
 
 # R
-(?i)^Raquette\b(.*),Raquette\1
-(?i)^(Route\.|Route|Rte\.|Rte)\b(.*),Route\2
-(?i)^Les\sQuatre\sRoutes\b(.*)$
-(?i)^Route\sD[Éée]partementale(\sNum[Éée]ro|\sN|\sN°?)?\b(.*),Route Départementale\2
-(?i)^RD ?(\d+)(.*),Route Départementale \1\2
-(?i)^Route\sForesti[Èèe]re\d(.*),Route Forestière\1
-(?i)^Route\sNationale(\sNum[Éée]ro|\sN|\sN°)?\b(.*),Route Nationale\2
-(?i)^RN ?(\d+)(.*),Route Nationale \1\2
-(?i)^Rues?\b(.*),Rue\1
-(?i)^Rue\sBasse\b(.*),Rue Basse\1
-(?i)^Rue\sHaute\b(.*),Rue Haute\1
-(?i)^(Ruelle|RLE)\b(.*),Ruelle\2
-(?i)^(R[Éée]sidence|Res)\b(.*),Résidence\2
-(?i)^R[Éée]sidence\.(.*),Résidence\1
+(?i)^Rampe\b(.*)$
+(?i)^Raquette\b(.*)$,Raquette\1
+(?i)^(R[Éée]sidence|Res)\b(.*)$,Résidence\2
+(?i)^Ring\b(.*)$
+(?i)^Rocade\b(.*)$
 (?i)^Rond[ -]+Point\b(.*)$,Rond-Point\1
 (?i)^Rd[ -]+pt\b(.*)$,Rond-Point\1
-# (?i)^(Ancienne\s)?RN\b(.*)$
-# (?i)^(Ancienne\s)?RD\b(.*)$
+(?i)^(Ancienne\s|Grande\s|Petite\s|Vieille\s|)(Route\.|Route|Rte\.|Rte)\b(.*)$,\1Route\3
+(?i)^Les\sQuatre\sRoutes\b(.*)$
+(?i)^Route\sD[Éée]partementale\b(.*)$,Route Départementale\1
+(?i)^Route\sD[Éée]partementale\s(Num[Éée]ro|N°|N)\b(.*)$,Route Départementale \2
+(?i)^RD ?(\d+)(.*)$,Route Départementale \1\2
+(?i)^Route\sForesti[Èèe]re\d(.*)$,Route Forestière\1
+(?i)^Route\sNationale\b(.*)$,Route Nationale\1
+(?i)^Route\sNationale\s(Num[Éée]ro|N°|N)\b(.*)$,Route Nationale \2
+(?i)^RN ?(\d+)(.*)$,Route Nationale \1\2
+(?i)^Rues?\b(.*)$,Rue\1
+(?i)^Rue\sBasse\b(.*)$,Rue Basse\1
+(?i)^Rue\sHaute\b(.*)$,Rue Haute\1
+(?i)^(Ruelle|RLE)\b(.*)$,Ruelle\2
 
 (?i)^(Rue|Route)\ssans\sNom$
 (?i)^Route\sD[Éée]partementale\s(No|Numéro|n°|N°|№)\b(.*)$
@@ -627,6 +629,7 @@ Search, Replace
 (?i)^(.+)\bde\sla\sVall[Éée]e\b(.*),\1de la Vallée\2
 (?i)^(.+)\bde\sla\sVau\b(.*),\1de la Vau\2
 (?i)^(.+)\bVelpeau\b(.*)$,\1Velpeau\2
+(?i)^(.+)\bPaul[\s-][Éée]mile\sVictor\b(.*)$,\1Paul-Émile Victor\2
 (?i)^(.+)\bla\sVille\b(.*)$,\1la Ville\2
 (?i)^(.+)\bde\sla\sVigne\b(.*)$,\1de la Vigne\2
 (?i)^(.+)\bde\nla\nVi[Èèe]rge\b(.*)$,\1de la Vierge\2
