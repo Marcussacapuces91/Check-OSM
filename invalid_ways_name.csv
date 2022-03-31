@@ -55,6 +55,8 @@ Search, Replace
 
 (?i)^(.+)\bl'Abb[Éée]\b(.*)$,\1l'Abbé\2
 (?i)^(.+)\b(les|des)\sAcacias\b(.*)$,\1\2 Acacias\3
+(?i)^(.+)\bd[\s']Activit[Éée]\b(.*)$,\1d'Activité\2
+(?i)^(.+)\bd[\s']Activit[Éée]s\b(.*)$,\1d'Activités\2
 (?i)^(.+)\bdes\sAlouettes\b(.*)$,\1des Alouettes\2
 (?i)^(.+)\bdes\sAlli[ée]s\b(.*)$,\1des Alliés\2
 (?i)^(.+)\bdes\sAmin[ée]es\b(.*)$,\1des Aminées\2
@@ -90,6 +92,7 @@ Search, Replace
 (?i)^(.+)\bdes\sBalatas\b(.*)$,\1des Balatas\2
 (?i)^(.+)\bde\sla\sBataille\sde\sStalingrad\b(.*)$,\1de la Bataille de Stalingrad\2
 (?i)^(.+)\bBayard\b(.*)$,\1Bayard\2
+(?i)^(.+)\bde\sBeaujardin\b(.*)$,\1de Beaujardin\2
 (?i)^(.+)\bdes\sB[Éée]gonias\b(.*)$,\1des Bégonias\2
 (?i)^(.+)\bde\sla\sBergerie\b(.*)$,\1de la Bergerie\2
 (?i)^(.+)\b(du|de|des|en)\sBois\b(.*)$,\1\2 Bois\3
@@ -382,6 +385,7 @@ Search, Replace
 (?i)^(.+)\bLavoisier\b(.*)$,\1Lavoisier\2
 (?i)^(.+)\bG[Éée]n[Éée]ral\sLeclerc\b(.*)$,\1Général Leclerc\2
 (?i)^(.+)\bLeconte\sde\s?Lisle\b(.*)$,\1Leconte de Lisle\2
+(?i)^(.+)\bdu\sL[Éée]gu[Éée]\b(.*)$,\1du Légué\2
 (?i)^(.+)\bJean\s[Éée]tienne\sLenoir\b(.*)$,\1Jean Étienne Lenoir\2
 (?i)^(.*)\bLieu\sdit\sStrutta\b(.*)$,\1Lieu dit Strutta\2
 (?i)^(.+)\bdu\sLion\sd'Or\b(.*)$,\1du Lion d'Or\2
@@ -409,6 +413,7 @@ Search, Replace
 (?i)^(.+)\bdu\sManoir\b(.*)$,\1du Manoir\2
 (?i)^(.+)\bRoger\sMath[Éée]\b(.*)$,\1Roger Mathé\2
 (?i)^(.+)\bdes\sM[Éée]dailles\b(.*)$,\1des Médailles\2
+(?i)^(.+)\bdes\sM[Éée]sanges\b(.*)$,\1des Mésanges\2
 (?i)^(.+)\bJean\sMichaut\b(.*)$,\1Jean Michaut\2
 (?i)^(.+)\bdes\sMoineaux\b(.*)$,\1des Moineaux\2
 (?i)^(.+)\bMontauban\b(.*)$,\1Montauban\2
@@ -451,25 +456,26 @@ Search, Replace
 (?i)^(.+)\bd'Orl[Éée]ans\b(.*)$,\1d'Orléans\2
 
 # P
-(?i)^Parc\b(.*)$
-(?i)^Parking\b(.*)$
-(?i)^Parvis\b(.*)$
-(?i)^Passage\b(.*)$
-(?i)^Passe\b(.*)$
-(?i)^Passerelle\b(.*)$
-(?i)^Patio\b(.*)$
-(?i)^P[Éée]n[Éée]trante\b(.*)$
-(?i)^P[Éée]riph[Éée]rique\b(.*)$
+(?i)^Parc\b(.*)$,Parc\1
+(?i)^Parking\b(.*)$,Parking\1
+(?i)^Parvis\b(.*)$,Parvis\1
+(?i)^Passage\b(.*)$,Passage\1
+(?i)^Passe\b(.*)$,Passe\1
+(?i)^Passerelle\b(.*)$,Passerelle\1
+(?i)^Patio\b(.*)$,Patio\1
+(?i)^P[Éée]n[Éée]trante\b(.*)$,Pénétrante\1
+(?i)^P[Éée]riph[Éée]rique\b(.*)$,Périphérique\1
 (?i)^Petit\b(.+)$,Petit\1
-(?i)^Piste\b(.+)$
+(?i)^Piste\b(.+)$,Piste\1
 (?i)^(Ancienne\s|Grande\s|Petite\s|)(Place|Pl)\b(.+)$,\1Place\3
-(?i)^Place\.(.+)$,Place\2
+(?i)^Place\.(.+)$,Place\1
 (?i)^Grand\sPlace\b(.*)$,Grand Place\1
 (?i)^Placette\b(.+)$,Placette\1
 (?i)^(Grand\s|)Pont\b(.+)$,\1Pont\2
-(?i)^Port\b(.*)$
-(?i)^Porte\b(.*)$
-(?i)^Promenade\b(.*)$
+(?i)^Port\b(.*)$,Port\1
+(?i)^Port\sde\sP[Êêe]che\b(.*)$,Port de Pêche\1
+(?i)^Porte\b(.*)$,Porte\1
+(?i)^Promenade\b(.*)$,Promenade\1
 
 (?i)^(.+)\bLoys\sPrat\b(.*)$,\1Loys Prat\2
 (?i)^(.+)\bdes?\sPal[Éée]tuviers\b(.*)$,\1des Palétuviers\2
