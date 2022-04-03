@@ -1,8 +1,5 @@
 Search, Replace
 
-#     "^(Basse |Grand( |'|' )|Grande |Haute |Petite |Nouvelle |Vieille )?Rue",
-#     '^(Grande )?Sente', '^Sentier', '^Square', '^Sortie',
-#     '^Terrasse', '^Traverse', '^Tranchée', '^Traverse', '^Tube', '^Tunnel',
 #     '^Vallée', '^Vallon', '^Venelle', '^Véloroute', '^Viaduc', '^Villa',
 #     '^(Ancienne |Petite |Nouvelle )?Voie',
 #     '^Voirie',
@@ -111,6 +108,7 @@ Search, Replace
 (?i)^(.+)\bdes\sBruy[Èèe]res\b(.*)$,\1des Bruyères\2
 
 # C
+(?i)^Camp\b(.*)$
 (?i)^Cap\b(.+)$,Cap\1
 (?i)^Cap\sLi[Éée]vin\b(.+)$,Cap Liévin\1
 (?i)^Carreau\b(.+)$,Carreau\1
@@ -534,6 +532,7 @@ Search, Replace
 (?i)^Route\sNationale\s(Num[Éée]ro|N°|N)\b(.*)$,Route Nationale \2
 (?i)^RN ?(\d+)(.*)$,Route Nationale \1\2
 (?i)^Rues?\b(.*)$,Rue\1
+(?i)^(Basse |Grande? |Haute |Petite |Nouvelle |Vieille |)Rue\b(.*)$
 (?i)^Rue\sBasse\b(.*)$,Rue Basse\1
 (?i)^Rue\sHaute\b(.*)$,Rue Haute\1
 (?i)^(Ruelle|RLE)\b(.*)$,Ruelle\2
@@ -556,8 +555,11 @@ Search, Replace
 (?i)^(.+)\bAntoine\sRouget\sde\sl’Isle\b(.*)$
 
 # S
+(?i)^(Grande\s|)Sente\b(.*)$
+(?i)^Sentier\b(.*)$
 (?i)^(Petit\s)?Sentier\b(.*)$,\1Sentier\2
 (?i)^Square\b(.*)$,Square\1
+(?i)^Sortie\b(.*)$
 
 (?i)^(.+)\bSainte[\s-]+Anne\b(.*)$,\1Sainte-Anne\2
 (?i)^(.+)\bSaint[\s-]+Antoine\b(.*)$,\1Saint-Antoine\2
@@ -596,8 +598,12 @@ Search, Replace
 (?i)^(.+)\bGeorges?\sSand\b\b(.*)$,\1George Sand\2
 
 # T
+(?i)^Terrasse\b(.*)$,Terrasse\1
+(?i)^Tranch[Éée]e\b(.*)$,Tranchée\1
 (?i)^Traverse\b(.*)$,Traverse\1
 (?i)^Traversi[Èèe]re\b(.*)$,Traversière\1
+(?i)^Tube\b(.*)$,Tube\1
+(?i)^Tunnel\b(.*)$,Tunnel\1
 
 (?i)^(.+)\bFran[çc]ois\sToullec\b(.*)$,\1François Toullec\2
 (?i)^(.+)\bElsa\sTriolet\b(.*)$,\1Elsa Triolet\2
