@@ -5,7 +5,7 @@ import os
 import re
 import tempfile
 import xml.etree.ElementTree
-from pprint import pprint
+# from pprint import pprint
 
 import esy.osm.pbf
 import requests
